@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "images"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -19,9 +20,27 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "css/bootstrap.min.css",
+        "css/owl.carousel.min.css",
+        "css/themify-icons.css",
+        "css/magnific-popup.css",
+        "css/animate.css",
+        "css/normalize.css",
+        "styles.css",
+        "css/responsive.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "js/vendor/modernizr-2.8.3.min.js",
+        "js/vendor/jquery-1.12.4.min.js",
+        "js/vendor/bootstrap.min.js",
+        "js/owl.carousel.min.js",
+        "js/contact-form.js",
+        "js/jquery.parallax-1.1.3.js",
+        "js/scrollUp.min.js",
+        "js/magnific-popup.min.js",
+        "js/wow.min.js",
+        "js/main.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

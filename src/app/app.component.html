@@ -1,20 +1,141 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<ng-container>
+
+
+  <div class="preloader">
+      <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+      </div>
+  </div>
+  <!--Mainmenu-area-->
+  <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
+      <div class="container">
+          <!--Logo-->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-menu">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a href="#" class="navbar-brand logo">
+                  <h2>colid</h2>
+              </a>
+          </div>
+          <!--Logo/-->
+          <nav class="collapse navbar-collapse" id="primary-menu">
+              <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#home-page">Home</a></li>
+                  <li><a href="#advantages">Vantagens</a></li>
+                  <li><a href="#projects-page">Projects</a></li>
+                  <li><a href="#feature-page">Features</a></li>
+                  <li><a href="#faq-page">FAQ</a></li>
+                  <li><a href="#contact-page">Contact</a></li>
+              </ul>
+          </nav>
+      </div>
+  </div>
+
+  <header class="header-area overlay full-height relative v-center" id="home-page">
+    <div class="absolute anlge-bg"></div>
+    <div class="container">
+      <div class="row v-center">
+        <div class="col-xs-12 col-md-7 header-text">
+          <h2>It’s all about Promoting your Business</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero ex inventore vel error quibusdam animi fugiat, doloribus dolores consectetur nulla deleniti sint blanditiis quod debitis quis vitae officiis tempora numquam.</p>
+          <a href="#" class="button white">Watch video</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <app-advantages></app-advantages>
+
+  <app-projects></app-projects>
+
+  <section class="gray-bg section-padding" id="feature-page">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                  <div class="page-title">
+                      <h2>SPECIAL FEATURES</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit voluptates, temporibus at, facere harum fugiat!</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-1.png" alt="">
+                      </div>
+                      <h3>Creative Design</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-2.png" alt="">
+                      </div>
+                      <h3>Unlimited Features</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-3.png" alt="">
+                      </div>
+                      <h3>Full Free Chat</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-4.png" alt="">
+                      </div>
+                      <h3>Retina ready</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-5.png" alt="">
+                      </div>
+                      <h3>High Resolution</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="box">
+                      <div class="box-icon">
+                          <img src="images/portfolio-icon-6.png" alt="">
+                      </div>
+                      <h3>Clean Codes</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quas nulla est adipisci,</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <app-faq></app-faq>
+
+  <footer class="footer-area relative sky-bg" id="contact-page">
+      <app-contact></app-contact>
+      <div class="footer-bottom">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xs-12 text-center">
+                      <p>&copy;Copyright 2018 All right resurved.  This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com">Colorlib</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</ng-container>
 
