@@ -1,0 +1,44 @@
+<mat-card>
+  <div class="row">
+    <h1><span><strong>Cadastro</strong></span></h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput formControlName="name" [formGroup]="form" id="name" placeholder="Name">
+          <mat-error
+            *ngIf="form.controls['name'].invalid &&
+            (form.controls['name'].dirty ||
+            form.controls['name'].touched)">{{ "Name is required" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="email" [formGroup]="form" id="email" placeholder="Email">
+          <mat-error
+            *ngIf="form.controls['email'].invalid &&
+            (form.controls['email'].dirty ||
+            form.controls['email'].touched)">{{ "Email is required" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="password" [formGroup]="form" id="password" placeholder="Name"  placeholder="Password" type="password">
+          <mat-error
+            *ngIf="form.controls['password'].invalid &&
+            (form.controls['password'].dirty ||
+            form.controls['password'].touched)">{{ "Password is required" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Confirm password"  formControlName="confirmPassword" [formGroup]="form" id="confirmPassword" placeholder="Confirm password" type="password">
+          <mat-error
+            *ngIf="form.controls['confirmPassword'].invalid &&
+            (form.controls['confirmPassword'].dirty ||
+            form.controls['confirmPassword'].touched)">
+            <div *ngIf="form.controls['confirmPassword'].errors.MatchPassword">Password does not match</div>
+            <div *ngIf="form.controls['confirmPassword'].errors.required">Password confirmation is required</div>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button disabled="{{ form.invalid }}" class="send" type="submit"><strong><strong>SUBMIT</strong></strong></button>
+      </div>
+    </form>
+  </div>
+</mat-card>

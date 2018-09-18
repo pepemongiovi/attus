@@ -170,6 +170,10 @@ input:-webkit-autofill:focus {
 *Default Background Class
 **/
 
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px !important;
+}
+
 .overlay:before,
 .sky-bg {
   background: #75cbe7;
