@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './initial-page/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FaqComponent } from './initial-page/faq/faq.component';
 import { ContactComponent } from './initial-page/contact/contact.component';
@@ -16,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatIconModule,
   MatCardModule,
-  MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatDialogModule
+  MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatDialogModule,
+  MatDatepickerModule, MatNativeDateModule, MatStepperModule
 } from '@angular/material';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
@@ -24,6 +25,12 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
+import { ProfileComponent } from './initial-page/profile/profile.component';
+import { InstructionsComponent } from './initial-page/instructions/instructions.component';
+import { PersonalInfoComponent } from './initial-page/profile/personal-info/personal-info.component';
+import { BankInfoComponent } from './initial-page/profile/bank-info/bank-info.component';
+import { InvestmentInfoComponent } from './initial-page/instructions/investment-info/investment-info.component';
+import { SliderComponent } from './initial-page/projects/slider/slider.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyChaLKvUCu6lsakLE04NrEtl1gfKdHXCGc',
@@ -38,13 +45,19 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
+    ProfileComponent,
     FaqComponent,
     ContactComponent,
     ProjectsComponent,
     AdvantagesComponent,
     HowItWorksComponent,
     SignUpComponent,
-    InitialPageComponent
+    InitialPageComponent,
+    InstructionsComponent,
+    PersonalInfoComponent,
+    BankInfoComponent,
+    InvestmentInfoComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,
@@ -65,9 +78,13 @@ export const firebaseConfig = {
     MatCheckboxModule,
     MatSelectModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatStepperModule
   ],
   providers: [UserService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [InstructionsComponent]
 })
 export class AppModule { }

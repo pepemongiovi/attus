@@ -8,7 +8,7 @@ import {User} from '../models/user.model';
 export class AuthService {
 
   private API: string;
-  private TOKEN = 'token';
+  private USER = 'user';
 
   constructor(private router: Router,
               private http: HttpClient) {
@@ -20,7 +20,7 @@ export class AuthService {
       .then( (user) => {
         if(user) {
           firebase.auth().currentUser.updateProfile({
-            displayName: userInfo.name,
+            displayName: userInfo.displayName,
             photoURL: ''
           }).then(
             ( s ) => {
@@ -35,34 +35,31 @@ export class AuthService {
     );
   }
 
-  login(email, password) {
-    const body = {
-      email: email,
-      password: password
-    };
-    return this.http.post(this.API, body);
+  login(user: User, closeDialog) {
+    firebase.auth().signInAndRetrieveDataWithEmailAndPassword(user.email, user.password)
+      .then((user) => {
+        this.setSession(user);
+        closeDialog;
+      });
   }
 
-  setSession(authData: any) {
-    localStorage.setItem(this.TOKEN, JSON.stringify(authData['token']));
-  }
+  setSession(user) {
+    localStorage.setItem(this.USER, JSON.stringify(user));
 
-  getToken() {
-    return JSON.parse(localStorage.getItem(this.TOKEN));
   }
 
   isAuthenticated() {
-    const token = localStorage.getItem(this.TOKEN);
-
-    return token ? true : false;
+    const user = localStorage.getItem(this.USER);
+    return user === null ? false : true;
   }
 
   revokeSession() {
-    localStorage.removeItem(this.TOKEN);
+    localStorage.removeItem(this.USER);
   }
 
-  logout() {
+  logout(closeDialog) {
     this.revokeSession();
+    closeDialog;
   }
 
 }

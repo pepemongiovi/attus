@@ -11,7 +11,7 @@ export class UserService {
   }
 
   createUser(u: User) {
-    const user = new User(u.name, u.email, u.password);
+    const user = new User(u.displayName, u.email, u.password);
     return this._http.post(this.API, user);
   }
 }

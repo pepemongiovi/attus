@@ -7,117 +7,70 @@
             <div class="item active row">
               <div class="v-center">
                 <div class="col-xs-12 col-md-6">
-                  <div class="caption-title" data-animation="animated fadeInUp">
-                    <h2>Easy to build</h2>
+                  <div class="caption-title" style="margin-bottom: 30px" data-animation="animated fadeInUp">
+                    <h2>Residencial Araucárias</h2>
                   </div>
-                  <div class="caption-desc" data-animation="animated fadeInUp">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute</p>
+                  <div style="margin-left:-50px; margin-top: -4px">
+                    <app-slider></app-slider>
                   </div>
-                  <div class="caption-button" data-animation="animated fadeInUp">
-                    <a href="#" class="button">Read more</a>
-                  </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo one" data-animation="animated fadeInRight">
-                    <img src="images/screen-1.jpg" alt="">
+                  <div style="height: 150px; width: 500px; margin-top: 30px; text-align: justify">
+                    <p>Residencial Araucarias: o terceiro projeto no URBE.ME em parceria com a incorporadora HPR. O empreendimento localiza-se na cidade de Uberlândia o município que mais cresce no estado de Minas Gerais.</p>
                   </div>
                 </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo two" data-animation="animated fadeInRight">
-                    <img src="images/screen-2.jpg" alt="">
+                <div class="col-xs-5 col-md-6">
+                  <div style="margin-top: 60px">
+                    <mat-icon>timeline</mat-icon>
+                    <span><b>Rentabilidade garantida: </b>R$ 20.000</span>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="item row">
-              <div class="v-center">
-                <div class="col-xs-12 col-md-6">
-                  <div class="caption-title" data-animation="animated fadeInUp">
-                    <h2>Easy to use</h2>
+                  <div>
+                    <mat-icon>monetization_on</mat-icon>
+                    <span><b>Rentabilidade ao final do empreedimento – ROI: </b> R$ 20.000</span>
                   </div>
-                  <div class="caption-desc" data-animation="animated fadeInUp">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute</p>
+                  <div>
+                    <mat-icon>equalizer</mat-icon>
+                    <span><b>Rentabilidade mensal média: </b>R$ 20.000</span>
                   </div>
-                  <div class="caption-button" data-animation="animated fadeInUp">
-                    <a href="#" class="button">Read more</a>
+                  <div>
+                    <mat-icon>access_time</mat-icon>
+                    <span><b>Tempo de retorno ao investimento: </b> 124 dias</span>
                   </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo one" data-animation="animated fadeInRight">
-                    <img src="images/screen-3.jpg" alt="">
+                  <div>
+                    <mat-icon>insert_invitation</mat-icon>
+                    <span><b>Prazo para finalizar a captação: </b> 10/02/2019</span>
                   </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo two" data-animation="animated fadeInRight">
-                    <img src="images/screen-4.jpg" alt="">
+                  <div>
+                    <mat-icon>attach_money</mat-icon>
+                    <span><b>Valor de cada cota: </b>R$ 20.000</span>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="item row">
-              <div class="v-center">
-                <div class="col-xs-12 col-md-6">
-                  <div class="caption-title" data-animation="animated fadeInUp">
-                    <h2>Easy to customize</h2>
+                  <div>
+                    <mat-icon>check</mat-icon>
+                    <span><b>Captação necessária: </b>R$ 500.000</span>
                   </div>
-                  <div class="caption-desc" data-animation="animated fadeInUp">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute</p>
+                  <div class="caption-desc" style="margin-top: 40px" data-animation="animated fadeInUp">
+                    <p><b>Captação atual: </b>R$ 400.000 / R$ 500.000</p>
                   </div>
-                  <div class="caption-button" data-animation="animated fadeInUp">
-                    <a href="#" class="button">Read more</a>
+                  <div class="progress" style="width: 75%">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 80%">80%</div>
                   </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo one" data-animation="animated fadeInRight">
-                    <img src="images/screen-7.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo two" data-animation="animated fadeInRight">
-                    <img src="images/screen-2.jpg" alt="">
+                  <div class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
+                    <a class="button" (click)="onInvest()" style="width: 75%; text-align: center; height: 35px; margin-bottom: 30px">
+                      <div style="margin-top: -5px">Investir</div>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item row">
-              <div class="v-center">
-                <div class="col-xs-12 col-md-6">
-                  <div class="caption-title" data-animation="animated fadeInUp">
-                    <h2>Awesome design</h2>
-                  </div>
-                  <div class="caption-desc" data-animation="animated fadeInUp">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute</p>
-                  </div>
-                  <div class="caption-button" data-animation="animated fadeInUp">
-                    <a href="#" class="button">Read more</a>
-                  </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo one" data-animation="animated fadeInRight">
-                    <img src="images/screen-3.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                  <div class="caption-photo two" data-animation="animated fadeInRight">
-                    <img src="images/screen-4.jpg" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
+
           </div>
           <!-- Indicators -->
-          <ol class="carousel-indicators caption-indector">
+          <ol class="carousel-indicators caption-indector" style="margin-bottom: -70px; margin-top: 80px">
             <li data-target="#caption_slide" data-slide-to="0" class="active">
-              <strong>Lorem ipsum </strong>consectetur adipisicing elit.
+              <strong>Projeto 1 </strong>Descrição do projeto
             </li>
             <li data-target="#caption_slide" data-slide-to="1">
-              <strong>Lorem ipsum </strong>consectetur adipisicing elit.
-            </li>
-            <li data-target="#caption_slide" data-slide-to="2">
-              <strong>Lorem ipsum </strong>consectetur adipisicing elit.
-            </li>
-            <li data-target="#caption_slide" data-slide-to="3">
-              <strong>Lorem ipsum </strong>consectetur adipisicing elit.
+              <strong>Projeto 2 </strong>Descrição do projeto
             </li>
           </ol>
         </div>

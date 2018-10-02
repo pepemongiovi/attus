@@ -170,8 +170,13 @@ input:-webkit-autofill:focus {
 *Default Background Class
 **/
 
-.custom-dialog-container .mat-dialog-container {
+.mat-dialog-container {
   padding: 0px !important;
+  background: rgb(19, 143, 194, 0.9);
+  background: -webkit-linear-gradient(bottom, rgb(96, 192, 224, 0.9), rgb(19, 143, 194, 0.9));
+  background: -o-linear-gradient(bottom, rgb(96, 192, 224, 0.9), rgb(19, 143, 194, 0.9));
+  background: -moz-linear-gradient(bottom, rgb(96, 192, 224, 0.9), rgb(19, 143, 194, 0.9));
+  background: linear-gradient(bottom, rgb(96, 192, 224, 0.9), rgb(19, 143, 194, 0.9));
 }
 
 .overlay:before,
@@ -455,7 +460,6 @@ input:-webkit-autofill:focus {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .caption-slider .carousel-indicators li {
@@ -790,7 +794,7 @@ input:-webkit-autofill:focus {
 ***/
 
 .footer-area {
-  padding-top: 120px;
+  padding-top: 60px;
   z-index: 1;
 }
 

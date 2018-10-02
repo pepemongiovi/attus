@@ -18,16 +18,11 @@
   width: 100%;
   margin: 0 auto;
   margin-bottom: -250px;
-  background: #005bea;
-  background: -webkit-linear-gradient(bottom, #005bea, #00c6fb);
-  background: -o-linear-gradient(bottom, #005bea, #00c6fb);
-  background: -moz-linear-gradient(bottom, #005bea, #00c6fb);
-  background: linear-gradient(bottom, #005bea, #00c6fb);
 }
 
 .txt1 {
   font-size: 16px;
-  color: #cccccc;
+  color: #e3ebed;
   line-height: 1.4;
 }
 
@@ -37,7 +32,6 @@
 
 .container-login100 {
   width: 100%;
-  min-height: 65vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -85,7 +79,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: -180px;
 }
 
 .closeIcon {
@@ -100,7 +93,7 @@
 }
 
 .login100-form-title {
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   color: #fff;
   line-height: 1.2;
@@ -164,7 +157,7 @@
   animation: anim-shadow 0.5s ease-in-out forwards;
 }
 
-.p-t-190 {padding-top: 190px;}
+.p-t-190 {padding-top: 45px;}
 
 .p-t-25 {padding-top: 25px;}
 
@@ -265,10 +258,10 @@
   top: 0;
   left: 0;
   background: #005bea;
-  background: -webkit-linear-gradient(left, #005bea, #00c6fb);
-  background: -o-linear-gradient(left, #005bea, #00c6fb);
-  background: -moz-linear-gradient(left, #005bea, #00c6fb);
-  background: linear-gradient(left, #005bea, #00c6fb);
+  background: -webkit-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
+  background: -o-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
+  background: -moz-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
+  background: linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;

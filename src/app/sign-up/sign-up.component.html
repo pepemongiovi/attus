@@ -1,44 +1,179 @@
-<mat-card>
-  <div class="row">
-    <h1><span><strong>Cadastro</strong></span></h1>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="example-container">
-        <mat-form-field>
-          <input matInput formControlName="name" [formGroup]="form" id="name" placeholder="Name">
-          <mat-error
-            *ngIf="form.controls['name'].invalid &&
-            (form.controls['name'].dirty ||
-            form.controls['name'].touched)">{{ "Name is required" }}</mat-error>
-        </mat-form-field>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <mat-form-field>
-          <input matInput formControlName="email" [formGroup]="form" id="email" placeholder="Email">
-          <mat-error
-            *ngIf="form.controls['email'].invalid &&
-            (form.controls['email'].dirty ||
-            form.controls['email'].touched)">{{ "Email is required" }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput formControlName="password" [formGroup]="form" id="password" placeholder="Name"  placeholder="Password" type="password">
-          <mat-error
-            *ngIf="form.controls['password'].invalid &&
-            (form.controls['password'].dirty ||
-            form.controls['password'].touched)">{{ "Password is required" }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Confirm password"  formControlName="confirmPassword" [formGroup]="form" id="confirmPassword" placeholder="Confirm password" type="password">
-          <mat-error
-            *ngIf="form.controls['confirmPassword'].invalid &&
-            (form.controls['confirmPassword'].dirty ||
-            form.controls['confirmPassword'].touched)">
-            <div *ngIf="form.controls['confirmPassword'].errors.MatchPassword">Password does not match</div>
-            <div *ngIf="form.controls['confirmPassword'].errors.required">Password confirmation is required</div>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button disabled="{{ form.invalid }}" class="send" type="submit"><strong><strong>SUBMIT</strong></strong></button>
-      </div>
-    </form>
+<div (click)="close()" style="color: #005bea; text-align: end">
+  <mat-icon class="closeIcon">close</mat-icon>
+  <span style="margin-right: 41px"></span>
+</div>
+<div class="limiter">
+  <div class="row small">
+    <div class="col-sm-10 header-text"><h1><b>Cadastro</b> - {{pageTitle}}</h1></div>
   </div>
-</mat-card>
+  <div class="" style="margin-left: -10%">
+    <div class="tab-content">
+      <div class="tab-pane active small" id="personalInfo">
+        <div class="text-center col-xs-4" style="margin-top: 60px">
+          <img style="margin-bottom: 15px"
+               [src]="user.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
+               class="avatar img-circle img-thumbnail" alt="avatar">
+          <input [(ngModel)]="user.profilePicture" type="file" class="text-center center-block file-upload">
+        </div>
+
+        <form class="form" action="##" name="profileForm" id="profileForm">
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="name"><h4>Nome completo</h4></label>
+              <input [(ngModel)]="user.displayName" type="text" class="form-control input100" name="name" id="name" placeholder="Nome Completo*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="email"><h4>Email</h4></label>
+              <input [(ngModel)]="user.email" type="email" class="form-control input100" name="email" id="email" placeholder="usuario@email.com" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-2">
+              <label for="ddi"><h4>DDI</h4></label>
+              <input [(ngModel)]="user.ddi" type="text" class="form-control input100" name="ddi" id="ddi" value="55" placeholder="DDI*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="phone"><h4>Telefone</h4></label>
+              <input [(ngModel)]="user.phone" type="text" class="form-control input100" name="phone" id="phone" placeholder="(83) 98789-2093">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="birthDay"><h4>Data de nascimento</h4></label>
+              <input [(ngModel)]="user.birthDay" type="date" class="form-control input100" name="birthDay" id="birthDay">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-2">
+              <label for="issuingBody"><h4>Orgão Emissor</h4></label>
+              <input [(ngModel)]="user.issuingBody" type="text" class="form-control input100" id="issuingBody" name="issuingBody" placeholder="Orgão Emissor*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="rg"><h4>RG</h4></label>
+              <input [(ngModel)]="user.rg" type="text" class="form-control input100" name="rg" id="rg" placeholder="RG*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="cpf"><h4>CPF</h4></label>
+              <input [(ngModel)]="user.cpf" type="text" maxlength="14" class="form-control input100" name="cpf" id="cpf" placeholder="xx.xxx.xxx-xx">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="country"><h4>País</h4></label>
+              <div class="form-group input100">
+                <mat-select id="country" [(ngModel)]="user.country" name="country" id="country" placeholder="Selecione">
+                  <mat-option *ngFor="let country of countries" [value]="country.nome_pais">
+                    {{ country.sigla + ' - ' + country.nome_pais }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-2">
+              <label for="state"><h4>UF</h4></label>
+              <input [(ngModel)]="user.uf" type="text" class="form-control input100" name="state" id="state" placeholder="UF*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="cep"><h4>CEP</h4></label>
+              <input [(ngModel)]="user.cep" type="text" class="form-control input100" name="cep" id="cep" placeholder="xxxxx-xxx">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="city"><h4>Cidade</h4></label>
+              <input [(ngModel)]="user.city" type="text" class="form-control input100" name="city" id="city" placeholder="Cidade*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-6">
+              <label for="address"><h4>Endereço</h4></label>
+              <input [(ngModel)]="user.address" type="text" class="form-control input100" name="address" id="address" placeholder="Endereço*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-2">
+              <label for="number"><h4>Número</h4></label>
+              <input [(ngModel)]="user.number" type="text" class="form-control input100" name="number" id="number" placeholder="Numero*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="complement"><h4>Complemento</h4></label>
+              <input [(ngModel)]="user.complement" type="text" class="form-control input100" name="complement" id="complement" placeholder="Complemento*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-6">
+              <label for="profession"><h4>Profissão</h4></label>
+              <input [(ngModel)]="user.profession" type="text" class="form-control input100" name="profession" id="profession" placeholder="Profissão*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label for="civilStatus"><h4>Estado Civil</h4></label>
+              <div class="form-group input100">
+                <mat-select id="civilStatus" [(ngModel)]="user.civilStatus" id="civilStatus" name="civilStatus" placeholder="Selecione">
+                  <mat-option *ngFor="let status of civilStatus" [value]="status">
+                    {{ status }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-xs-12">
+            <button data-toggle="tab" href="#bankInfo" class="btn btn-lg btn-success pull-right" (click)="next()">
+              <i class="glyphicon glyphicon-arrow-right"></i>
+              Pŕoximo
+            </button>
+          </div>
+        </form>
+      </div><!--/tab-pane-->
+
+      <div class="tab-pane small" id="bankInfo">
+        <button class="btn btn-lg btn-success pull-right" style="margin-left: 10px" (click)="signUp()" type="submit">
+          <i class="glyphicon glyphicon-ok-sign"></i>
+          Finalizar
+        </button>
+        <button data-toggle="tab" href="#personalInfo" class="btn btn-lg btn-danger pull-right" (click)="back()">
+          <i class="glyphicon glyphicon-arrow-left"></i>
+          Voltar
+        </button>
+      </div>
+
+    </div><!--/tab-pane-->
+  </div><!--/tab-content-->
+</div>
+

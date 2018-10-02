@@ -1,6 +1,6 @@
 <ng-container>
   <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
-    <div class="container">
+    <div *ngIf="!loginDialogRef && !profileDialogRef && !signUpDialogRef && !instructionsDialogRef" class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-menu">
           <span class="icon-bar"></span>
@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
         </button>
         <a href="#" class="navbar-brand logo">
-          <h2>Attus</h2>
+          <img class="logo" src="../../images/attusLogo2.png">
         </a>
       </div>
 
@@ -19,8 +19,9 @@
           <li><a href="#feature-page">Vantagens</a></li>
           <li><a href="#projects-page">Projetos</a></li>
           <li><a href="#faq-page">FAQ</a></li>
-          <li><a href="#contact-page">Contato</a></li>
-          <li><a (click)="openDialog()">Login</a></li>
+          <!--<li><a href="#contact-page">Contato</a></li>-->
+          <li *ngIf="!isLoggedIn()"><a (click)="openLoginDialog()">Entrar</a></li>
+          <li><a *ngIf="isLoggedIn()" (click)="openProfileDialog()">Perfil</a></li>
         </ul>
       </nav>
     </div>
@@ -43,7 +44,8 @@
 
   <app-advantages></app-advantages>
 
-  <app-projects></app-projects>
+
+  <app-projects (invest)="openInstructionsDialog()"></app-projects>
 
   <app-faq></app-faq>
 

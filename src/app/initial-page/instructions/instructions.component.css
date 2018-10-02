@@ -1,0 +1,76 @@
+mat-horizontal-stepper{
+  background-color: transparent;
+}
+
+.closeIcon {
+  position: absolute;
+  color: #FFFFFF;
+  margin: 10px;
+  float: right;
+}
+
+.closeIcon:hover {
+  color: red;
+}
+
+/deep/ .mat-step-header .mat-step-icon-not-touched{
+  background-color: rgba(255, 255, 255, 0.5);
+  color: blue;
+  height: 40px;
+  width: 40px;
+  font-size: 15px;
+}
+
+/deep/ .mat-step-header .mat-step-icon {
+  height: 40px;
+  width: 40px;
+  font-size: 15px;
+  background-color: limegreen;
+}
+
+.small {
+  transform: scale(0.80, 0.80);
+  margin-top:-100px;
+  margin-left:-30px;
+}
+
+.navigationNextButton {
+  background-color:limegreen;
+  color: white;
+  border-radius: 25px;
+  font-weight: bold;
+  size: 100px;
+}
+
+.navigationBackButton {
+  background-color: red;
+  color: white;
+  border-radius: 25px;
+  font-weight: bold;
+  size: 60px;
+}
+
+.instructionsBtns {
+  margin-top: 10px;
+  float: right;
+}
+
+.instructionsText {
+  text-align: justify;
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+/deep/ .mat-step-label {
+  color: white !important;
+}
+
+mat-horizontal-stepper {
+  padding: 20px;
+}
+
+/deep/ .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+

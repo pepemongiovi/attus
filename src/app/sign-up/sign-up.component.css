@@ -1,73 +1,114 @@
-.container {
-  border: 3px solid;
-  width: 400px;
+.limiter {
+  margin-left: 8%;
 }
 
-.container-form {
-  margin-top: 10%;
+.closeIcon {
+  position: absolute;
+  color: #FFFFFF;
+  margin: 10px;
+  float: right;
 }
 
-mat-form-field {
-  margin-bottom: 10px;
+.closeIcon:hover {
+  color: red;
 }
 
-.spacer {
-  margin: 5px 0px;
-}
-
-.btn-submit {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-}
-
-input {
+.logoutBtn {
   width: 100%;
 }
 
-.invalid-feedback {
+.logoutBtnContainer {
+  text-align: center;
+}
+
+.small {
+  transform: scale(0.8, 0.8);
+}
+
+input, select, textarea{
+  color: #000000;
+}
+
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+input[type="date"]:before {
+  color: transparent;
+  background: none;
   display: block;
-}
-
-.example-container {
-  display: flex;
-  height: 90vh;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
-
-.example-container > * {
-  width: 30%;
-}
-
-.mat-raised-button{
-  margin: 3px;
-}
-
-.send {
-  background-color: #78909C;
+  font-family: 'FontAwesome';
+  content: '\f073';
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  margin-top: -5px;
+  margin-right: 20px;
+  top: 12px;
+  right: 6px;
+  color: rgb(19, 143, 194);
 }
 
 h1 {
-  font-size: 35px;
-  color: black;
+  color: white;
+  margin-left: -100px;
 }
 
-mat-card-header {
-  text-align: left;
+/*---------------------------------------------*/
+.wrap-input100 {
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
-mat-card {
-  background-color: #1b6d85;
-  text-align: center;
-  min-height: 100%;
+.input100 {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #333333;
+  display: block;
+  width: 100%;
+  background: #fff;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 25px;
 }
 
-h3 {
-  color: black;
+/*------------------------------------------------------------------
+[ Focus ]*/
+.focus-input100 {
+  display: block;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(0,91,234, 0.6);
 }
 
-input {
-  color: black;
+.input100:focus + .focus-input100 {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
+}
+
+mat-select {
+  margin-top: 18px;
+}
+
+li {
+  background-color: #ccc;
 }

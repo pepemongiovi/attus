@@ -5,6 +5,8 @@ import { PasswordValidation } from '../shared/password-validation';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import {AuthService} from '../services/auth.service';
+import {ProfileComponent} from '../initial-page/profile/profile.component';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,48 +15,30 @@ import {AuthService} from '../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
-  emailRegex = /^[\w\W]{1,}@[\w\W]{2,}$/;
-  form: FormGroup;
+  constructor(public dialogRef: MatDialogRef<SignUpComponent>) {}
 
-  constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private router: Router) {
-    this.createForm();
-  }
+  emailRegex = /^[\w\W]{1,}@[\w\W]{2,}$/;
+  user = new User();
+  pageTitle = 'Dados pessoais';
+  civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
 
   ngOnInit() {
   }
 
-  createForm() {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: ['', [Validators.required, Validators.min(8)]],
-      confirmPassword: ['', [Validators.required]]
-    }, {
-      validator: PasswordValidation.MatchPassword
-    });
+  next() {
+    this.pageTitle = 'Dados bancários (OPCIONAL)';
   }
 
-  resetForm() {
-    this.form.reset({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    });
+  back() {
+    this.pageTitle = 'Dados pessoais';
   }
 
-  onSubmit() {
-    const user = new User(
-      this.form.value.name,
-      this.form.value.email,
-      this.form.value.password
-    );
+  close() {
+    this.dialogRef.close();
+  }
 
-    this.authService.signUp(user);
+  signUp() {
 
-    this.resetForm();
   }
 
 }

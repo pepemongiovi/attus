@@ -1,8 +1,18 @@
 mat-icon {
   margin-right: 7px;
-  margin-top: -3px !important;
+  margin-left: -32px;
+  margin-top: -4px !important;
 }
 
 .material-icons, .icon-text {
   vertical-align: middle;
+}
+
+.panel {
+  margin-bottom: -35px;
+}
+
+p {
+  margin-bottom: 20px;
+  margin-top: -20px;
 }
