@@ -5,6 +5,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {AuthService} from '../services/auth.service';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import {InstructionsComponent} from './instructions/instructions.component';
+import {UserService} from '../services/user.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-initial-page',
@@ -20,13 +22,19 @@ export class InitialPageComponent implements OnInit {
   profileDialogRef;
   signUpDialogRef;
   instructionsDialogRef;
-
+  user = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit() {
   }
 
   isLoggedIn() {
+    this.user = JSON.parse(localStorage.getItem('user'));
     return this.authService.isAuthenticated();
+  }
+
+  invest() {
+    if(this.user) this.openInstructionsDialog();
+    else this.openSignUpDialog();
   }
 
   openLoginDialog() {

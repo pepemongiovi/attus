@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <div (click)="close()" style="color: #005bea; text-align: end">
   <mat-icon class="closeIcon">close</mat-icon>
@@ -16,65 +14,124 @@
       <div class="tab-pane active small" id="personalInfo">
         <div class="text-center col-xs-4" style="margin-top: 60px">
           <img style="margin-bottom: 15px"
-               [src]="user.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
+               [src]="personalInfo.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
                class="avatar img-circle img-thumbnail" alt="avatar">
-          <input [(ngModel)]="user.profilePicture" type="file" class="text-center center-block file-upload">
+          <input (change)="onSelectFile($event)" name="profilePicture" type="file" class="text-center center-block file-upload">
         </div>
 
         <form class="form" action="##" name="profileForm" id="profileForm">
           <div class="form-group">
             <div class="col-xs-4">
-              <label for="name"><h4>Nome completo</h4></label>
+              <label for="name">
+                <h4 *ngIf="textIsValid(user.displayName)">Nome completo</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(user.displayName)">Nome completo*</h4>
+              </label>
               <input [(ngModel)]="user.displayName" type="text" class="form-control input100" name="name" id="name" placeholder="Nome Completo*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-4">
-              <label for="email"><h4>Email</h4></label>
+              <label for="email">
+                <h4 *ngIf="emailIsValid()">Email</h4>
+                <h4 class="validationMessage" *ngIf="!emailIsValid()">Email*</h4>
+              </label>
               <input [(ngModel)]="user.email" type="email" class="form-control input100" name="email" id="email" placeholder="usuario@email.com" >
             </div>
           </div>
 
           <div class="form-group">
+            <div class="col-xs-4">
+              <label for="password">
+                <h4 *ngIf="passwordIsValid(user.password)">Senha</h4>
+                <h4 class="validationMessage" *ngIf="!passwordIsValid(user.password)">Senha*</h4>
+              </label>
+              <input [(ngModel)]="user.password" type="password" minlength="6" class="form-control input100" id="password" name="password" placeholder="Senha*">
+              <p style="margin-top:-88px" *ngIf="!passwordIsValid(user.password)" class="validationMessage">Deve ter no mínimo 6 caracteres.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="passwordConfirmation">
+                <h4 *ngIf="passwordConfirmationIsValid(user.passwordConfirmation)">Confirmar Senha</h4>
+                <h4 class="validationMessage" *ngIf="!passwordConfirmationIsValid(user.passwordConfirmation)">Confirmar Senha*</h4>
+              </label>
+              <input [(ngModel)]="user.passwordConfirmation" type="password" class="form-control input100" id="passwordConfirmation" name="passwordConfirmation" placeholder="Confimar Senha*" >
+            </div>
+          </div>
+
+          <div class="form-group">
             <div class="col-xs-2">
-              <label for="ddi"><h4>DDI</h4></label>
-              <input [(ngModel)]="user.ddi" type="text" class="form-control input100" name="ddi" id="ddi" value="55" placeholder="DDI*">
+              <label for="issuingBody">
+                <h4 *ngIf="textIsValid(personalInfo.issuingBody)">Orgão Emissor</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.issuingBody)">Orgão Emissor</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.issuingBody" type="text" class="form-control input100" id="issuingBody" name="issuingBody" placeholder="Orgão Emissor*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="phone"><h4>Telefone</h4></label>
-              <input [(ngModel)]="user.phone" type="text" class="form-control input100" name="phone" id="phone" placeholder="(83) 98789-2093">
+              <label for="rg">
+                <h4 *ngIf="numberIsValid(personalInfo.rg)">RG</h4>
+                <h4 class="validationMessage" *ngIf="!numberIsValid(personalInfo.rg)">RG*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.rg" type="number" class="form-control input100 no-spin" name="rg" id="rg" placeholder="RG*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="birthDay"><h4>Data de nascimento</h4></label>
-              <input [(ngModel)]="user.birthDay" type="date" class="form-control input100" name="birthDay" id="birthDay">
+              <label for="cpf">
+                <h4 *ngIf="cpfIsValid()">CPF</h4>
+                <h4 class="validationMessage" *ngIf="!cpfIsValid()">CPF*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.cpf" type="text" class="form-control input100 no-spin" name="cpf" id="cpf" placeholder="xx.xxx.xxx-xx">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <label for="profession">
+                <h4 *ngIf="textIsValid(personalInfo.profession)">Profissão</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.profession)">Profissão*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.profession" type="text" class="form-control input100" name="profession" id="profession" placeholder="Profissão*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-2">
-              <label for="issuingBody"><h4>Orgão Emissor</h4></label>
-              <input [(ngModel)]="user.issuingBody" type="text" class="form-control input100" id="issuingBody" name="issuingBody" placeholder="Orgão Emissor*">
+              <label for="ddi">
+                <h4 *ngIf="numberIsValid(personalInfo.ddi)">DDI</h4>
+                <h4 class="validationMessage" *ngIf="!numberIsValid(personalInfo.ddi)">DDI*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.ddi" type="number" class="form-control input100 no-spin" name="ddi" id="ddi" value="55" placeholder="DDI*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="rg"><h4>RG</h4></label>
-              <input [(ngModel)]="user.rg" type="text" class="form-control input100" name="rg" id="rg" placeholder="RG*">
+              <label for="phone">
+                <h4 *ngIf="phoneIsValid()">Telefone</h4>
+                <h4 class="validationMessage" *ngIf="!phoneIsValid()">Telefone*</h4>
+                </label>
+              <input [(ngModel)]="personalInfo.phone" type="number" class="form-control input100 no-spin" name="phone" id="phone" placeholder="(83) 98789-2093">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="cpf"><h4>CPF</h4></label>
-              <input [(ngModel)]="user.cpf" type="text" maxlength="14" class="form-control input100" name="cpf" id="cpf" placeholder="xx.xxx.xxx-xx">
+              <label for="birthDay">
+                <h4 *ngIf="birthDayIsValid()">Data de Nascimento</h4>
+                <h4 class="validationMessage" *ngIf="!birthDayIsValid()">Data de Nascimento*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.birthDay" id="birthDay" name="birthDay" class="form-control input100" [matDatepicker]="picker" placeholder="Data de Nascimento*">
+              <div style="margin-left: 75%; margin-top: -65px; size: 10px">
+                  <mat-datepicker-toggle style="size: 10px" matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker style="size: 10px;  " #picker></mat-datepicker>
+              </div>
             </div>
           </div>
 
@@ -82,7 +139,7 @@
             <div class="col-xs-4">
               <label for="country"><h4>País</h4></label>
               <div class="form-group input100">
-                <mat-select id="country" [(ngModel)]="user.country" name="country" id="country" placeholder="Selecione">
+                <mat-select id="country" [(ngModel)]="personalInfo.country" name="country" id="country" placeholder="Selecione">
                   <mat-option *ngFor="let country of countries" [value]="country.nome_pais">
                     {{ country.sigla + ' - ' + country.nome_pais }}
                   </mat-option>
@@ -93,58 +150,72 @@
 
           <div class="form-group">
             <div class="col-xs-2">
-              <label for="state"><h4>UF</h4></label>
-              <input [(ngModel)]="user.uf" type="text" class="form-control input100" name="state" id="state" placeholder="UF*">
+              <label for="state">
+                <h4 *ngIf="textIsValid(personalInfo.uf)">UF</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.uf)">UF*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.uf" type="text" class="form-control input100" name="state" id="state" placeholder="UF*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="cep"><h4>CEP</h4></label>
-              <input [(ngModel)]="user.cep" type="text" class="form-control input100" name="cep" id="cep" placeholder="xxxxx-xxx">
+              <label for="cep">
+                <h4 *ngIf="numberIsValid(personalInfo.cep)">CEP</h4>
+                <h4 class="validationMessage" *ngIf="!numberIsValid(personalInfo.cep)">CEP*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.cep" type="number" class="form-control input100 no-spin" name="cep" id="cep" placeholder="xxxxx-xxx">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="city"><h4>Cidade</h4></label>
-              <input [(ngModel)]="user.city" type="text" class="form-control input100" name="city" id="city" placeholder="Cidade*">
+              <label for="city">
+                <h4 *ngIf="textIsValid(personalInfo.city)">Cidade</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.city)">Cidade*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.city" type="text" class="form-control input100" name="city" id="city" placeholder="Cidade*">
             </div>
           </div>
 
+
           <div class="form-group">
-            <div class="col-xs-6">
-              <label for="address"><h4>Endereço</h4></label>
-              <input [(ngModel)]="user.address" type="text" class="form-control input100" name="address" id="address" placeholder="Endereço*">
+            <div class="col-xs-5">
+              <label for="address">
+                <h4 *ngIf="textIsValid(personalInfo.address)">Endereço</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.address)">Endereço*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.address" type="text" class="form-control input100" name="address" id="address" placeholder="Endereço*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-2">
-              <label for="number"><h4>Número</h4></label>
-              <input [(ngModel)]="user.number" type="text" class="form-control input100" name="number" id="number" placeholder="Numero*">
+              <label for="number">
+                <h4 *ngIf="numberIsValid(personalInfo.number)">Número</h4>
+                <h4 class="validationMessage" *ngIf="!numberIsValid(personalInfo.number)">Número*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.number" type="number" class="form-control input100 no-spin" name="number" id="number" placeholder="Numero*">
             </div>
           </div>
 
           <div class="form-group">
-            <div class="col-xs-4">
-              <label for="complement"><h4>Complemento</h4></label>
-              <input [(ngModel)]="user.complement" type="text" class="form-control input100" name="complement" id="complement" placeholder="Complemento*">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-xs-6">
-              <label for="profession"><h4>Profissão</h4></label>
-              <input [(ngModel)]="user.profession" type="text" class="form-control input100" name="profession" id="profession" placeholder="Profissão*">
+            <div class="col-xs-5">
+              <label for="complement">
+                <h4 *ngIf="textIsValid(personalInfo.addressComplement)">Complemento</h4>
+                <h4 class="validationMessage" *ngIf="!textIsValid(personalInfo.addressComplement)">Complemento*</h4>
+              </label>
+              <input [(ngModel)]="personalInfo.addressComplement" type="text" class="form-control input100" name="complement" id="complement" placeholder="Complemento*">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-3">
-              <label for="civilStatus"><h4>Estado Civil</h4></label>
+              <label for="civilStatus">
+                <h4>Estado Civil</h4>
+              </label>
               <div class="form-group input100">
-                <mat-select id="civilStatus" [(ngModel)]="user.civilStatus" id="civilStatus" name="civilStatus" placeholder="Selecione">
+                <mat-select id="civilStatus" [(ngModel)]="personalInfo.civilStatus" id="civilStatus" name="civilStatus" placeholder="Selecione">
                   <mat-option *ngFor="let status of civilStatus" [value]="status">
                     {{ status }}
                   </mat-option>
@@ -154,7 +225,7 @@
           </div>
 
           <div class="form-group col-xs-12">
-            <button data-toggle="tab" href="#bankInfo" class="btn btn-lg btn-success pull-right" (click)="next()">
+            <button [disabled]="!nextBtnIsValid()" data-toggle="tab" href="#bankInfo" class="btn btn-lg btn-success pull-right" (click)="next()">
               <i class="glyphicon glyphicon-arrow-right"></i>
               Pŕoximo
             </button>
@@ -163,7 +234,8 @@
       </div><!--/tab-pane-->
 
       <div class="tab-pane small" id="bankInfo">
-        <button class="btn btn-lg btn-success pull-right" style="margin-left: 10px" (click)="signUp()" type="submit">
+        <app-bank-info (updateBankInfo)="updateBankInfo($event)" (submitBtnStatusUpdate)="submitBtnIsDisabled($event)"></app-bank-info>
+        <button [disabled]="submitBtnDisabled" class="btn btn-lg btn-success pull-right" style="margin-left: 10px" (click)="signUp()" type="submit">
           <i class="glyphicon glyphicon-ok-sign"></i>
           Finalizar
         </button>

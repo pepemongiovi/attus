@@ -125,3 +125,7 @@ li {
   margin: 0 !important;
   -moz-appearance:textfield !important;
 }
+
+.validationMessage {
+  color: red; margin-top:-17px;
+}

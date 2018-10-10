@@ -12,14 +12,14 @@
       </div><!--/col-3-->
       <div class="" style="margin-left: -10%">
         <ul class="nav nav-tabs small">
-          <li class="active"><a data-toggle="tab" href="#personal-info">Dados pessoais</a></li>
-          <li><a data-toggle="tab" href="#bank-info">Dados bancários</a></li>
-          <li><a data-toggle="tab" href="#projects">Meus Projetos</a></li>
+          <li class="active"><a data-toggle="tab" href="#personal-info">Dados Pessoais</a></li>
+          <li><a data-toggle="tab" href="#bank-info">Dados Bancários</a></li>
+          <li><a data-toggle="tab" href="#projects">Meus Investimentos</a></li>
         </ul>
 
         <div class="tab-content">
           <div class="tab-pane active small" style="margin-top:15px" id="personal-info">
-            <app-personal-info (logout)="logout()" [showSaveButton]="true"></app-personal-info>
+            <app-personal-info (logout)="logout()" [showButtons]="true"></app-personal-info>
           </div>
 
           <div class="tab-pane small" id="bank-info">

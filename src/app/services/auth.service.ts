@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
-import {User} from '../models/user.model';
+import {UserService} from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -11,11 +11,11 @@ export class AuthService {
   private USER = 'user';
 
   constructor(private router: Router,
-              private http: HttpClient) {
+              private userService: UserService) {
     this.API = '';
   }
 
-  signUp(userInfo: User) {
+  signUp(userInfo, personalInfo, bankInfo, closeSignUpDialog) {
     firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(userInfo.email, userInfo.password)
       .then( (user) => {
         if(user) {
@@ -24,18 +24,20 @@ export class AuthService {
             photoURL: ''
           }).then(
             ( s ) => {
-              this.router.navigate(['']);
+              this.setSession(user);
+              this.userService.savePersonalInfo(personalInfo);
+              this.userService.saveBankInfo(bankInfo);
+              closeSignUpDialog;
             }
           );
         }
-        console.log(user);
       })
       .catch(
       error => console.log(error)
     );
   }
 
-  login(user: User, closeDialog) {
+  login(user, closeDialog) {
     firebase.auth().signInAndRetrieveDataWithEmailAndPassword(user.email, user.password)
       .then((user) => {
         this.setSession(user);
@@ -45,7 +47,6 @@ export class AuthService {
 
   setSession(user) {
     localStorage.setItem(this.USER, JSON.stringify(user));
-
   }
 
   isAuthenticated() {

@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BankInfo} from '../../../models/bankInfo.model';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-bank-info',
@@ -7,34 +9,52 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class BankInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   @Input() showSaveButton;
   @Output() submitBtnStatusUpdate = new EventEmitter();
-  user = JSON.parse(localStorage.getItem('user')).user;
+  @Output() updateBankInfo = new EventEmitter();
   banks = require('../../../../jsons/banks.json');
+  bankInfo = new BankInfo();
 
   ngOnInit() {
+    this.fetchBankInfo();
+  }
+
+  fetchBankInfo() {
+    if(JSON.parse(localStorage.getItem('user'))!=null) {
+      this.userService.getBankInfo().on('value', (snapshot) => {
+        if(snapshot.val() !== null) {
+          this.bankInfo = snapshot.val();
+        }
+      });
+    }
   }
 
   numberIsValid(num) {
     let isValid = true;
-    if(num!==undefined && (isNaN(num) || num<=0)) {
+    if (num !== undefined && (isNaN(num) || num <= 0)) {
       isValid = false;
     }
     return isValid;
   }
 
   save() {
+    this.userService.saveBankInfo(this.bankInfo);
   }
 
   disableSaveBtn() {
-    let disabled = !this.numberIsValid(this.user.checkingAccount)
-      || !this.numberIsValid(this.user.agency)
-      || !this.numberIsValid(this.user.bankNumber)
-      || this.user.agency===undefined || this.user.bankNumber===undefined
-      || this.user.checkingAccount===undefined;
+    const disabled = !this.numberIsValid(this.bankInfo.checkingAccount)
+      || !this.numberIsValid(this.bankInfo.agency)
+      || !this.numberIsValid(this.bankInfo.bankNumber)
+      || this.bankInfo.agency === undefined
+      || this.bankInfo.bankNumber === undefined
+      || this.bankInfo.checkingAccount === undefined;
+
     this.submitBtnStatusUpdate.emit(disabled);
+
+    if (!disabled) this.updateBankInfo.emit(this.bankInfo);
+
     return disabled;
   }
 }

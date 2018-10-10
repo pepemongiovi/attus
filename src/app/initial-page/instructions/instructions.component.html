@@ -13,7 +13,7 @@
         <h3>Confira atentamente seu dados pessoais, pois eles serão usados para confecção do contrato de investimento, garantindo sua segurança jurídica.</h3>
       </div>
       <div>
-        <app-personal-info [showSaveButton]="false"></app-personal-info>
+        <app-personal-info [showButtons]="false"></app-personal-info>
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationNextButton" matStepperNext>SALVAR E PROSSEGUIR</button>
@@ -60,8 +60,8 @@
       </div>
       <div class="instructionsBtns" style="margin-bottom: 350px">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
+        <button mat-button class="navigationNextButton" matStepperNext>FINALIZAR</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-
 </div>

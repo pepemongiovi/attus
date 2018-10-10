@@ -1,5 +1,5 @@
 {
-  "name": "real-estate-cf",
+  "name": "attus",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -23,7 +23,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "angularfire2": "^5.0.1",
+    "@sendgrid/mail": "^6.3.1",
+    "angularfire2": "^5.0.2",
     "core-js": "^2.4.1",
     "firebase": "^5.5.0",
     "rxjs": "^5.5.12",

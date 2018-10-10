@@ -257,7 +257,7 @@
   border-radius: 25px;
   top: 0;
   left: 0;
-  background: #005bea;
+  background: rgb(19, 143, 194, 0.9);
   background: -webkit-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
   background: -o-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));
   background: -moz-linear-gradient(left, rgb(96, 192, 224), rgb(19, 143, 194));

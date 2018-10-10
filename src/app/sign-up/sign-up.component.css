@@ -13,6 +13,23 @@
   color: red;
 }
 
+.validationMessage {
+  color: red;
+}
+
+form:invalid>#submit {
+  pointer-events: none;
+}
+
+.mat-input-element {
+  font-size: 15px !important;
+}
+
+.fixedHeight {
+  margin-bottom: 200px;
+  margin-top: 200px;
+}
+
 .logoutBtn {
   width: 100%;
 }
@@ -111,4 +128,10 @@ mat-select {
 
 li {
   background-color: #ccc;
+}
+
+.no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  -moz-appearance:textfield !important;
 }

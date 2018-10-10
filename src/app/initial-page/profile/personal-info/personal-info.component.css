@@ -13,6 +13,12 @@
   color: red;
 }
 
+.profilePicture {
+  margin-bottom: 15px;
+  height: 220px;
+  width: 220px;
+}
+
 .logoutBtn {
   width: 100%;
 }

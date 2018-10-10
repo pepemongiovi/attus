@@ -3,7 +3,7 @@
     <div class="col-xs-5">
       <label for="bank"><h4>Banco</h4></label>
       <div class="form-group input100">
-        <mat-select [(ngModel)]="user.bankNumber" name="bank" id="bank" placeholder="Selecione">
+        <mat-select [(ngModel)]="bankInfo.bankNumber" name="bank" id="bank" placeholder="Selecione">
           <mat-option *ngFor="let bank of banks" [value]="bank.value">
             {{ bank.value + ' - ' + bank.label }}
           </mat-option>
@@ -15,9 +15,9 @@
   <div class="form-group">
     <div class="col-xs-2">
       <label for="agency"><h4>Agência</h4></label>
-      <input [(ngModel)]="user.agency" type="number" min="1" step="1" class="form-control input100 no-spin" name="agency" id="agency" placeholder="Agência*">
-      <div *ngIf="!numberIsValid(user.agency)"
-           class="alert alert-danger">
+      <input [(ngModel)]="bankInfo.agency" type="number" min="1" step="1" class="form-control input100 no-spin" name="agency" id="agency" placeholder="Agência*">
+      <div *ngIf="!numberIsValid(bankInfo.agency)"
+           class="validationMessage">
         Valor inválido.
       </div>
     </div>
@@ -26,9 +26,9 @@
   <div class="form-group">
     <div class="col-xs-3">
       <label for="checkingAccount"><h4>Conta Corrente</h4></label>
-      <input [(ngModel)]="user.checkingAccount" type="number" min="1" step="1" class="form-control input100 no-spin" name="checkingAccount" id="checkingAccount" placeholder="Conta Corrente*">
-      <div *ngIf="!numberIsValid(user.checkingAccount)"
-           class="alert alert-danger">
+      <input [(ngModel)]="bankInfo.checkingAccount" type="number" min="1" step="1" class="form-control input100 no-spin" name="checkingAccount" id="checkingAccount" placeholder="Conta Corrente*">
+      <div *ngIf="!numberIsValid(bankInfo.checkingAccount)"
+           class="validationMessage">
         Valor inválido.
       </div>
     </div>

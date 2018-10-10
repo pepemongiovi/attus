@@ -1,6 +1,5 @@
 import {Component, OnInit, HostBinding, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {User} from '../../models/user.model';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
               private authService: AuthService) { }
 
-  user: User = new User();
+  user = {};
   openSignUpDialog = false;
 
   ngOnInit() {}

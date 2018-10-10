@@ -1,6 +1,7 @@
 ﻿<div class="carousel-wrapper">
-  <img [src]="imgsUrl[selectedImgIndex]" class="carousel-wrapper" [ngStyle]="setStyle()"/>
-  <div [ngStyle]="setStyle()">
+  <img class="carousel-wrapper" [src]="imgsUrl[selectedImgIndex]" />
+
+  <div *ngIf="imgsUrl.length>1">
     <a class="arrow arrow-prev" (click)="back()"></a>
     <a class="arrow arrow-next" (click)="next()"></a>
   </div>

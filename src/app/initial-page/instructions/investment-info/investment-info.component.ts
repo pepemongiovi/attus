@@ -12,14 +12,12 @@ export class InvestmentInfoComponent implements OnInit {
 
   @Output() submitBtnStatusUpdate = new EventEmitter();
   user = JSON.parse(localStorage.getItem('user')).user;
-  projects = [{ id: '1', name: 'Project 1' }, { id: '1', name: 'Project 2' }];
-  selectedProjectId;
-  investmentValue: number;
+  projects = [{ id: '1', name: 'Project 1', quotaValue: 800 }, { id: '1', name: 'Project 2', quotaValue: 600 }];
   investmentForm: FormGroup;
 
   ngOnInit() {
     this.investmentForm = new FormGroup({
-      'selectedProjectId': new FormControl('', [
+      'selectedProject': new FormControl('', [
         Validators.required
       ]),
       'quotas': new FormControl('', [
@@ -29,13 +27,12 @@ export class InvestmentInfoComponent implements OnInit {
         Validators.required
       ])
     });
-    console.log(this.investmentForm);
   }
 
   quotasIsValid() {
     let isValid = true;
-    let quotas = this.investmentForm.value.quotas;
-    if(quotas!=='' && (isNaN(quotas) || quotas<=0)) {
+    const quotas = this.investmentForm.value.quotas;
+    if(quotas !== '' && (isNaN(quotas) || quotas <= 0)) {
       isValid = false;
     }
     return isValid;
@@ -43,17 +40,17 @@ export class InvestmentInfoComponent implements OnInit {
 
   investmentValueIsValid() {
     let isValid = true;
-    let investmentValue = this.investmentForm.value.investmentValue;
-    if(investmentValue!=='' && (isNaN(investmentValue) || investmentValue<=0)) {
+    const investmentValue = this.investmentForm.value.investmentValue;
+    if(investmentValue !== '' && (isNaN(investmentValue) || investmentValue <= 0)) {
       isValid = false;
     }
     return isValid;
   }
 
   disableSubmit() {
-    let projectNotSelected = this.investmentForm.value.selectedProjectId === '';
-    let quotasEmpty = this.investmentForm.value.quotas === '';
-    let investmentValueEmpty = this.investmentForm.value.investmentValue === '';
+    const projectNotSelected = this.investmentForm.value.selectedProject === '';
+    const quotasEmpty = this.investmentForm.value.quotas === '';
+    const investmentValueEmpty = this.investmentForm.value.investmentValue === '';
     this.submitBtnStatusUpdate.emit(
       !this.investmentValueIsValid() || !this.quotasIsValid() || projectNotSelected
       || quotasEmpty || investmentValueEmpty

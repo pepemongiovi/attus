@@ -123,3 +123,6 @@ li {
   border-left: 5px solid red;
 }
 
+.validationMessage {
+  color: red; margin-top:-17px;
+}

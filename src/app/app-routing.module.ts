@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'initial-page', pathMatch: 'full' },
   { path: 'initial-page', component: InitialPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'personalInfo', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'sign-up', component: SignUpComponent }
 ];
 

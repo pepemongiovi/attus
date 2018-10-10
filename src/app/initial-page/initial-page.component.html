@@ -31,10 +31,12 @@
     <div class="absolute anlge-bg"></div>
     <div class="container">
       <div class="row v-center">
-        <div class="col-xs-12 col-md-7 header-text">
-          <h2>It’s all about Promoting your Business</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero ex inventore vel error quibusdam animi fugiat, doloribus dolores consectetur nulla deleniti sint blanditiis quod debitis quis vitae officiis tempora numquam.</p>
-          <a href="#" class="button white">Watch video</a>
+        <div class="col-xs-12 col-md-12 header-text">
+          <h1>{{ user ? 'Bem vindo, ' + user.user.displayName : ''}}</h1>
+          <h2 style="width: 400px; margin-top: 25px">O crowdfunding imobiliário seguro</h2>
+          <p>Faça seu dinheiro render de um jeito fácil</p>
+          <p style="margin-top:-12px">Diversifique sua carteira com ativos imobiliários</p>
+          <a href="#projects-page" class="button white">Conheça nossos projetos</a>
         </div>
       </div>
     </div>
@@ -45,7 +47,7 @@
   <app-advantages></app-advantages>
 
 
-  <app-projects (invest)="openInstructionsDialog()"></app-projects>
+  <app-projects (invest)="invest()"></app-projects>
 
   <app-faq></app-faq>
 
@@ -55,7 +57,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 text-center">
-            <p>&copy;Copyright 2018 All right resurved.  This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com">Colorlib</a></p>
+            <p style="font-size: 14px">&copy;Copyright 2018 All right resurved.  This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com">Colorlib</a></p>
           </div>
         </div>
       </div>

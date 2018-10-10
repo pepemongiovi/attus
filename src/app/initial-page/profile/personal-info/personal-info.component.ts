@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {PersonalInfo} from '../../../models/personalInfo.model';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -7,16 +9,35 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   @Output() logout = new EventEmitter();
-  @Input() showSaveButton;
+  @Input() showButtons;
   user = JSON.parse(localStorage.getItem('user')).user;
-  countries = require('../../../../jsons/countries.json');
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
+  countries = require('../../../../jsons/countries.json');
+  personalInfo = new PersonalInfo();
 
   ngOnInit() {
-    this.user.country = this.countries[29].nome_pais;
+    this.fetchPersonalInfo();
+  }
+
+  fetchPersonalInfo() {
+    this.userService.getPersonalInfo().on('value', (snapshot) => {
+      if (snapshot.val() !== null) {
+        this.personalInfo = snapshot.val();
+      }
+    });
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.personalInfo.profilePicture = event.target.result;
+      }
+    }
   }
 
   onLogout() {
@@ -24,8 +45,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   save() {
-
+    this.userService.savePersonalInfo(this.personalInfo);
+    this.userService.saveUserInfo(this.user);
   }
-
-
 }
