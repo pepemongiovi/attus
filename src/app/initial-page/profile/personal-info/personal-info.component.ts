@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PersonalInfo} from '../../../models/personalInfo.model';
 import {UserService} from '../../../services/user.service';
+import {BankInfo} from '../../../models/bankInfo.model';
 
 @Component({
   selector: 'app-personal-info',
@@ -47,5 +48,73 @@ export class PersonalInfoComponent implements OnInit {
   save() {
     this.userService.savePersonalInfo(this.personalInfo);
     this.userService.saveUserInfo(this.user);
+  }
+
+  numberIsValid(num) {
+    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    let isValid = true;
+    if (num !== undefined && (isNaN(num) || num <= 0)) {
+      isValid = false;
+    }
+    if (num) {
+      isValid = isValid && !format.test(num.toString());
+    }
+    return isValid ;
+  }
+
+  textIsValid(text) {
+    if(text) {
+      const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      return !format.test(text) && text.length > 0 && !(/\d/.test(text));
+    }
+    return true;
+  }
+
+  emailIsValid() {
+    const email = this.user.email;
+    if (email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    return true;
+  }
+
+  phoneIsValid() {
+    if(this.personalInfo.phone) {
+      const valid = this.numberIsValid(this.personalInfo.phone);
+      return valid && this.personalInfo.phone.toString().length > 7;
+    }
+    return true;
+  }
+
+  birthDayIsValid() {
+    const birthDay = this.personalInfo.birthDay;
+    if(birthDay === null) return true;
+    return birthDay;
+  }
+
+  cpfIsValid() {
+    const cpf = this.personalInfo.cpf;
+    if(cpf) {
+      return this.numberIsValid(parseInt(cpf, 10)) && cpf.length === 11;
+    }
+    return true;
+  }
+
+  infoIsValid() {
+    return this.user.displayName && this.user.email && this.personalInfo.phone
+      && this.personalInfo.issuingBody && this.personalInfo.rg && this.personalInfo.cpf
+      && this.personalInfo.profession && this.personalInfo.country && this.personalInfo.uf
+      && this.personalInfo.cep && this.personalInfo.city && this.personalInfo.address
+      && this.personalInfo.number && this.personalInfo.addressComplement
+      && this.personalInfo.birthDay && this.personalInfo.civilStatus && this.personalInfo.ddi &&
+      this.textIsValid(this.user.displayName) && this.emailIsValid() &&
+      this.numberIsValid(this.personalInfo.ddi) && this.phoneIsValid() &&
+      this.birthDayIsValid() && this.textIsValid(this.personalInfo.issuingBody) &&
+      this.numberIsValid(this.personalInfo.rg) && this.cpfIsValid() &&
+      this.textIsValid(this.personalInfo.profession) && this.textIsValid(this.personalInfo.country) &&
+      this.textIsValid(this.personalInfo.uf) && this.numberIsValid(this.personalInfo.cep) &&
+      this.textIsValid(this.personalInfo.city) && this.textIsValid(this.personalInfo.address) &&
+      this.numberIsValid(this.personalInfo.number) && this.textIsValid(this.personalInfo.addressComplement);
   }
 }

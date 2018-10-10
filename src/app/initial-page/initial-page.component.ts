@@ -22,13 +22,11 @@ export class InitialPageComponent implements OnInit {
   profileDialogRef;
   signUpDialogRef;
   instructionsDialogRef;
-  user = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit() {
   }
 
   isLoggedIn() {
-    this.user = JSON.parse(localStorage.getItem('user'));
     return this.authService.isAuthenticated();
   }
 

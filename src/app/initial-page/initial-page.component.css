@@ -9,3 +9,9 @@
 p {
   font-size: 1.6vw;
 }
+
+.valign-center {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+}

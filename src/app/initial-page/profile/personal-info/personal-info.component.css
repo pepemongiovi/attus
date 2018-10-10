@@ -9,6 +9,10 @@
   float: right;
 }
 
+.validationMessage {
+  color: red;
+}
+
 .closeIcon:hover {
   color: red;
 }

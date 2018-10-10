@@ -20,8 +20,18 @@
           <li><a href="#projects-page">Projetos</a></li>
           <li><a href="#faq-page">FAQ</a></li>
           <!--<li><a href="#contact-page">Contato</a></li>-->
-          <li *ngIf="!isLoggedIn()"><a (click)="openLoginDialog()">Entrar</a></li>
-          <li><a *ngIf="isLoggedIn()" (click)="openProfileDialog()">Perfil</a></li>
+          <li *ngIf="!isLoggedIn()"><a (click)="openLoginDialog()">
+            <div class="valign-center">
+              <mat-icon style="margin-right: 4px">input</mat-icon>
+              <span>Entrar</span>
+            </div>
+          </a></li>
+          <li><a *ngIf="isLoggedIn()" (click)="openProfileDialog()">
+            <div class="valign-center">
+              <mat-icon style="margin-right: 3px">account_circle</mat-icon>
+              <span>Perfil</span>
+            </div>
+          </a></li>
         </ul>
       </nav>
     </div>
@@ -32,7 +42,6 @@
     <div class="container">
       <div class="row v-center">
         <div class="col-xs-12 col-md-12 header-text">
-          <h1>{{ user ? 'Bem vindo, ' + user.user.displayName : ''}}</h1>
           <h2 style="width: 400px; margin-top: 25px">O crowdfunding imobiliário seguro</h2>
           <p>Faça seu dinheiro render de um jeito fácil</p>
           <p style="margin-top:-12px">Diversifique sua carteira com ativos imobiliários</p>
