@@ -31,6 +31,10 @@ export class BankInfoComponent implements OnInit {
     }
   }
 
+  onUpdateBankInfo() {
+    this.userService.bankInfo = this.bankInfo;
+  }
+
   numberIsValid(num) {
     let isValid = true;
     if (num !== undefined && (isNaN(num) || num <= 0)) {

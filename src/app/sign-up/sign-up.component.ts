@@ -7,7 +7,7 @@ import {AuthService} from '../services/auth.service';
 import {ProfileComponent} from '../initial-page/profile/profile.component';
 import {MatDialogRef} from '@angular/material';
 import {PersonalInfo} from '../models/personalInfo.model';
-import {User} from '../models/user';
+import {User} from '../models/user.model';
 import {BankInfo} from '../models/bankInfo.model';
 
 @Component({

@@ -1,5 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../../services/user.service';
+import {InvestmentInfo} from '../../../models/investmentInfo.model';
+import {ProjectService} from '../../../services/project.service';
+import {Project} from '../../../models/project.model';
 
 @Component({
   selector: 'app-investment-info',
@@ -8,25 +12,48 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class InvestmentInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   @Output() submitBtnStatusUpdate = new EventEmitter();
+  @Output() updateInvestmentInfo = new EventEmitter();
   user = JSON.parse(localStorage.getItem('user')).user;
-  projects = [{ id: '1', name: 'Project 1', quotaValue: 800 }, { id: '1', name: 'Project 2', quotaValue: 600 }];
   investmentForm: FormGroup;
+  STATUS_IN_PROGRESS = 'EM ANDAMENTO';
+  selectedProject: Project;
 
   ngOnInit() {
+    this.createForm();
+    this.fetchSelectedProject();
+  }
+
+  fetchSelectedProject() {
+    this.selectedProject = this.projectService.getSelectedProject();
+  }
+
+  createForm() {
     this.investmentForm = new FormGroup({
-      'selectedProject': new FormControl('', [
-        Validators.required
-      ]),
       'quotas': new FormControl('', [
-        Validators.required
-      ]),
-      'investmentValue': new FormControl('', [
         Validators.required
       ])
     });
+  }
+
+  getTotalInvestmentValue() {
+    if(!isNaN(this.investmentForm.value.quotas) && !isNaN(this.selectedProject.valorDeCota)){
+      return this.investmentForm.value.quotas * this.selectedProject.valorDeCota;
+    }
+    return '--';
+  }
+
+  investmentInfoUpdate() {
+    const info = new InvestmentInfo(
+      this.selectedProject.name,
+      this.investmentForm.value.quotas * this.selectedProject.valorDeCota,
+      0,
+      this.STATUS_IN_PROGRESS,
+      this.investmentForm.value.quotas,
+      this.selectedProject.valorDeCota);
+    this.updateInvestmentInfo.emit(info);
   }
 
   quotasIsValid() {
@@ -38,22 +65,8 @@ export class InvestmentInfoComponent implements OnInit {
     return isValid;
   }
 
-  investmentValueIsValid() {
-    let isValid = true;
-    const investmentValue = this.investmentForm.value.investmentValue;
-    if(investmentValue !== '' && (isNaN(investmentValue) || investmentValue <= 0)) {
-      isValid = false;
-    }
-    return isValid;
-  }
-
   disableSubmit() {
-    const projectNotSelected = this.investmentForm.value.selectedProject === '';
     const quotasEmpty = this.investmentForm.value.quotas === '';
-    const investmentValueEmpty = this.investmentForm.value.investmentValue === '';
-    this.submitBtnStatusUpdate.emit(
-      !this.investmentValueIsValid() || !this.quotasIsValid() || projectNotSelected
-      || quotasEmpty || investmentValueEmpty
-    );
+    this.submitBtnStatusUpdate.emit(!this.quotasIsValid() || quotasEmpty);
   }
 }

@@ -1,23 +1,21 @@
 <form class="form" [formGroup]="investmentForm" #formDir="ngForm">
   <div class="cross-validation" [class.cross-validation-error]="formDir.errors?.formDir && (formDir.touched || formDir.dirty)">
-    <div class="form-group col-xs-5">
-      <label for="project"><h4>Projeto</h4></label>
-      <div class="form-group input100">
-        <mat-select formControlName="selectedProject" name="project" id="project"
-                    placeholder="Selecione" required>
-          <mat-option *ngFor="let project of projects" [value]="project.name">
-            {{ project.name }}
-          </mat-option>
-        </mat-select>
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label for="project"><h4>Projeto</h4></label>
+        <input id="project" class="form-control input100" readonly="readonly"
+               [value]="selectedProject.name">
       </div>
     </div>
 
     <div class="form-group">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
 
-        <label for="quotas"><h4>
-          Nº de Cotas {{investmentForm.value.selectedProject!=='' ?
-          '(R$ ' + investmentForm.value.selectedProject.quotaValue + '/cota)' : ''}}</h4></label>
+        <label for="quotas">
+          <h4>
+            Nº de Cotas (R$ {{selectedProject.valorDeCota}} / cota)
+          </h4>
+        </label>
         <input formControlName="quotas" type="number" min="1" step="1"
                class="form-control input100" name="quotas"
                id="quotas" placeholder="Nº de Cotas*" required>
@@ -31,15 +29,11 @@
     <div class="form-group">
       <div class="col-xs-3">
         <label for="investmentValue"><h4>Valor a ser investido</h4></label>
-        <input formControlName="investmentValue" type="number" min="1"
-               class="form-control input100 no-spin" name="investmentValue"
-               id="investmentValue" placeholder="Valor a ser investido*" required>
-        <div *ngIf="!investmentValueIsValid()"
-             class="validationMessage">
-          Valor inválido.
-        </div>
+        <input id="investmentValue" class="form-control input100" readonly="readonly"
+               [value]="getTotalInvestmentValue()">
       </div>
     </div>
+    <div *ngIf="investmentInfoUpdate()"></div>
     <div *ngIf="disableSubmit()"></div>
   </div>
 </form>

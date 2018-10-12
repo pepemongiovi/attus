@@ -12,7 +12,7 @@
                     <h2>{{project.name}}</h2>
                   </div>
                   <div style="margin-left:-50px; margin-top: -4px">
-                    <app-slider></app-slider>
+                    <app-slider [imgsUrl]="[project.imgURL]"></app-slider>
                   </div>
                   <div style="height: 150px; width: 93%; margin-left:-5px; margin-top: 30px; text-align: justify">
                     <p>{{project.description}}</p>
@@ -64,22 +64,20 @@
                       </div>
                     </div>
                     <div class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
-                      <a class="button" (click)="onInvest()" style="width: 75%; text-align: center; height: 35px; margin-bottom: 30px">
+                      <a class="button" (click)="onInvest(project)" style="width: 75%; text-align: center; height: 35px; margin-bottom: 30px">
                         <div style="margin-top: -5px">Investir</div>
                       </a>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
-
           </div>
           <!-- Indicators -->
-          <ol class="carousel-indicators" style="margin-bottom: -70px; margin-top: 80px">
+          <ol class="carousel-indicators" style="margin-bottom: -70px; margin-top: 80px" *ngIf="projects">
             <li *ngFor="let project of projects; let i = index"
                 data-target="#caption_slide" (click)="selectProject(i)"
-                [ngClass]="{ 'active': i === selectedProjectIndex }">
+                [ngClass]="{ 'active': i == selectedProjectIndex }">
               <strong>{{project.name}} </strong>
             </li>
           </ol>

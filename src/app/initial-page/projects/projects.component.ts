@@ -1,4 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {UrlSerializer} from '@angular/router';
+import {UserService} from '../../services/user.service';
+import {ProjectService} from '../../services/project.service';
+import {Project} from '../../models/project.model';
 
 @Component({
   selector: 'app-projects',
@@ -7,37 +11,22 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   @Output() invest = new EventEmitter();
-  projects = [
-    { name: 'Residencial Araucárias',
-      description: 'Residencial Araucarias: o terceiro projeto no URBE.ME em parceria com a incorporadora HPR. O empreendimento localiza-se na cidade de Uberlândia o município que mais cresce no estado de Minas Gerais.',
-      rentabilidadeGarantida: 20000,
-      rentabilidadeFinal: 20000,
-      captacaoAtual: 20000,
-      captacaoNecessaria: 30000,
-      valorDeCota: 2000,
-      rentabilidadeMensalMedia: 20000,
-      tempoDeRetorno: 123,
-      prazoParaFinalizarCaptacao: '10/10/2019'
-    },
-    { name: 'Residencial Araucárias 2',
-      description: 'Residencial Araucarias: o terceiro projeto no URBE.ME em parceria com a incorporadora HPR. O empreendimento localiza-se na cidade de Uberlândia o município que mais cresce no estado de Minas Gerais.',
-      rentabilidadeGarantida: 40000,
-      rentabilidadeFinal: 40000,
-      captacaoAtual: 40000,
-      captacaoNecessaria: 40000,
-      valorDeCota: 4000,
-      rentabilidadeMensalMedia: 40000,
-      tempoDeRetorno: 133,
-      prazoParaFinalizarCaptacao: '10/10/2020'
-    }
-  ];
-
+  projects: Project[];
   selectedProjectIndex = 0;
 
   ngOnInit() {
+    this.fetchProjects();
+  }
+
+  fetchProjects() {
+    this.projectService.fetchProjects().on('value', (snapshot) => {
+      if (snapshot.val() !== null) {
+        this.projects = snapshot.val().filter((proj) => proj);
+      }
+    }, (err) => console.log(err));
   }
 
   selectProject(projectIndex) {
@@ -45,12 +34,20 @@ export class ProjectsComponent implements OnInit {
   }
 
   getPercentage(project) {
-    const percentage = (project.captacaoAtual / project.captacaoNecessaria)*100;
+    const percentage = (project.captacaoAtual / project.captacaoNecessaria) * 100;
     return Math.round(percentage * 100) / 100;
   }
 
-  onInvest() {
+  onInvest(project) {
+    this.projectService.setSelectedProject(project);
     this.invest.emit(true);
+  }
+
+  getProjects() {
+    if(this.projects !== undefined) {
+      console.log(this.projects);
+      return this.projects.filter((proj, index) => index > 0);
+    }
   }
 
 }

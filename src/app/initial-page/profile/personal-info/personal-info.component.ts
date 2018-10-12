@@ -13,11 +13,13 @@ export class PersonalInfoComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   @Output() logout = new EventEmitter();
+  @Output() updateSalveBtnStatus = new EventEmitter();
   @Input() showButtons;
   user = JSON.parse(localStorage.getItem('user')).user;
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
   countries = require('../../../../jsons/countries.json');
   personalInfo = new PersonalInfo();
+  selectedDate;
 
   ngOnInit() {
     this.fetchPersonalInfo();
@@ -29,6 +31,14 @@ export class PersonalInfoComponent implements OnInit {
         this.personalInfo = snapshot.val();
       }
     });
+  }
+
+  onUpdateSaveBtnStatus() {
+    this.updateSalveBtnStatus.emit(this.infoIsValid());
+  }
+
+  onUpdatePersonalInfo() {
+    this.userService.personalInfo = this.personalInfo;
   }
 
   onSelectFile(event) {
@@ -43,6 +53,12 @@ export class PersonalInfoComponent implements OnInit {
 
   onLogout() {
     this.logout.emit(true);
+  }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    return formatedDate;
   }
 
   save() {
@@ -87,10 +103,25 @@ export class PersonalInfoComponent implements OnInit {
     return true;
   }
 
+  setDate() {
+    const nums = this.personalInfo.birthDay.split('/');
+    this.selectedDate = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10), parseInt(nums[0], 10));
+  }
+
+  onDateChange(date) {
+    this.personalInfo.birthDay = this.formatDate(date);
+  }
+
   birthDayIsValid() {
-    const birthDay = this.personalInfo.birthDay;
-    if(birthDay === null) return true;
-    return birthDay;
+    if(this.personalInfo.birthDay) {
+      if(this.personalInfo.birthDay.includes('/')){
+        this.setDate();
+      }
+    }
+    if(this.personalInfo.birthDay) {
+      return this.personalInfo.birthDay;
+    }
+    return true;
   }
 
   cpfIsValid() {

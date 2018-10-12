@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LoginComponent} from './login/login.component';
 import {MatDialog} from '@angular/material';
 import {ProfileComponent} from './profile/profile.component';
@@ -7,6 +7,7 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 import {InstructionsComponent} from './instructions/instructions.component';
 import {UserService} from '../services/user.service';
 import * as firebase from 'firebase';
+import {ProjectService} from '../services/project.service';
 
 @Component({
   selector: 'app-initial-page',
@@ -16,14 +17,17 @@ import * as firebase from 'firebase';
 export class InitialPageComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private projectService: ProjectService) { }
 
   loginDialogRef;
   profileDialogRef;
   signUpDialogRef;
   instructionsDialogRef;
+  user = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit() {
+    this.projectService.fetchProjects();
   }
 
   isLoggedIn() {

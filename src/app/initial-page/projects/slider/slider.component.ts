@@ -11,7 +11,7 @@ export class SliderComponent implements OnInit {
   constructor() { }
 
   selectedImgIndex = 0;
-  imgsUrl = ['https://static.pexels.com/photos/6526/sea-beach-holiday-vacation-large.jpg'];
+  @Input() imgsUrl;
 
   ngOnInit() {
     setInterval(() => this.next(), 10000);

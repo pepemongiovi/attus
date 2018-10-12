@@ -13,10 +13,15 @@
         <h3>Confira atentamente seu dados pessoais, pois eles serão usados para confecção do contrato de investimento, garantindo sua segurança jurídica.</h3>
       </div>
       <div>
-        <app-personal-info [showButtons]="false"></app-personal-info>
+        <app-personal-info (updateSaveBtnStatus)="updateSaveBtnStatus($event)"
+                           [showButtons]="false"></app-personal-info>
       </div>
       <div class="instructionsBtns">
-        <button mat-button class="navigationNextButton" matStepperNext>SALVAR E PROSSEGUIR</button>
+        <button mat-button class="navigationNextButton"
+                (click)="savePersonalInfo()"
+                [disabled]="!saveBtnIsValid" matStepperNext>
+          SALVAR E PROSSEGUIR
+        </button>
       </div>
     </mat-step>
     <mat-step>
@@ -29,7 +34,11 @@
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
-        <button mat-button class="navigationNextButton" [disabled]="bankInfoBtnDisabled" matStepperNext>SALVAR E PROSSEGUIR</button>
+        <button mat-button class="navigationNextButton"
+                (click)="saveBankInfo()"
+                [disabled]="bankInfoBtnDisabled" matStepperNext>
+          SALVAR E PROSSEGUIR
+        </button>
         <div style="margin-bottom: 700px"></div>
       </div>
     </mat-step>
@@ -39,7 +48,10 @@
         <h3>Escolha o projeto no qual deseja investir, o número de cotas e o valor total a ser investido.</h3>
       </div>
       <div>
-        <app-investment-info (submitBtnStatusUpdate)="investmentInfoBtnUpdate($event)"></app-investment-info>
+        <app-investment-info
+          (submitBtnStatusUpdate)="investmentInfoBtnUpdate($event)"
+          (updateInvestmentInfo)="updateInvestmentInfo($event)">
+        </app-investment-info>
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
@@ -60,7 +72,7 @@
       </div>
       <div class="instructionsBtns" style="margin-bottom: 350px">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
-        <button mat-button class="navigationNextButton" matStepperNext>FINALIZAR</button>
+        <button mat-button class="navigationNextButton" (click)="invest()">FINALIZAR</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

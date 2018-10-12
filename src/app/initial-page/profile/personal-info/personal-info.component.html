@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div class="text-center col-xs-4" [ngStyle]="{'margin-top': !showButtons ? '15%' : '2%' }">
+<div class="text-center col-xs-4" [ngStyle]="{'margin-top': !showButtons ? '5%' : '2%' }">
   <img [src]="personalInfo.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
        class="avatar img-circle img-thumbnail profilePicture" alt="avatar">
   <input (change)="onSelectFile($event)" type="file" id="profilePicture"
@@ -95,7 +95,7 @@
         <h4 *ngIf="birthDayIsValid()">Data de Nascimento</h4>
         <h4 *ngIf="!birthDayIsValid()" class="validationMessage">Data de Nascimento*</h4>
       </label>
-      <input [(ngModel)]="personalInfo.birthDay" [matDatepicker]="picker" id="birthDay"
+      <input (dateChange)="onDateChange($event.value)" [value]="selectedDate" [matDatepicker]="picker" id="birthDay"
              class="form-control input100" name="birthDay" placeholder="Data de Nascimento*">
       <div style="margin-left: 75%; margin-top: -65px; size: 10px">
         <mat-datepicker-toggle style="size: 10px" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -210,7 +210,8 @@
       </div>
     </div>
   </div>
-
+  <div *ngIf="onUpdateSaveBtnStatus()"></div>
+  <div *ngIf="onUpdatePersonalInfo()"></div>
   <div class="form-group">
     <div class="col-xs-12">
       <br>

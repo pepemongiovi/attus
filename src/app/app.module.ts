@@ -17,7 +17,7 @@ import {
   MatIconModule,
   MatCardModule,
   MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatDialogModule,
-  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE
+  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE, MatTableModule
 } from '@angular/material';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
@@ -31,7 +31,8 @@ import { PersonalInfoComponent } from './initial-page/profile/personal-info/pers
 import { BankInfoComponent } from './initial-page/profile/bank-info/bank-info.component';
 import { InvestmentInfoComponent } from './initial-page/instructions/investment-info/investment-info.component';
 import { SliderComponent } from './initial-page/projects/slider/slider.component';
-import {HttpModule} from '@angular/http';
+import { InvestmentsInfoComponent } from './initial-page/profile/investments-info/investments-info.component';
+import {ProjectService} from './services/project.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyChaLKvUCu6lsakLE04NrEtl1gfKdHXCGc',
@@ -58,7 +59,8 @@ export const firebaseConfig = {
     PersonalInfoComponent,
     BankInfoComponent,
     InvestmentInfoComponent,
-    SliderComponent
+    SliderComponent,
+    InvestmentsInfoComponent
   ],
   imports: [
     CommonModule,
@@ -84,9 +86,9 @@ export const firebaseConfig = {
     MatNativeDateModule,
     MatStepperModule,
     MatDatepickerModule,
-    HttpModule
+    MatTableModule
   ],
-  providers: [UserService, AuthService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [UserService, AuthService, ProjectService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],
   entryComponents: [InstructionsComponent]
 })
