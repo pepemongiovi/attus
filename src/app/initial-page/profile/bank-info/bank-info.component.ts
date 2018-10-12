@@ -14,8 +14,8 @@ export class BankInfoComponent implements OnInit {
   @Input() showSaveButton;
   @Output() submitBtnStatusUpdate = new EventEmitter();
   @Output() updateBankInfo = new EventEmitter();
-  banks = require('../../../../jsons/banks.json');
   bankInfo = new BankInfo();
+  banks = require('../../../../jsons/banks.json');
 
   ngOnInit() {
     this.fetchBankInfo();

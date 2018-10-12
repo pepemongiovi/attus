@@ -55,12 +55,6 @@ export class PersonalInfoComponent implements OnInit {
     this.logout.emit(true);
   }
 
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
-    return formatedDate;
-  }
-
   save() {
     this.userService.savePersonalInfo(this.personalInfo);
     this.userService.saveUserInfo(this.user);
@@ -110,6 +104,12 @@ export class PersonalInfoComponent implements OnInit {
 
   onDateChange(date) {
     this.personalInfo.birthDay = this.formatDate(date);
+  }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    return formatedDate;
   }
 
   birthDayIsValid() {

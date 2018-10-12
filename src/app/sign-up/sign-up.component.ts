@@ -23,7 +23,6 @@ export class SignUpComponent implements OnInit {
   pageTitle = 'Dados pessoais';
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
   countries = require('../../jsons/countries.json');
-
   bankInfo: BankInfo = new BankInfo();
   personalInfo = new PersonalInfo();
   user = new User();
@@ -111,6 +110,17 @@ export class SignUpComponent implements OnInit {
     const birthDay = this.personalInfo.birthDay;
     if(birthDay===null) return true;
     return birthDay;
+  }
+
+  onDateChange(date) {
+    console.log(date);
+    this.personalInfo.birthDay = this.formatDate(date);
+  }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    return formatedDate;
   }
 
   submitBtnIsDisabled(disabled) {

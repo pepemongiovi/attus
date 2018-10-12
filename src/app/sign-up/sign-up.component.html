@@ -127,7 +127,7 @@
                 <h4 *ngIf="birthDayIsValid()">Data de Nascimento</h4>
                 <h4 class="validationMessage" *ngIf="!birthDayIsValid()">Data de Nascimento*</h4>
               </label>
-              <input [(ngModel)]="personalInfo.birthDay" id="birthDay" name="birthDay" class="form-control input100" [matDatepicker]="picker" placeholder="Data de Nascimento*">
+              <input (dateChange)="onDateChange($event.value)" id="birthDay" name="birthDay" class="form-control input100" [matDatepicker]="picker" placeholder="Data de Nascimento*">
               <div style="margin-left: 75%; margin-top: -65px; size: 10px">
                   <mat-datepicker-toggle style="size: 10px" matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker style="size: 10px;  " #picker></mat-datepicker>
