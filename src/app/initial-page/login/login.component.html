@@ -43,7 +43,7 @@
               <!--Forgot Username / Password?-->
             <!--</a>-->
           <!--</div>-->
-
+          <div *ngIf="closeIfLogged()"></div>
           <div class="text-center w-full" style="margin-top: 10px; cursor: pointer">
             <a class="txt1" (click)="signUp()">
                <i class="material-icons">how_to_reg</i> Cadastre-se aqui

@@ -1,0 +1,64 @@
+<div (click)="close()" style="color: #005bea; text-align: end; margin-top: 3px">
+  <mat-icon class="closeIcon">close</mat-icon>
+  <span style="margin-right: 42px"></span>
+</div>
+<div class="limiter">
+  <div>
+    <div class="row small">
+      <div class="header-text" style="margin-left: 23%"><h1>Dashboard - Pesquise os investimentos de um usuário</h1></div>
+    </div>
+    <div class="small col-xs-5" style="margin-left: -8.2%">
+      <label for="investmentId">
+        <h4 style="color: white">E-mail do usuário</h4>
+      </label>
+      <div class="valign-center" style="display: inline-flex">
+        <input class="input100" style="width: 370px" type="text" id="investmentId" [(ngModel)]="userEmail">
+        <span (click)="searchUser()" style="margin-bottom: -8px;">
+          <mat-icon style="margin-left: -35px; cursor: pointer">search</mat-icon>
+        </span>
+        <mat-spinner [diameter]="30" style="margin-left: 10px" *ngIf="loading"></mat-spinner>
+      </div>
+    </div>
+    <h4 style="color: red; margin-top: 100px; margin-left: -20px" *ngIf="!investments && searched">Nenhum investimento realizado.</h4>
+    <table class="table table-hover" *ngIf="investments">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Projeto</th>
+        <th scope="col">Investimento</th>
+        <th scope="col">Rendimento (R$)</th>
+        <th scope="col">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let investment of investments; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{investment.project}}</td>
+        <td>R$ {{investment.value}}</td>
+        <td>
+          <div class="col-xs-4">
+            <input type="number" matInput style="width: 200px; height: 25px; margin-left: -33px" class="small input100" [value]="investment.income" [(ngModel)]="investments[i].income">
+          </div>
+        </td>
+        <td>
+          <mat-select style="width: 170px; margin-top: -13px" [(ngModel)]="investments[i].status" [value]="investments[i].status" placeholder="Selecione">
+            <mat-option [value]="STATUS_IN_PROGRESS">
+            <span>
+              {{STATUS_IN_PROGRESS}}
+            </span>
+            </mat-option>
+            <mat-option [value]="STATUS_FINISHED">
+            <span>
+              {{STATUS_FINISHED}}
+            </span>
+            </mat-option>
+          </mat-select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div *ngIf="investments" style="margin-right: 30px" class="saveButtonDiv">
+      <button mat-button class="saveButton" type="submit" (click)="save()">SALVAR</button>
+    </div>
+  </div><!--/row-->
+</div>

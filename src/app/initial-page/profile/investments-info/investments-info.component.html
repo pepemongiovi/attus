@@ -1,4 +1,5 @@
-<table class="table table-hover">
+<h3 style="color: red" *ngIf="!investments">Nenhum investimento realizado.</h3>
+<table *ngIf="investments" class="table table-hover">
   <thead>
   <tr>
     <th scope="col">#</th>

@@ -1,6 +1,7 @@
 import {Component, OnInit, HostBinding, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {AuthService} from '../../services/auth.service';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,19 @@ import {AuthService} from '../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private messageService: MessageService) { }
 
   user = {};
   openSignUpDialog = false;
 
   ngOnInit() {}
+
+  closeIfLogged() {
+    if(JSON.parse(localStorage.getItem('user'))) {
+      this.close();
+    }
+  }
 
   close() {
     this.dialogRef.close();
@@ -27,6 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.user, this.close());
+    this.authService.login(this.user);
   }
 }

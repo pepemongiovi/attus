@@ -17,7 +17,7 @@ import {
   MatIconModule,
   MatCardModule,
   MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatDialogModule,
-  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE, MatTableModule
+  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE, MatTableModule, MatSnackBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
@@ -33,6 +33,8 @@ import { InvestmentInfoComponent } from './initial-page/instructions/investment-
 import { SliderComponent } from './initial-page/projects/slider/slider.component';
 import { InvestmentsInfoComponent } from './initial-page/profile/investments-info/investments-info.component';
 import {ProjectService} from './services/project.service';
+import { DashboardComponent } from './initial-page/dashboard/dashboard.component';
+import {MessageService} from './services/message.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyChaLKvUCu6lsakLE04NrEtl1gfKdHXCGc',
@@ -60,7 +62,8 @@ export const firebaseConfig = {
     BankInfoComponent,
     InvestmentInfoComponent,
     SliderComponent,
-    InvestmentsInfoComponent
+    InvestmentsInfoComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -86,10 +89,12 @@ export const firebaseConfig = {
     MatNativeDateModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
-  providers: [UserService, AuthService, ProjectService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [UserService, AuthService, ProjectService, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],
-  entryComponents: [InstructionsComponent]
+  entryComponents: [InstructionsComponent, DashboardComponent]
 })
 export class AppModule { }

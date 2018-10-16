@@ -13,13 +13,14 @@ export class PersonalInfoComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   @Output() logout = new EventEmitter();
-  @Output() updateSalveBtnStatus = new EventEmitter();
+  @Output() updateSaveBtnStatus = new EventEmitter();
   @Input() showButtons;
   user = JSON.parse(localStorage.getItem('user')).user;
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
   countries = require('../../../../jsons/countries.json');
   personalInfo = new PersonalInfo();
   selectedDate;
+  loading = true;
 
   ngOnInit() {
     this.fetchPersonalInfo();
@@ -30,11 +31,12 @@ export class PersonalInfoComponent implements OnInit {
       if (snapshot.val() !== null) {
         this.personalInfo = snapshot.val();
       }
+      this.loading = false;
     });
   }
 
   onUpdateSaveBtnStatus() {
-    this.updateSalveBtnStatus.emit(this.infoIsValid());
+    this.updateSaveBtnStatus.emit(this.infoIsValid());
   }
 
   onUpdatePersonalInfo() {
@@ -99,7 +101,7 @@ export class PersonalInfoComponent implements OnInit {
 
   setDate() {
     const nums = this.personalInfo.birthDay.split('/');
-    this.selectedDate = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10), parseInt(nums[0], 10));
+    this.selectedDate = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10)-1, parseInt(nums[0], 10));
   }
 
   onDateChange(date) {
@@ -108,7 +110,7 @@ export class PersonalInfoComponent implements OnInit {
 
   formatDate(dateString) {
     const date = new Date(dateString);
-    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    const formatedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     return formatedDate;
   }
 

@@ -1,6 +1,6 @@
 <ng-container>
   <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
-    <div *ngIf="!loginDialogRef && !profileDialogRef && !signUpDialogRef && !instructionsDialogRef" class="container">
+    <div *ngIf="noDialogsOpened()" class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-menu">
           <span class="icon-bar"></span>
@@ -19,6 +19,12 @@
           <li><a href="#feature-page">Vantagens</a></li>
           <li><a href="#projects-page">Projetos</a></li>
           <li><a href="#faq-page">FAQ</a></li>
+          <li><a *ngIf="isLoggedIn() && isAdmin()" (click)="openDashboardDialog()">
+            <div class="valign-center">
+              <mat-icon style="margin-right: 3px">dashboard</mat-icon>
+              <span>Dashboard</span>
+            </div>
+          </a></li>
           <!--<li><a href="#contact-page">Contato</a></li>-->
           <li *ngIf="!isLoggedIn()"><a (click)="openLoginDialog()">
             <div class="valign-center">

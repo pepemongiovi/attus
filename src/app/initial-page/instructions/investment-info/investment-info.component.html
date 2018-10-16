@@ -7,7 +7,6 @@
                [value]="selectedProject.name">
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-xs-4">
 
@@ -33,7 +32,7 @@
                [value]="getTotalInvestmentValue()">
       </div>
     </div>
-    <div *ngIf="investmentInfoUpdate()"></div>
-    <div *ngIf="disableSubmit()"></div>
   </div>
+  <div *ngIf="investmentInfoUpdate()"></div>
+  <div *ngIf="disableSubmit()"></div>
 </form>

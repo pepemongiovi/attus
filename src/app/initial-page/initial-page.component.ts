@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LoginComponent} from './login/login.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ProfileComponent} from './profile/profile.component';
 import {AuthService} from '../services/auth.service';
 import { SignUpComponent } from '../sign-up/sign-up.component';
@@ -8,6 +8,8 @@ import {InstructionsComponent} from './instructions/instructions.component';
 import {UserService} from '../services/user.service';
 import * as firebase from 'firebase';
 import {ProjectService} from '../services/project.service';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {MessageService} from '../services/message.service';
 
 @Component({
   selector: 'app-initial-page',
@@ -24,18 +26,30 @@ export class InitialPageComponent implements OnInit {
   profileDialogRef;
   signUpDialogRef;
   instructionsDialogRef;
-  user = JSON.parse(localStorage.getItem('user'));
+  dashboardDialogRef;
 
   ngOnInit() {
     this.projectService.fetchProjects();
+  }
+
+  noDialogsOpened() {
+    return !this.loginDialogRef && !this.profileDialogRef &&
+      !this.signUpDialogRef && !this.instructionsDialogRef &&
+      !this.dashboardDialogRef;
   }
 
   isLoggedIn() {
     return this.authService.isAuthenticated();
   }
 
+  isAdmin() {
+    const user = JSON.parse(localStorage.getItem('user')).user;
+    return user.uid === '13bnR2dXlMVBARsjrpIGNki1Y9V2';
+  }
+
   invest() {
-    if(this.user) this.openInstructionsDialog();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user) this.openInstructionsDialog();
     else this.openSignUpDialog();
   }
 
@@ -63,6 +77,18 @@ export class InitialPageComponent implements OnInit {
       });
       this.signUpDialogRef.afterClosed().subscribe(() => {
         this.signUpDialogRef = undefined;
+      });
+    }
+  }
+
+  openDashboardDialog() {
+    if(!this.dashboardDialogRef) {
+      this.dashboardDialogRef = this.dialog.open(DashboardComponent, {
+        height: '95%',
+        width: '110%'
+      });
+      this.dashboardDialogRef.afterClosed().subscribe(() => {
+        this.dashboardDialogRef = undefined;
       });
     }
   }

@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <div id="caption_slide" class="carousel slide caption-slider" data-ride="carousel">
+        <mat-spinner *ngIf="!projects" style="margin-left: 45%"></mat-spinner>
+        <div id="caption_slide" *ngIf="projects" class="carousel slide caption-slider" data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div *ngFor="let project of projects; let i = index"
                  [ngClass]="{ 'item active row': i === selectedProjectIndex, 'item row': i !== selectedProjectIndex}">
@@ -63,7 +64,8 @@
                         {{getPercentage(project)}}%
                       </div>
                     </div>
-                    <div class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
+                    <h3 style="color: white" *ngIf="project.captacaoAtual===project.captacaoNecessaria"><mat-icon>lock</mat-icon> Em construção</h3>
+                    <div *ngIf="project.captacaoAtual!==project.captacaoNecessaria" class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
                       <a class="button" (click)="onInvest(project)" style="width: 75%; text-align: center; height: 35px; margin-bottom: 30px">
                         <div style="margin-top: -5px">Investir</div>
                       </a>

@@ -167,7 +167,8 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.signUp(this.user, this.personalInfo, this.bankInfo, this.close());
+    this.authService.signUp(this.user, this.personalInfo, this.bankInfo);
+    this.close();
   }
 
 }

@@ -13,13 +13,13 @@
         <h3>Confira atentamente seu dados pessoais, pois eles serão usados para confecção do contrato de investimento, garantindo sua segurança jurídica.</h3>
       </div>
       <div>
-        <app-personal-info (updateSaveBtnStatus)="updateSaveBtnStatus($event)"
+        <app-personal-info (updateSaveBtnStatus)="updatePersonalSaveBtnStatus($event)"
                            [showButtons]="false"></app-personal-info>
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationNextButton"
                 (click)="savePersonalInfo()"
-                [disabled]="!saveBtnIsValid" matStepperNext>
+                [disabled]="!savePersonalInfoBtnIsValid" matStepperNext>
           SALVAR E PROSSEGUIR
         </button>
       </div>
@@ -45,7 +45,8 @@
     <mat-step>
       <ng-template matStepLabel style="color: white">Investimento</ng-template>
       <div class="header-text instructionsText">
-        <h3>Escolha o projeto no qual deseja investir, o número de cotas e o valor total a ser investido.</h3>
+        <h3>Escolha o número de cotas a ser investido.</h3>
+        <h4 style="color: white"><u><b>Limite de cotas:</b></u> {{getQuotasLimit()}} cotas</h4>
       </div>
       <div>
         <app-investment-info
@@ -65,8 +66,10 @@
         <h3>Após a escolha do projeto e dos valores, você receberá em seu email uma cópia do contrato (Termo de Adesão) para assinatura. Assine eletronicamente este contrato seguindo as instruções na tela. Esta assinatura é executada e garantida pela empresa de Certificação e Assinatura eletrônica <b>D4sign</b>.</h3>
         <h4><b>OBSERVAÇÂO: </b>Evite a abertura do email através de seu smartphone pois pode haver desconfiguração da tela.</h4>
         <br>
-        <h3> Confirme seu investimento fazendo o depósito na conta de custódia da Attus dentro do prazo estipulado.</h3>
-        <h4><b>OBSERVAÇÂO: </b>Se você fará o investimento através de TED, a transferência deve vir da sua conta cadastrada.</h4>
+        <h3>O aporte dos valores será feito no momento da “chamada de capital”, quando se dará o início das obras.
+          Os investidores serão avisados por e-mail e terão até 2 dias úteis para realizar o aporte via TED ou depósito na conta de custódia da Attus.</h3>
+        <h4><b>OBSERVAÇÂO 1: </b>Se você fará o investimento através de TED, a transferência deve vir da sua conta cadastrada.</h4>
+        <h4><b>OBSERVAÇÂO 2: </b>Não serão aceitos depósitos em cheque.</h4>
         <br>
         <h3>Pronto, agora é só aguardar que os seus lucros serão depositados diretamente em sua conta corrente ao final da execução e venda/pagamento do projeto. Durante este período você poderá acompanhar o andamento através da aba “Meus projetos” aqui na área de assinante.</h3>
       </div>

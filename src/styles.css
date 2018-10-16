@@ -989,3 +989,11 @@ preloader
     opacity: 0;
   }
 }
+
+.green-snackbar {
+  background: green;
+}
+
+.red-snackbar {
+  background: red;
+}

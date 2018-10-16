@@ -24,9 +24,9 @@ export class ProjectService {
     return firebase.database().ref('/projects');
   }
 
-  saveProject(proj) {
+  saveProjects(projects) {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDababase.object('projects/2').set(proj);
+      this.afDababase.object('projects').set(projects);
     });
   }
 }

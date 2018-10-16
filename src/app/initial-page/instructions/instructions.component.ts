@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {UserService} from '../../services/user.service';
 import {InvestmentInfo} from '../../models/investmentInfo.model';
+import {ProjectService} from '../../services/project.service';
 
 @Component({
   selector: 'app-instructions',
@@ -11,11 +12,12 @@ import {InvestmentInfo} from '../../models/investmentInfo.model';
 export class InstructionsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<InstructionsComponent>,
-              private userService: UserService) { }
+              private userService: UserService,
+              private projectService: ProjectService) { }
   investmentInfo: InvestmentInfo;
   investmentInfoBtnDisabled = true;
   bankInfoBtnDisabled = false;
-  saveBtnIsValid = true;
+  savePersonalInfoBtnIsValid = true;
   pastInvestments;
 
   ngOnInit() {
@@ -28,12 +30,17 @@ export class InstructionsComponent implements OnInit {
     }, (err) => console.log(err));
   }
 
+  getQuotasLimit() {
+    const selectedProject = this.projectService.getSelectedProject();
+    return (selectedProject.captacaoNecessaria - selectedProject.captacaoAtual) / selectedProject.valorDeCota;
+  }
+
   updateInvestmentInfo(investmentInfo) {
     this.investmentInfo = investmentInfo;
   }
 
-  updateSaveBtnStatus(valid) {
-    this.saveBtnIsValid = valid;
+  updatePersonalSaveBtnStatus(valid) {
+    this.savePersonalInfoBtnIsValid = valid;
   }
 
   savePersonalInfo() {
@@ -45,7 +52,8 @@ export class InstructionsComponent implements OnInit {
   }
 
   invest() {
-    this.userService.saveInvestmentInfo(this.investmentInfo, this.pastInvestments, this.close());
+    this.userService.saveInvestmentInfo(this.investmentInfo, this.pastInvestments);
+    this.close();
   }
 
   investmentInfoBtnUpdate(disable) {

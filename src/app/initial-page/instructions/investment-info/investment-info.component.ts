@@ -57,12 +57,17 @@ export class InvestmentInfoComponent implements OnInit {
   }
 
   quotasIsValid() {
-    let isValid = true;
     const quotas = this.investmentForm.value.quotas;
+    if(!quotas) return true;
+    let isValid = quotas <= this.getQuotasLimit();
     if(quotas !== '' && (isNaN(quotas) || quotas <= 0)) {
       isValid = false;
     }
     return isValid;
+  }
+
+  getQuotasLimit() {
+    return (this.selectedProject.captacaoNecessaria - this.selectedProject.captacaoAtual) / this.selectedProject.valorDeCota;
   }
 
   disableSubmit() {

@@ -7,6 +7,7 @@ import {BankInfo} from '../models/bankInfo.model';
 import { Http } from '@angular/http';
 import {HttpClient} from '@angular/common/http';
 import {InvestmentInfo} from '../models/investmentInfo.model';
+import {MessageService} from './message.service';
 
 @Injectable()
 export class UserService {
@@ -16,7 +17,8 @@ export class UserService {
 
   constructor(private http: HttpClient,
               private afAuth: AngularFireAuth,
-              private afDababase: AngularFireDatabase) {
+              private afDababase: AngularFireDatabase,
+              private messageService: MessageService) {
   }
 
   sendEmail(investmentInfo: InvestmentInfo) {
@@ -49,26 +51,32 @@ export class UserService {
 
   savePersonalInfo(personalInfo: PersonalInfo) {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDababase.object(`personalInfo/${auth.uid}`).set(personalInfo);
+      this.afDababase.object(`personalInfo/${auth.uid}`).set(personalInfo)
+        .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
     });
   }
 
-  saveInvestmentInfo(investmentInfo, investments, closeDialog) {
+  saveInvestmentInfo(investmentInfo, investments) {
     this.afAuth.authState.take(1).subscribe(auth => {
       if (investments === null) investments = [investmentInfo];
       else investments.push(investmentInfo);
       this.afDababase.object(`investments/${auth.uid}`).set(investments)
         .then(() => {
           this.sendEmail(investmentInfo);
-          closeDialog;
+          this.messageService.showSuccess('Investimento realizado com sucesso!');
         });
     });
+  }
 
+  saveInvestments(uid, investments) {
+    this.afDababase.object(`investments/${uid}`).set(investments)
+      .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
   }
 
   saveBankInfo(bankInfo: BankInfo) {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDababase.object(`bankInfo/${auth.uid}`).set(bankInfo);
+      this.afDababase.object(`bankInfo/${auth.uid}`).set(bankInfo)
+        .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
     });
   }
 
@@ -93,5 +101,15 @@ export class UserService {
   getInvestments() {
     const currentUser = JSON.parse(localStorage.getItem('user')).user;
     return firebase.database().ref('/investments/' + currentUser.uid);
+  }
+
+  getInvestmentsByUID(userUID) {
+    return firebase.database().ref('/investments/' + userUID);
+  }
+
+  getUserByEmail(emailAddress) {
+    const url = 'https://us-central1-attus-4fdcb.cloudfunctions.net/getUserByEmail';
+    console.log(emailAddress);
+    return this.http.post(url, {email: emailAddress});
   }
 }

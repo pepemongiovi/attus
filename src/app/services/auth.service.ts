@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {UserService} from './user.service';
+import {MessageService} from './message.service';
 
 @Injectable()
 export class AuthService {
@@ -11,11 +12,12 @@ export class AuthService {
   private USER = 'user';
 
   constructor(private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private messageService: MessageService) {
     this.API = '';
   }
 
-  signUp(userInfo, personalInfo, bankInfo, closeSignUpDialog) {
+  signUp(userInfo, personalInfo, bankInfo) {
     firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(userInfo.email, userInfo.password)
       .then( (user) => {
         if(user) {
@@ -27,7 +29,7 @@ export class AuthService {
               this.setSession(user);
               this.userService.savePersonalInfo(personalInfo);
               this.userService.saveBankInfo(bankInfo);
-              closeSignUpDialog;
+              this.messageService.showSuccess('Registrado com sucesso!!');
             }
           );
         }
@@ -37,12 +39,12 @@ export class AuthService {
     );
   }
 
-  login(user, closeDialog) {
+  login(user) {
     firebase.auth().signInAndRetrieveDataWithEmailAndPassword(user.email, user.password)
       .then((user) => {
         this.setSession(user);
-        closeDialog;
-      });
+        this.messageService.showSuccess('Login realizado com sucesso!!');
+      }, () => this.messageService.showError('E-mail ou senha incorreta'));
   }
 
   setSession(user) {
@@ -58,9 +60,8 @@ export class AuthService {
     localStorage.removeItem(this.USER);
   }
 
-  logout(closeDialog) {
+  logout() {
     this.revokeSession();
-    closeDialog;
   }
 
 }
