@@ -64,12 +64,14 @@
                         {{getPercentage(project)}}%
                       </div>
                     </div>
-                    <h3 style="color: white" *ngIf="project.captacaoAtual===project.captacaoNecessaria"><mat-icon>lock</mat-icon> Em construção</h3>
-                    <div *ngIf="project.captacaoAtual!==project.captacaoNecessaria" class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
+                    <div *ngIf="project.captacaoAtual<project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE" class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
                       <a class="button" (click)="onInvest(project)" style="width: 75%; text-align: center; height: 35px; margin-bottom: 30px">
                         <div style="margin-top: -5px">Investir</div>
                       </a>
                     </div>
+                    <h3 style="color: white" *ngIf="project.captacaoAtual>=project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE">
+                      <mat-icon>lock</mat-icon> Investimentos encerrados
+                    </h3>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,21 @@
+<h3 style="color: red" *ngIf="!investments">Nenhum investimento realizado.</h3>
+<table *ngIf="investments" class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Projeto</th>
+    <th scope="col">Investimento</th>
+    <th scope="col">Rendimento</th>
+    <th scope="col">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let investment of investments; let i = index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{investment.project}}</td>
+    <td>R$ {{investment.value}}</td>
+    <td>{{ getIncome(investment) }}</td>
+    <td [ngStyle]="{'color': investment.status === STATUS_IN_PROGRESS ? 'orange' : 'green' }"><b>{{investment.status}}</b></td>
+  </tr>
+  </tbody>
+</table>

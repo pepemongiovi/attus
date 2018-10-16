@@ -43,19 +43,19 @@
           <div class="form-group">
             <div class="col-xs-4">
               <label for="password">
-                <h4 *ngIf="passwordIsValid(user.password)">Senha</h4>
-                <h4 class="validationMessage" *ngIf="!passwordIsValid(user.password)">Senha*</h4>
+                <h4 *ngIf="passwordIsValid()">Senha</h4>
+                <h4 class="validationMessage" *ngIf="!passwordIsValid()">Senha*</h4>
               </label>
               <input [(ngModel)]="user.password" type="password" minlength="6" class="form-control input100" id="password" name="password" placeholder="Senha*">
-              <p style="margin-top:-88px" *ngIf="!passwordIsValid(user.password)" class="validationMessage">Deve ter no mínimo 6 caracteres.</p>
+              <p style="margin-top:-88px" *ngIf="!passwordIsValid()" class="validationMessage">Deve ter no mínimo 6 caracteres.</p>
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-xs-4">
               <label for="passwordConfirmation">
-                <h4 *ngIf="passwordConfirmationIsValid(user.passwordConfirmation)">Confirmar Senha</h4>
-                <h4 class="validationMessage" *ngIf="!passwordConfirmationIsValid(user.passwordConfirmation)">Confirmar Senha*</h4>
+                <h4 *ngIf="passwordConfirmationIsValid()">Confirmar Senha</h4>
+                <h4 class="validationMessage" *ngIf="!passwordConfirmationIsValid()">Confirmar Senha*</h4>
               </label>
               <input [(ngModel)]="user.passwordConfirmation" type="password" class="form-control input100" id="passwordConfirmation" name="passwordConfirmation" placeholder="Confimar Senha*" >
             </div>

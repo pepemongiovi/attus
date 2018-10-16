@@ -1,0 +1,38 @@
+<form class="form" [formGroup]="investmentForm" #formDir="ngForm">
+  <div class="cross-validation" [class.cross-validation-error]="formDir.errors?.formDir && (formDir.touched || formDir.dirty)">
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label for="project"><h4>Projeto</h4></label>
+        <input id="project" class="form-control input100" readonly="readonly"
+               [value]="selectedProject.name">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-4">
+
+        <label for="quotas">
+          <h4>
+            Nº de Cotas (R$ {{selectedProject.valorDeCota}} / cota)
+          </h4>
+        </label>
+        <input formControlName="quotas" type="number" min="1" step="1"
+               class="form-control input100" name="quotas"
+               id="quotas" placeholder="Nº de Cotas*" required>
+        <div *ngIf="!quotasIsValid()"
+             class="validationMessage">
+            Nº de cotas inválido.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-3">
+        <label for="investmentValue"><h4>Valor a ser investido</h4></label>
+        <input id="investmentValue" class="form-control input100" readonly="readonly"
+               [value]="getTotalInvestmentValue()">
+      </div>
+    </div>
+  </div>
+  <div *ngIf="investmentInfoUpdate()"></div>
+  <div *ngIf="disableSubmit()"></div>
+</form>

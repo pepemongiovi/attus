@@ -1,14 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from '../login/login.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {ProfileComponent} from './profile/profile.component';
+import {ProfileComponent} from '../profile/profile.component';
 import {AuthService} from '../services/auth.service';
 import { SignUpComponent } from '../sign-up/sign-up.component';
-import {InstructionsComponent} from './instructions/instructions.component';
+import {InstructionsComponent} from '../instructions/instructions.component';
 import {UserService} from '../services/user.service';
 import * as firebase from 'firebase';
 import {ProjectService} from '../services/project.service';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {DashboardComponent} from '../dashboard/dashboard.component';
 import {MessageService} from '../services/message.service';
 
 @Component({

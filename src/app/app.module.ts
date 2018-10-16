@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './initial-page/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FaqComponent } from './initial-page/faq/faq.component';
 import { ContactComponent } from './initial-page/contact/contact.component';
@@ -25,15 +25,15 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import { ProfileComponent } from './initial-page/profile/profile.component';
-import { InstructionsComponent } from './initial-page/instructions/instructions.component';
-import { PersonalInfoComponent } from './initial-page/profile/personal-info/personal-info.component';
-import { BankInfoComponent } from './initial-page/profile/bank-info/bank-info.component';
-import { InvestmentInfoComponent } from './initial-page/instructions/investment-info/investment-info.component';
+import { ProfileComponent } from './profile/profile.component';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { PersonalInfoComponent } from './profile/personal-info/personal-info.component';
+import { BankInfoComponent } from './profile/bank-info/bank-info.component';
+import { InvestmentInfoComponent } from './instructions/investment-info/investment-info.component';
 import { SliderComponent } from './initial-page/projects/slider/slider.component';
-import { InvestmentsInfoComponent } from './initial-page/profile/investments-info/investments-info.component';
+import { InvestmentsInfoComponent } from './profile/investments-info/investments-info.component';
 import {ProjectService} from './services/project.service';
-import { DashboardComponent } from './initial-page/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import {MessageService} from './services/message.service';
 
 export const firebaseConfig = {
@@ -95,6 +95,6 @@ export const firebaseConfig = {
   ],
   providers: [UserService, AuthService, ProjectService, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],
-  entryComponents: [InstructionsComponent, DashboardComponent]
+  entryComponents: [InstructionsComponent, DashboardComponent, LoginComponent, SignUpComponent, ProfileComponent]
 })
 export class AppModule { }

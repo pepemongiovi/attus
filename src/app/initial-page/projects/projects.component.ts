@@ -16,6 +16,7 @@ export class ProjectsComponent implements OnInit {
   @Output() invest = new EventEmitter();
   projects: Project[];
   selectedProjectIndex = 0;
+  MAX_INVESTMENT_PERCENTAGE = 1.2;
 
   ngOnInit() {
     this.fetchProjects();

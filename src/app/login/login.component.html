@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="limiter">
+    <div (click)="close()" style="color: #005bea; text-align: end; height:50px">
+      <mat-icon class="closeIcon">close</mat-icon>
+      <span style="margin-right: 41px"></span>
+    </div>
+
+    <div class="container-login100">
+      <div class="wrap-login100 p-t-190">
+        <form class="login100-form validate-form">
+          <div class="col-xs-12 col-md-7 ">
+          </div>
+          <span class="header-text login100-form-title">
+              Acesse sua conta
+          </span>
+
+          <div class="wrap-input100 validate-input m-b-10" data-validate = "email is required">
+            <input class="input100" type="text" name="email" placeholder="E-mail" [(ngModel)]="user.email">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <mat-icon>email</mat-icon>
+              </span>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
+            <input class="input100" type="password" name="pass" placeholder="Senha" [(ngModel)]="user.password">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <mat-icon>lock</mat-icon>
+              </span>
+          </div>
+
+          <div class="container-login100-form-btn p-t-10">
+            <button class="login100-form-btn" (click)="login()">
+              Entrar
+            </button>
+          </div>
+
+          <!--<div class="text-center w-full p-t-25 p-b-230">-->
+            <!--<a href="#" class="txt1">-->
+              <!--Forgot Username / Password?-->
+            <!--</a>-->
+          <!--</div>-->
+          <div *ngIf="closeIfLogged()"></div>
+          <div class="text-center w-full" style="margin-top: 10px; cursor: pointer">
+            <a class="txt1" (click)="signUp()">
+               <i class="material-icons">how_to_reg</i> Cadastre-se aqui
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+

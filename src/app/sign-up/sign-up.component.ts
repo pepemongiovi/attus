@@ -4,7 +4,7 @@ import { PasswordValidation } from '../shared/password-validation';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import {AuthService} from '../services/auth.service';
-import {ProfileComponent} from '../initial-page/profile/profile.component';
+import {ProfileComponent} from '../profile/profile.component';
 import {MatDialogRef} from '@angular/material';
 import {PersonalInfo} from '../models/personalInfo.model';
 import {User} from '../models/user.model';

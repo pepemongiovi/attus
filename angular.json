@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "real-estate-cf": {
+    "attus": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "real-estate-cf:build"
+            "browserTarget": "attus:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "real-estate-cf:build:production"
+              "browserTarget": "attus:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "real-estate-cf:build"
+            "browserTarget": "attus:build"
           }
         },
         "test": {
@@ -131,7 +131,7 @@
         }
       }
     },
-    "real-estate-cf-e2e": {
+    "attus-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -140,7 +140,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "real-estate-cf:serve"
+            "devServerTarget": "attus:serve"
           }
         },
         "lint": {
@@ -157,7 +157,7 @@
       }
     }
   },
-  "defaultProject": "real-estate-cf",
+  "defaultProject": "attus",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
