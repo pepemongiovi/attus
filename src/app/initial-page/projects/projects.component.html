@@ -10,17 +10,18 @@
               <div class="v-center">
                 <div class="col-xs-12 col-md-6">
                   <div class="caption-title" style="margin-bottom: 30px" data-animation="animated fadeInUp">
-                    <h2>{{project.name}}</h2>
+                    <h2 style="margin-bottom: 40px">Projetos</h2>
+                    <h1>{{project.name}}</h1>
                   </div>
                   <div style="margin-left:-50px; margin-top: -4px">
                     <app-slider [imgsUrl]="[project.imgURL]"></app-slider>
                   </div>
-                  <div style="height: 150px; width: 93%; margin-left:-5px; margin-top: 30px; text-align: justify">
+                  <div style="height: 200px; width: 93%; margin-left:-5px; margin-top: 20px; text-align: justify">
                     <p>{{project.description}}</p>
                   </div>
                 </div>
-                <div class="col-xs-5 col-md-6" >
-                  <div style="margin-top: 60px">
+                <div style="margin-bottom: -11px" class="col-xs-5 col-md-6" >
+                  <div >
                     <mat-icon>timeline</mat-icon>
                     <span><b>Rentabilidade garantida: </b>R$ {{project.rentabilidadeGarantida}}</span>
                   </div>
@@ -54,7 +55,7 @@
                   </div>
 
                   <div>
-                    <div class="caption-desc" style="margin-top: 40px" data-animation="animated fadeInUp">
+                    <div class="caption-desc" style="margin-top: 30px" data-animation="animated fadeInUp">
                       <p><b>Captação atual: </b>R$ {{project.captacaoAtual}} / R$ {{project.captacaoNecessaria}}</p>
                     </div>
                     <div class="progress" style="width: 75%">
@@ -78,7 +79,7 @@
             </div>
           </div>
           <!-- Indicators -->
-          <ol class="carousel-indicators" style="margin-bottom: -70px; margin-top: 80px" *ngIf="projects">
+          <ol class="carousel-indicators" style="margin-bottom: -70px; margin-top: 20px" *ngIf="projects">
             <li *ngFor="let project of projects; let i = index"
                 data-target="#caption_slide" (click)="selectProject(i)"
                 [ngClass]="{ 'active': i == selectedProjectIndex }">

@@ -7,3 +7,14 @@
   margin-left: 2px;
   font-size: 15px;
 }
+
+.valign-center {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+mat-icon {
+  margin-right: 5px;
+}

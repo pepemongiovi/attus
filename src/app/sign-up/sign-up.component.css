@@ -25,6 +25,12 @@ form:invalid>#submit {
   font-size: 15px !important;
 }
 
+.profilePicture {
+  margin-bottom: 15px;
+  height: 220px;
+  width: 220px;
+}
+
 .fixedHeight {
   margin-bottom: 200px;
   margin-top: 200px;
