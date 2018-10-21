@@ -3,6 +3,7 @@ mat-horizontal-stepper{
 }
 
 .closeIcon {
+  cursor: pointer;
   position: absolute;
   color: #FFFFFF;
   margin: 10px;

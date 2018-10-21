@@ -1,5 +1,3 @@
-
-
 .wrap-input100 {
   position: relative;
   width: 100%;
@@ -82,6 +80,7 @@
 }
 
 .closeIcon {
+  cursor: pointer;
   position: absolute;
   color: #FFFFFF;
   margin: 10px;

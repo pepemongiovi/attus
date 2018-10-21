@@ -17,7 +17,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatDialogModule,
-  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE, MatTableModule, MatSnackBarModule, MatProgressSpinnerModule
+  MatDatepickerModule, MatNativeDateModule, MatStepperModule, MAT_DATE_LOCALE, MatTableModule, MatSnackBarModule, MatProgressSpinnerModule,
+  MatListModule
 } from '@angular/material';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
@@ -91,7 +92,8 @@ export const firebaseConfig = {
     MatDatepickerModule,
     MatTableModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   providers: [UserService, AuthService, ProjectService, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],

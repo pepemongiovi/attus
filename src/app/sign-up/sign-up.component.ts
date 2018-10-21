@@ -54,6 +54,14 @@ export class SignUpComponent implements OnInit {
     return isValid ;
   }
 
+  cepIsValid() {
+    if(this.personalInfo.cep) {
+      const cep = parseInt(this.personalInfo.cep.toString().replace('-', ''), 10);
+      return !isNaN(cep) && cep.toString().length === 8;
+    }
+    return true;
+  }
+
   updateBankInfo(bankInfo: BankInfo) {
     this.bankInfo = bankInfo;
   }
@@ -149,7 +157,7 @@ export class SignUpComponent implements OnInit {
       this.birthDayIsValid() && this.textIsValid(this.personalInfo.issuingBody) &&
       this.numberIsValid(this.personalInfo.rg) && this.cpfIsValid() &&
       this.textIsValid(this.personalInfo.profession) && this.textIsValid(this.personalInfo.country) &&
-      this.textIsValid(this.personalInfo.uf) && this.numberIsValid(this.personalInfo.cep) &&
+      this.textIsValid(this.personalInfo.uf) && this.cepIsValid() &&
       this.textIsValid(this.personalInfo.city) && this.textIsValid(this.personalInfo.address) &&
       this.numberIsValid(this.personalInfo.number) && this.textIsValid(this.personalInfo.addressComplement);
   }
