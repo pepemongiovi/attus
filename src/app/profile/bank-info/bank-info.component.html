@@ -1,48 +1,49 @@
-<form class="form" action="##" name="bankInfoForm" id="bankInfoForm">
-  <div class="form-group">
-    <div class="col-xs-5">
-      <label for="bank"><h4>Banco</h4></label>
-      <div class="form-group input100">
-        <mat-select [(ngModel)]="bankInfo.bankNumber" name="bank" id="bank" placeholder="Selecione">
-          <mat-option *ngFor="let bank of banks" [value]="bank.value">
-            {{ bank.value + ' - ' + bank.label }}
-          </mat-option>
-        </mat-select>
-      </div>
-    </div>
-  </div>
+<form class="form" [formGroup]="form" style="margin-top: 13px;"
+      action="##" name="bankInfoForm" id="bankInfoForm">
 
-  <div class="form-group">
-    <div class="col-xs-2">
-      <label for="agency"><h4>Agência</h4></label>
-      <input [(ngModel)]="bankInfo.agency" type="number" min="1" step="1" class="form-control input100 no-spin" name="agency" id="agency" placeholder="Agência*">
-      <div *ngIf="!numberIsValid(bankInfo.agency)"
-           class="validationMessage">
-        Valor inválido.
-      </div>
-    </div>
-  </div>
+  <mat-form-field style="width: 30%; margin-left: 10%">
+    <mat-select [formGroup]="form" formControlName="bankNumber"
+                class="form-control" style="margin-bottom: -2px"
+                name="bankNumber" id="bankNumber" placeholder="Banco*">
+      <mat-option *ngFor="let bank of banks" [value]="bank.value">
+        {{ bank.value + ' - ' + bank.label }}
+      </mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="form.controls['bankNumber'].invalid &&
+            (form.controls['bankNumber'].dirty ||
+            form.controls['bankNumber'].touched)">{{ "Banco inválido" }}
+    </mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <div class="col-xs-3">
-      <label for="checkingAccount"><h4>Conta Corrente</h4></label>
-      <input [(ngModel)]="bankInfo.checkingAccount" type="number" min="1" step="1" class="form-control input100 no-spin" name="checkingAccount" id="checkingAccount" placeholder="Conta Corrente*">
-      <div *ngIf="!numberIsValid(bankInfo.checkingAccount)"
-           class="validationMessage">
-        Valor inválido.
-      </div>
-    </div>
-  </div>
+  <mat-form-field style="width: 15%">
+    <input matInput [formGroup]="form" formControlName="agency" type="number"
+           class="form-control no-spin" name="agency"
+           id="agency" placeholder="Agência*">
+    <mat-error
+      *ngIf="form.controls['agency'].invalid &&
+            (form.controls['agency'].dirty ||
+            form.controls['agency'].touched)">{{ "Agência inválida" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field style="width: 15%">
+    <input matInput [formGroup]="form" formControlName="checkingAccount" type="number"
+           class="form-control no-spin" name="checkingAccount"
+           id="checkingAccount" placeholder="Conta corrente*">
+    <mat-error
+      *ngIf="form.controls['checkingAccount'].invalid &&
+            (form.controls['checkingAccount'].dirty ||
+            form.controls['checkingAccount'].touched)">{{ "Conta corrente inválida" }}
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-button class="navigationSaveButton"
+          [disabled]="form.invalid" *ngIf="showSaveButton"
+          type="submit" (click)="save()">
+    <mat-icon style="color: white">check</mat-icon>
+    SALVAR
+  </button>
+
   <div *ngIf="onUpdateBankInfo()"></div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <br>
-      <button mat-button class="navigationSaveButton pull-right" [disabled]="disableSaveBtn()"
-              *ngIf="showSaveButton" type="submit" (click)="save()">
-        <mat-icon style="color: white">check</mat-icon>
-        SALVAR
-      </button>
-      <div *ngIf="disableSaveBtn()"></div>
-    </div>
-  </div>
 </form>

@@ -18,7 +18,10 @@ import {BankInfo} from '../models/bankInfo.model';
 export class SignUpComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<SignUpComponent>,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
   pageTitle = 'Dados pessoais';
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
@@ -27,9 +30,37 @@ export class SignUpComponent implements OnInit {
   personalInfo = new PersonalInfo();
   user = new User();
   submitBtnDisabled = true;
+  form: FormGroup;
+  passwordRegex = /^(?=.*\d).{8,}$/;
+  emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   ngOnInit() {
-    this.setDefaultInfo();
+  }
+
+  createForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+      password: ['', [Validators.required, Validators.pattern(this.passwordRegex)]],
+      confirmPassword: ['', [Validators.required]],
+      issuingBody: ['', Validators.required],
+      rg: ['', Validators.required],
+      cpf: ['', Validators.required],
+      birthDay: ['', Validators.required],
+      ddi: ['55', Validators.required],
+      phone: ['', Validators.required],
+      profession: ['', Validators.required],
+      civilStatus: ['', Validators.required],
+      country: [this.countries[29].nome_pais, Validators.required],
+      uf: ['', Validators.required],
+      cep: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+      number: ['', Validators.required],
+      addressComplement: ['', Validators.required]
+    }, {
+      validator: PasswordValidation.MatchPassword
+    });
   }
 
   onSelectFile(event) {
@@ -42,87 +73,8 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  numberIsValid(num) {
-    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-    let isValid = true;
-    if (num !== undefined && (isNaN(num) || num <= 0)) {
-      isValid = false;
-    }
-    if (num) {
-      isValid = isValid && !format.test(num.toString());
-    }
-    return isValid ;
-  }
-
-  cepIsValid() {
-    if(this.personalInfo.cep) {
-      const cep = parseInt(this.personalInfo.cep.toString().replace('-', ''), 10);
-      return !isNaN(cep) && cep.toString().length === 8;
-    }
-    return true;
-  }
-
   updateBankInfo(bankInfo: BankInfo) {
     this.bankInfo = bankInfo;
-  }
-
-  passwordIsValid() {
-    const password = this.user.password;
-    if (password) {
-      return password.length >= 6;
-    }
-    return true;
-  }
-
-  passwordConfirmationIsValid() {
-    const password = this.user.password;
-    const passwordConfirmation = this.user.passwordConfirmation;
-    if ((password === passwordConfirmation) || !passwordConfirmation) {
-      return true;
-    }
-    return false;
-  }
-
-  textIsValid(text) {
-    if(text) {
-      const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-      return !format.test(text) && text.length > 0 && !(/\d/.test(text));
-    }
-    return true;
-  }
-
-  emailIsValid() {
-    const email = this.user.email;
-    if (email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-    return true;
-  }
-
-  setDefaultInfo() {
-    this.personalInfo.country = this.countries[29].nome_pais;
-    this.personalInfo.ddi = 55;
-    this.personalInfo.birthDay = null;
-  }
-
-  phoneIsValid() {
-    if(this.personalInfo.phone) {
-      const valid = this.numberIsValid(this.personalInfo.phone);
-      return valid && this.personalInfo.phone.toString().length > 7;
-    }
-    return true;
-  }
-
-  birthDayIsValid() {
-    const birthDay = this.personalInfo.birthDay;
-    if(birthDay===null) return true;
-    return birthDay;
-  }
-
-  onDateChange(date) {
-    console.log(date);
-    this.personalInfo.birthDay = this.formatDate(date);
   }
 
   formatDate(dateString) {
@@ -135,35 +87,26 @@ export class SignUpComponent implements OnInit {
     this.submitBtnDisabled = disabled;
   }
 
-  cpfIsValid() {
-    const cpf = this.personalInfo.cpf;
-    if(cpf) {
-      return this.numberIsValid(parseInt(cpf, 10)) && cpf.length === 11;
-    }
-    return true;
-  }
-
-  nextBtnIsValid() {
-    return this.user.displayName && this.user.email && this.user.password
-      && this.user.passwordConfirmation && this.personalInfo.phone
-      && this.personalInfo.issuingBody && this.personalInfo.rg && this.personalInfo.cpf
-      && this.personalInfo.profession && this.personalInfo.country && this.personalInfo.uf
-      && this.personalInfo.cep && this.personalInfo.city && this.personalInfo.address
-      && this.personalInfo.number && this.personalInfo.addressComplement
-      && this.personalInfo.birthDay && this.personalInfo.civilStatus && this.personalInfo.ddi &&
-      this.textIsValid(this.user.displayName) && this.emailIsValid() &&
-      this.passwordIsValid() && this.passwordConfirmationIsValid() &&
-      this.numberIsValid(this.personalInfo.ddi) && this.phoneIsValid() &&
-      this.birthDayIsValid() && this.textIsValid(this.personalInfo.issuingBody) &&
-      this.numberIsValid(this.personalInfo.rg) && this.cpfIsValid() &&
-      this.textIsValid(this.personalInfo.profession) && this.textIsValid(this.personalInfo.country) &&
-      this.textIsValid(this.personalInfo.uf) && this.cepIsValid() &&
-      this.textIsValid(this.personalInfo.city) && this.textIsValid(this.personalInfo.address) &&
-      this.numberIsValid(this.personalInfo.number) && this.textIsValid(this.personalInfo.addressComplement);
-  }
-
   next() {
     this.pageTitle = 'Dados bancários (OPCIONAL)';
+    this.user.displayName = this.form.value.name;
+    this.user.email = this.form.value.email;
+    this.user.password = this.form.value.password;
+    this.user.passwordConfirmation = this.form.value.passwordConfirmation;
+    this.personalInfo.issuingBody = this.form.value.issuingBody;
+    this.personalInfo.rg = this.form.value.rg;
+    this.personalInfo.cpf = this.form.value.cpf;
+    this.personalInfo.birthDay = this.formatDate(this.form.value.birthDay.toString());
+    this.personalInfo.phone = this.form.value.phone;
+    this.personalInfo.profession = this.form.value.profession;
+    this.personalInfo.civilStatus = this.form.value.civilStatus;
+    this.personalInfo.country = this.form.value.country;
+    this.personalInfo.uf = this.form.value.uf;
+    this.personalInfo.cep = this.form.value.cep;
+    this.personalInfo.city = this.form.value.city;
+    this.personalInfo.address = this.form.value.address;
+    this.personalInfo.number = this.form.value.number;
+    this.personalInfo.addressComplement = this.form.value.addressComplement;
   }
 
   back() {

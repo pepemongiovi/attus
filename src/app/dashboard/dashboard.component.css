@@ -90,7 +90,7 @@ h1 {
   width: 100%;
   background: #fff;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 4px;
   padding: 0 30px 0 25px;
 }
 
@@ -99,7 +99,7 @@ h1 {
 .focus-input100 {
   display: block;
   position: absolute;
-  border-radius: 25px;
+  border-radius: 4px;
   bottom: 0;
   left: 0;
   z-index: -1;
@@ -145,7 +145,7 @@ mat-icon:hover {
 .saveButton {
   background-color:limegreen;
   color: white;
-  border-radius: 25px;
+  border-radius: 4px;
   font-weight: bold;
   size: 100px;
 }

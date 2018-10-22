@@ -38,7 +38,7 @@ mat-horizontal-stepper{
 .navigationNextButton {
   background-color:limegreen;
   color: white;
-  border-radius: 25px;
+  border-radius: 4px;
   font-weight: bold;
   size: 100px;
 }
@@ -46,7 +46,7 @@ mat-horizontal-stepper{
 .navigationBackButton {
   background-color: royalblue;
   color: white;
-  border-radius: 25px;
+  border-radius: 4px;
   font-weight: bold;
   size: 60px;
 }
