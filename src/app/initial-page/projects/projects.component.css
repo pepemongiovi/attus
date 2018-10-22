@@ -15,6 +15,29 @@
   margin-bottom: 7px;
 }
 
+.project-description {
+  width: 93%;
+  margin-left:-5px;
+  margin-top: 20px;
+  text-align: justify;
+}
+
 mat-icon {
   margin-right: 5px;
+}
+
+@media only screen and (max-width: 991px) {
+  .project-description {
+    width: 100%;
+    margin-left: 0;
+  }
+  .caption-button,
+  .caption-desc,
+  .ended-projects {
+    text-align: center;
+  }
+  .progress {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

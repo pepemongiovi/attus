@@ -16,11 +16,11 @@
                   <div style="margin-left:-50px; margin-top: -4px">
                     <app-slider [imgsUrl]="[project.imgURL]"></app-slider>
                   </div>
-                  <div style="height: 200px; width: 93%; margin-left:-5px; margin-top: 20px; text-align: justify">
+                  <div class="project-description">
                     <p>{{project.description}}</p>
                   </div>
                 </div>
-                <div style="margin-bottom: -11px" class="col-xs-5 col-md-6" >
+                <div style="margin-bottom: -11px" class="col-xs-12 col-md-6" >
                   <div >
                     <mat-icon>timeline</mat-icon>
                     <span><b>Rentabilidade garantida: </b>R$ {{project.rentabilidadeGarantida}}</span>
@@ -70,7 +70,7 @@
                         <div style="margin-top: -5px">Investir</div>
                       </a>
                     </div>
-                    <h3 style="color: white" *ngIf="project.captacaoAtual>=project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE">
+                    <h3 style="color: white" *ngIf="project.captacaoAtual>=project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE" class="ended-projects">
                       <mat-icon>lock</mat-icon> Investimentos encerrados
                     </h3>
                   </div>
