@@ -96,6 +96,7 @@ export class SignUpComponent implements OnInit {
     this.personalInfo.issuingBody = this.form.value.issuingBody;
     this.personalInfo.rg = this.form.value.rg;
     this.personalInfo.cpf = this.form.value.cpf;
+    this.personalInfo.ddi = this.form.value.ddi;
     this.personalInfo.birthDay = this.formatDate(this.form.value.birthDay.toString());
     this.personalInfo.phone = this.form.value.phone;
     this.personalInfo.profession = this.form.value.profession;
