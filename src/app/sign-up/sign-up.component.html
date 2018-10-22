@@ -6,9 +6,11 @@
   <span style="margin-right: 41px"></span>
 </div>
 <div class="limiter">
-  <div class="row small">
-    <div class="col-sm-10 header-text"><h1><b>Cadastro</b> - {{pageTitle}}</h1></div>
+
+  <div class="header-text">
+    <h1><b>Cadastro</b> - {{pageTitle}}</h1>
   </div>
+
   <div class="" style="margin-left: -10%">
     <div class="tab-content">
       <div class="tab-pane active" id="personalInfo">
@@ -19,7 +21,6 @@
         </div>
 
         <form class="form" [formGroup]="form" action="##" name="profileForm" id="profileForm">
-
 
           <mat-form-field>
             <input matInput formControlName="name"
@@ -240,11 +241,11 @@
                       form.controls['addressComplement'].touched)">{{ "Complemento inválido" }}
             </mat-error>
           </mat-form-field>
-          <!--[disabled]= "form.invalid"-->
+          <!---->
           <div class="form-group col-xs-12">
-            <button type="submit" data-toggle="tab"
+            <button type="submit" data-toggle="tab" [disabled]="form.invalid"
                     href="#bankInfo" class="btn btn-lg btn-success pull-right small"
-                    (click)="next()" style="margin-right: 3%">
+                    (click)="next()" style="margin-right: 3%" >
               <i class="glyphicon glyphicon-arrow-right"></i>
               Pŕoximo
             </button>
@@ -252,13 +253,21 @@
         </form>
       </div><!--/tab-pane-->
 
-      <div class="tab-pane small" id="bankInfo">
-        <app-bank-info (updateBankInfo)="updateBankInfo($event)" (submitBtnStatusUpdate)="submitBtnIsDisabled($event)"></app-bank-info>
-        <button class="btn btn-lg btn-success pull-right" style="margin-left: 10px" (click)="signUp()" type="submit">
+      <div class="tab-pane" id="bankInfo" style="margin-right: 50px">
+        <div style="margin-left: -3%">
+          <app-bank-info (updateBankInfo)="updateBankInfo($event)"
+                         (submitBtnStatusUpdate)="submitBtnIsDisabled($event)">
+          </app-bank-info>
+        </div>
+
+        <button class="btn btn-lg btn-success pull-right small"
+                style="margin-left: 10px; margin-left: -10px"
+                (click)="signUp()" type="submit">
           <i class="glyphicon glyphicon-ok-sign"></i>
           Finalizar
         </button>
-        <button data-toggle="tab" href="#personalInfo" class="btn btn-lg btn-danger pull-right" (click)="back()">
+        <button data-toggle="tab" href="#personalInfo"
+                class="btn btn-lg btn-danger pull-right small" (click)="back()">
           <i class="glyphicon glyphicon-arrow-left"></i>
           Voltar
         </button>

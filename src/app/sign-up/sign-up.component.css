@@ -129,6 +129,11 @@ h1 {
   animation: anim-shadow 0.5s ease-in-out forwards;
 }
 
+.header-text {
+  margin-left: 6.5%;
+  margin-bottom: 30px;
+}
+
 mat-select {
   margin-top: 18px;
 }

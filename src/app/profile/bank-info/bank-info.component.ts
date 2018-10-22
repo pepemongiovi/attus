@@ -35,11 +35,18 @@ export class BankInfoComponent implements OnInit {
     });
   }
 
+  setBankInfo() {
+    this.form.controls['bankNumber'].setValue(this.bankInfo.bankNumber);
+    this.form.controls['agency'].setValue(this.bankInfo.agency);
+    this.form.controls['checkingAccount'].setValue(this.bankInfo.checkingAccount);
+  }
+
   fetchBankInfo() {
     if(JSON.parse(localStorage.getItem('user'))!=null) {
       this.userService.getBankInfo().on('value', (snapshot) => {
         if(snapshot.val() !== null) {
           this.bankInfo = snapshot.val();
+          this.setBankInfo();
         }
       });
     }
@@ -47,32 +54,10 @@ export class BankInfoComponent implements OnInit {
 
   onUpdateBankInfo() {
     this.userService.bankInfo = this.bankInfo;
-  }
-
-  numberIsValid(num) {
-    let isValid = true;
-    if (num !== undefined && (isNaN(num) || num <= 0)) {
-      isValid = false;
-    }
-    return isValid;
+    this.submitBtnStatusUpdate.emit(this.form.invalid);
   }
 
   save() {
     this.userService.saveBankInfo(this.bankInfo);
-  }
-
-  disableSaveBtn() {
-    const disabled = !this.numberIsValid(this.bankInfo.checkingAccount)
-      || !this.numberIsValid(this.bankInfo.agency)
-      || !this.numberIsValid(this.bankInfo.bankNumber)
-      || this.bankInfo.agency === undefined
-      || this.bankInfo.bankNumber === undefined
-      || this.bankInfo.checkingAccount === undefined;
-
-    this.submitBtnStatusUpdate.emit(disabled);
-
-    if (!disabled) this.updateBankInfo.emit(this.bankInfo);
-
-    return disabled;
   }
 }
