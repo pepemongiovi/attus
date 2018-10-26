@@ -12,29 +12,30 @@
       <div class="header-text instructionsText" style="margin-top: 20px; margin-bottom: 30px;">
         <h3>Confira atentamente seu dados pessoais, pois eles serão usados para confecção do contrato de investimento, garantindo sua segurança jurídica.</h3>
       </div>
-      <div>
+      <div class="personalInfoContainer">
         <app-personal-info (updateSaveBtnStatus)="updatePersonalSaveBtnStatus($event)"
                            [showButtons]="false"></app-personal-info>
       </div>
-      <div class="instructionsBtns">
+      <div class="instructionsBtns normal">
         <button mat-button class="navigationNextButton"
                 (click)="savePersonalInfo()"
                 [disabled]="!savePersonalInfoBtnIsValid" matStepperNext>
           SALVAR E PROSSEGUIR
         </button>
       </div>
+      <div style="margin-bottom: 360px"></div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel style="color: white">Dados bancários</ng-template>
       <div class="header-text instructionsText">
         <h3>Confira também seus dados bancários, pois serão usados para que você receba os lucros e rendimentos sobre o investimento.</h3>
       </div>
-      <div>
+      <div class="bankInfoContainer">
         <app-bank-info (submitBtnStatusUpdate)="bankInfoBtnUpdate($event)" [showSaveButton]="false"></app-bank-info>
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
-        <button mat-button class="navigationNextButton"
+        <button mat-button class="bankNextButton"
                 (click)="saveBankInfo()"
                 [disabled]="bankInfoBtnDisabled" matStepperNext>
           SALVAR E PROSSEGUIR
@@ -48,7 +49,7 @@
         <h3>Escolha o número de cotas a ser investido.</h3>
         <h4 style="color: white"><u><b>Limite de cotas:</b></u> {{getQuotasLimit()}} cotas</h4>
       </div>
-      <div>
+      <div style="margin-left: -1%">
         <app-investment-info
           (submitBtnStatusUpdate)="investmentInfoBtnUpdate($event)"
           (updateInvestmentInfo)="updateInvestmentInfo($event)">
@@ -56,7 +57,7 @@
       </div>
       <div class="instructionsBtns">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
-        <button mat-button class="navigationNextButton" [disabled]="investmentInfoBtnDisabled" matStepperNext>PRÓXIMO</button>
+        <button mat-button class="investmentNextButton" [disabled]="investmentInfoBtnDisabled" matStepperNext>PRÓXIMO</button>
         <div style="margin-bottom: 700px"></div>
       </div>
     </mat-step>
@@ -75,7 +76,7 @@
       </div>
       <div class="instructionsBtns" style="margin-bottom: 350px">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
-        <button mat-button class="navigationNextButton" (click)="invest()">FINALIZAR</button>
+        <button mat-button class="finishButton" (click)="invest()">FINALIZAR</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

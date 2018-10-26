@@ -17,7 +17,14 @@ export class AuthService {
     this.API = '';
   }
 
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const formatedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    return formatedDate;
+  }
+
   signUp(userInfo, personalInfo, bankInfo) {
+    personalInfo.birthDay = this.formatDate(personalInfo.birthDay);
     firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(userInfo.email, userInfo.password)
       .then( (user) => {
         if(user) {

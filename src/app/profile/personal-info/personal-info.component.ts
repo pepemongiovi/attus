@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PersonalInfo} from '../../models/personalInfo.model';
 import {UserService} from '../../services/user.service';
 import {BankInfo} from '../../models/bankInfo.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PasswordValidation} from '../../shared/password-validation';
 
 @Component({
   selector: 'app-personal-info',
@@ -10,7 +12,8 @@ import {BankInfo} from '../../models/bankInfo.model';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private formBuilder: FormBuilder) { }
 
   @Output() logout = new EventEmitter();
   @Output() updateSaveBtnStatus = new EventEmitter();
@@ -19,24 +22,49 @@ export class PersonalInfoComponent implements OnInit {
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
   countries = require('../../../jsons/countries.json');
   personalInfo = new PersonalInfo();
-  selectedDate;
   loading = true;
+  form: FormGroup;
+  emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   ngOnInit() {
     this.fetchPersonalInfo();
+  }
+
+  createForm() {
+    this.setDate();
+    this.form = this.formBuilder.group({
+      name: [this.user.displayName, [Validators.required]],
+      email: [this.user.email, [Validators.required, Validators.pattern(this.emailRegex)]],
+      issuingBody: [this.personalInfo.issuingBody, Validators.required],
+      rg: [this.personalInfo.rg, Validators.required],
+      cpf: [this.personalInfo.cpf, Validators.required],
+      birthDay: [this.personalInfo.birthDay, Validators.required],
+      ddi: ['55', Validators.required],
+      phone: [this.personalInfo.phone, Validators.required],
+      profession: [this.personalInfo.profession, Validators.required],
+      civilStatus: [this.personalInfo.civilStatus, Validators.required],
+      country: [this.personalInfo.country, Validators.required],
+      uf: [this.personalInfo.uf, Validators.required],
+      cep: [this.personalInfo.cep, Validators.required],
+      city: [this.personalInfo.city, Validators.required],
+      address: [this.personalInfo.address, Validators.required],
+      number: [this.personalInfo.number, Validators.required],
+      addressComplement: [this.personalInfo.addressComplement, Validators.required]
+    });
   }
 
   fetchPersonalInfo() {
     this.userService.getPersonalInfo().on('value', (snapshot) => {
       if (snapshot.val() !== null) {
         this.personalInfo = snapshot.val();
+        this.createForm();
       }
       this.loading = false;
     });
   }
 
   onUpdateSaveBtnStatus() {
-    this.updateSaveBtnStatus.emit(this.infoIsValid());
+    this.updateSaveBtnStatus.emit(!this.form.invalid);
   }
 
   onUpdatePersonalInfo() {
@@ -58,96 +86,13 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   save() {
+    this.personalInfo.birthDay = this.form.value.birthDay;
     this.userService.savePersonalInfo(this.personalInfo);
     this.userService.saveUserInfo(this.user);
   }
 
-  numberIsValid(num) {
-    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-    let isValid = true;
-    if (num !== undefined && (isNaN(num) || num <= 0)) {
-      isValid = false;
-    }
-    if (num) {
-      isValid = isValid && !format.test(num.toString());
-    }
-    return isValid ;
-  }
-
-  textIsValid(text) {
-    if(text) {
-      const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-      return !format.test(text) && text.length > 0 && !(/\d/.test(text));
-    }
-    return true;
-  }
-
-  emailIsValid() {
-    const email = this.user.email;
-    if (email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-    return true;
-  }
-
-  phoneIsValid() {
-    if(this.personalInfo.phone) {
-      const valid = this.numberIsValid(this.personalInfo.phone);
-      return valid && this.personalInfo.phone.toString().length > 7;
-    }
-    return true;
-  }
-
   setDate() {
     const nums = this.personalInfo.birthDay.split('/');
-    this.selectedDate = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10)-1, parseInt(nums[0], 10));
-  }
-
-  onDateChange(date) {
-    this.personalInfo.birthDay = this.formatDate(date);
-  }
-
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    const formatedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    return formatedDate;
-  }
-
-  birthDayIsValid() {
-    if(this.personalInfo.birthDay) {
-      if(this.personalInfo.birthDay.includes('/')){
-        this.setDate();
-      }
-    }
-    if(this.personalInfo.birthDay) {
-      return this.personalInfo.birthDay;
-    }
-    return true;
-  }
-
-  cpfIsValid() {
-    const cpf = this.personalInfo.cpf;
-    if(cpf) {
-      return this.numberIsValid(parseInt(cpf, 10)) && cpf.length === 11;
-    }
-    return true;
-  }
-
-  infoIsValid() {
-    return this.user.displayName && this.user.email && this.personalInfo.phone
-      && this.personalInfo.issuingBody && this.personalInfo.rg && this.personalInfo.cpf
-      && this.personalInfo.profession && this.personalInfo.country && this.personalInfo.uf
-      && this.personalInfo.cep && this.personalInfo.city && this.personalInfo.address
-      && this.personalInfo.number && this.personalInfo.addressComplement
-      && this.personalInfo.birthDay && this.personalInfo.civilStatus && this.personalInfo.ddi &&
-      this.textIsValid(this.user.displayName) && this.emailIsValid() &&
-      this.numberIsValid(this.personalInfo.ddi) && this.phoneIsValid() &&
-      this.birthDayIsValid() && this.textIsValid(this.personalInfo.issuingBody) &&
-      this.numberIsValid(this.personalInfo.rg) && this.cpfIsValid() &&
-      this.textIsValid(this.personalInfo.profession) && this.textIsValid(this.personalInfo.country) &&
-      this.textIsValid(this.personalInfo.uf) && this.numberIsValid(this.personalInfo.cep) &&
-      this.textIsValid(this.personalInfo.city) && this.textIsValid(this.personalInfo.address) &&
-      this.numberIsValid(this.personalInfo.number) && this.textIsValid(this.personalInfo.addressComplement);
+    this.personalInfo.birthDay = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10)-1, parseInt(nums[0], 10));
   }
 }

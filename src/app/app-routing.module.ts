@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AuthGuard} from './guards/auth.guard';
+import {FaqComponent} from './initial-page/faq/faq.component';
 
 const routes: Routes = [
   { path: '', component: InitialPageComponent }

@@ -25,7 +25,7 @@ import {AuthService} from './services/auth.service';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
+import {APP_BASE_HREF, CommonModule} from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { PersonalInfoComponent } from './profile/personal-info/personal-info.component';
@@ -95,7 +95,14 @@ export const firebaseConfig = {
     MatProgressSpinnerModule,
     MatListModule
   ],
-  providers: [UserService, AuthService, ProjectService, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [
+    UserService,
+    AuthService,
+    ProjectService,
+    MessageService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    { provide: APP_BASE_HREF, useValue : '/' }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [InstructionsComponent, DashboardComponent, LoginComponent, SignUpComponent, ProfileComponent]
 })

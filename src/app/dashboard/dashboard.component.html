@@ -7,17 +7,20 @@
     <div class="row small">
       <div class="header-text" style="margin-left: 23%"><h1>Dashboard - Pesquise os investimentos de um usuário</h1></div>
     </div>
-    <div class="small col-xs-5" style="margin-left: -8.2%">
-      <label for="investmentId">
-        <h4 style="color: white">E-mail do usuário</h4>
-      </label>
-      <div class="valign-center" style="display: inline-flex">
-        <input class="input100" style="width: 370px" type="text" id="investmentId" [(ngModel)]="userEmail">
-        <span (click)="searchUser()" style="margin-bottom: -8px;">
-          <mat-icon style="margin-left: -35px; cursor: pointer">search</mat-icon>
-        </span>
-        <mat-spinner [diameter]="30" style="margin-left: 10px" *ngIf="loading"></mat-spinner>
-      </div>
+    <div class="small col-xs-5" style="margin-left: -8%">
+      <form>
+        <label for="investmentId">
+          <h4 style="color: white">E-mail do usuário</h4>
+        </label>
+        <div class="valign-center" style="display: inline-flex">
+          <input class="input100" style="width: 370px" type="text" name="investmentId" id="investmentId" [(ngModel)]="userEmail" />
+          <button (click)="searchUser()" type="submit" style="margin-bottom: -8px; background-color: transparent; border: none">
+            <mat-icon style="margin-left: -50px; cursor: pointer">search</mat-icon>
+          </button>
+          <mat-spinner [diameter]="30" style="margin-left: 10px" *ngIf="loading"></mat-spinner>
+        </div>
+      </form>
+
     </div>
     <h4 style="color: red; margin-top: 100px; margin-left: -20px" *ngIf="!investments && searched">Nenhum investimento realizado.</h4>
     <table class="table table-hover" *ngIf="investments">

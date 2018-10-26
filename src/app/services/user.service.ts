@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 import {HttpClient} from '@angular/common/http';
 import {InvestmentInfo} from '../models/investmentInfo.model';
 import {MessageService} from './message.service';
+import {formatDate} from 'tough-cookie';
 
 @Injectable()
 export class UserService {
@@ -49,7 +50,14 @@ export class UserService {
     return o1;
   }
 
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const formatedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    return formatedDate;
+  }
+
   savePersonalInfo(personalInfo: PersonalInfo) {
+    personalInfo.birthDay = this.formatDate(personalInfo.birthDay);
     this.afAuth.authState.take(1).subscribe(auth => {
       this.afDababase.object(`personalInfo/${auth.uid}`).set(personalInfo)
         .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));

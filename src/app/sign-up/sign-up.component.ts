@@ -77,37 +77,13 @@ export class SignUpComponent implements OnInit {
     this.bankInfo = bankInfo;
   }
 
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    const formatedDate = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
-    return formatedDate;
-  }
-
   submitBtnIsDisabled(disabled) {
     this.submitBtnDisabled = disabled;
   }
 
   next() {
     this.pageTitle = 'Dados bancários (OPCIONAL)';
-    this.user.displayName = this.form.value.name;
-    this.user.email = this.form.value.email;
-    this.user.password = this.form.value.password;
-    this.user.passwordConfirmation = this.form.value.passwordConfirmation;
-    this.personalInfo.issuingBody = this.form.value.issuingBody;
-    this.personalInfo.rg = this.form.value.rg;
-    this.personalInfo.cpf = this.form.value.cpf;
-    this.personalInfo.ddi = this.form.value.ddi;
-    this.personalInfo.birthDay = this.formatDate(this.form.value.birthDay.toString());
-    this.personalInfo.phone = this.form.value.phone;
-    this.personalInfo.profession = this.form.value.profession;
-    this.personalInfo.civilStatus = this.form.value.civilStatus;
-    this.personalInfo.country = this.form.value.country;
-    this.personalInfo.uf = this.form.value.uf;
-    this.personalInfo.cep = this.form.value.cep;
-    this.personalInfo.city = this.form.value.city;
-    this.personalInfo.address = this.form.value.address;
-    this.personalInfo.number = this.form.value.number;
-    this.personalInfo.addressComplement = this.form.value.addressComplement;
+    this.personalInfo.birthDay = this.form.value.birthDay;
   }
 
   back() {

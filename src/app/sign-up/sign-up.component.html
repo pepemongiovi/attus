@@ -23,7 +23,7 @@
         <form class="form" [formGroup]="form" action="##" name="profileForm" id="profileForm">
 
           <mat-form-field>
-            <input matInput formControlName="name"
+            <input matInput formControlName="name" [(ngModel)]="user.displayName"
                    [formGroup]="form" type="text" class="form-control"
                    name="name" id="name" placeholder="Nome Completo*">
             <mat-error
@@ -37,8 +37,8 @@
             <input matInput formControlName="email"
                    [formGroup]="form" type="text" class="form-control"
                    name="email" id="email" placeholder="E-mail*">
-            <mat-error
-              *ngIf="form.controls['email'].invalid &&
+            <mat-error>
+              *ngIf="form.controls['email'].invalid && [(ngModel)]="user.email"
                       (form.controls['email'].dirty ||
                       form.controls['email'].touched)">{{ "Exemplo: nome@gmail.com" }}
             </mat-error>
@@ -46,7 +46,7 @@
 
           <mat-form-field>
             <input matInput formControlName="password" [formGroup]="form"
-                   id="password"  placeholder="Senha*"
+                   id="password"  placeholder="Senha*" [(ngModel)]="user.password"
                    type="password" class="form-control">
             <mat-error
               *ngIf="form.controls['password'].invalid &&
@@ -68,7 +68,7 @@
           </mat-form-field>
 
           <mat-form-field  style="width: 14.4%">
-            <input matInput formControlName="issuingBody"
+            <input matInput formControlName="issuingBody" [(ngModel)]="personalInfo.issuingBody"
                    [formGroup]="form" type="text" class="form-control"
                    name="issuingBody" id="issuingBody" placeholder="Orgão Emissor*">
             <mat-error
@@ -79,7 +79,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 14.4%">
-            <input matInput formControlName="rg"
+            <input matInput formControlName="rg" [(ngModel)]="personalInfo.rg"
                    [formGroup]="form" type="number" class="form-control"
                    name="rg" id="rg" placeholder="RG*">
             <mat-error
@@ -90,7 +90,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 14.4%">
-            <input matInput formControlName="cpf"
+            <input matInput formControlName="cpf" [(ngModel)]="personalInfo.cpf"
                    [formGroup]="form" type="number" class="form-control"
                    name="cpf" id="cpf" placeholder="CPF*">
             <mat-error
@@ -116,7 +116,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 7.4%">
-            <input matInput formControlName="ddi"
+            <input matInput formControlName="ddi" [(ngModel)]="personalInfo.ddi"
                    [formGroup]="form" type="number" class="form-control"
                    name="ddi" id="ddi" placeholder="DDI*">
             <mat-error
@@ -127,7 +127,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 21.4%">
-            <input matInput formControlName="phone"
+            <input matInput formControlName="phone" [(ngModel)]="personalInfo.phone"
                    [formGroup]="form" type="number" class="form-control"
                    name="phone" id="phone" placeholder="Telefone*">
             <mat-error
@@ -138,7 +138,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput formControlName="profession"
+            <input matInput formControlName="profession" [(ngModel)]="personalInfo.profession"
                    [formGroup]="form" type="text" class="form-control"
                    name="profession" id="profession" placeholder="Profissão*">
             <mat-error
@@ -149,7 +149,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 18%; margin-left: 102px">
-            <mat-select id="civilStatus" [formGroup]="form" formControlName="civilStatus"
+            <mat-select id="civilStatus" [formGroup]="form" formControlName="civilStatus" [(ngModel)]="personalInfo.civilStatus"
                         name="civilStatus" placeholder="Estado Civil*" style="margin-bottom: -2px" class="form-control">
               <mat-option *ngFor="let status of civilStatus" [value]="status">
                 {{ status }}
@@ -163,7 +163,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 25%">
-            <mat-select id="country" [formGroup]="form" formControlName="country"
+            <mat-select id="country" [formGroup]="form" formControlName="country" [(ngModel)]="personalInfo.country"
                         name="country" placeholder="País*" style="margin-bottom: -2px" class="form-control">
               <mat-option *ngFor="let country of countries" [value]="country.nome_pais">
                 {{ country.sigla + ' - ' + country.nome_pais }}
@@ -177,7 +177,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 19%">
-            <input matInput formControlName="uf"
+            <input matInput formControlName="uf" [(ngModel)]="personalInfo.uf"
                    [formGroup]="form" type="text" class="form-control"
                    name="uf" id="uf" placeholder="UF*">
             <mat-error
@@ -188,7 +188,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 18.5%">
-            <input matInput formControlName="cep"
+            <input matInput formControlName="cep" [(ngModel)]="personalInfo.cep"
                    [formGroup]="form" type="number" class="form-control"
                    name="cep" id="cep" placeholder="CEP*">
             <mat-error
@@ -199,7 +199,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 20%; margin-left: 102px">
-            <input matInput formControlName="city"
+            <input matInput formControlName="city" [(ngModel)]="personalInfo.city"
                    [formGroup]="form" type="text" class="form-control"
                    name="city" id="city" placeholder="Cidade*">
             <mat-error
@@ -210,7 +210,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput formControlName="address"
+            <input matInput formControlName="address" [(ngModel)]="personalInfo.address"
                    [formGroup]="form" type="text" class="form-control"
                    name="address" id="address" placeholder="Endereço*">
             <mat-error
@@ -221,7 +221,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 10%">
-            <input matInput formControlName="number"
+            <input matInput formControlName="number" [(ngModel)]="personalInfo.number"
                    [formGroup]="form" type="number" class="form-control"
                    name="number" id="number" placeholder="Número*">
             <mat-error
@@ -232,7 +232,7 @@
           </mat-form-field>
 
           <mat-form-field style="width: 20.5%">
-            <input matInput formControlName="addressComplement"
+            <input matInput formControlName="addressComplement" [(ngModel)]="personalInfo.addressComplement"
                    [formGroup]="form" type="text" class="form-control"
                    name="addressComplement" id="addressComplement" placeholder="Complemento*">
             <mat-error

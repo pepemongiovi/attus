@@ -1,228 +1,228 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <mat-spinner style="margin-left: 47%; margin-top: 150px" *ngIf="loading"></mat-spinner>
-<div *ngIf="!loading">
-  <div class="text-center col-xs-4" [ngStyle]="{'margin-top': !showButtons ? '5%' : '2%' }">
+<div *ngIf="!loading" style="margin-left: 100px">
+  <div class="col-xs-4 logoutBtnContainer" [ngStyle]="{'margin-top': !showButtons ? '5%' : '2%' }">
     <img [src]="personalInfo.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
          class="avatar img-circle img-thumbnail profilePicture" alt="avatar">
     <input (change)="onSelectFile($event)" type="file" id="profilePicture"
            class="text-center center-block file-upload">
-    <button *ngIf="showButtons" mat-raised-button class="logoutBtn" style="margin-top: 20px"
+    <button *ngIf="showButtons" mat-raised-button class="logoutBtn"
             color="warn" (click)="onLogout()">Sair</button>
+    <div style="height: 30px" *ngIf="!showButtons"></div>
   </div>
 
+  <form class="form" [formGroup]="form" action="##" name="profileForm" id="profileForm">
+    <mat-form-field>
+      <input matInput formControlName="name" [(ngModel)]="user.displayName"
+             [formGroup]="form" type="text" class="form-control"
+             name="name" id="name" placeholder="Nome Completo*">
+      <mat-error
+        *ngIf="form.controls['name'].invalid &&
+                      (form.controls['name'].dirty ||
+                      form.controls['name'].touched)">{{ "Nome deve ter somente letras" }}
+      </mat-error>
+    </mat-form-field>
 
-  <form class="form" action="##" name="profileForm" id="profileForm">
-    <div class="form-group">
-      <div class="col-xs-4">
-        <label for="name">
-          <h4 *ngIf="textIsValid(user.displayName)">Nome Completo</h4>
-          <h4 *ngIf="!textIsValid(user.displayName)" class="validationMessage">Nome Completo*</h4>
-        </label>
-        <input [(ngModel)]="user.displayName" type="text" class="form-control input100"
-               name="name" id="name" placeholder="Nome Completo*">
-      </div>
-    </div>
+    <mat-form-field>
+      <input matInput formControlName="email" [(ngModel)]="user.email"
+             [formGroup]="form" type="text" class="form-control"
+             name="email" id="email" placeholder="E-mail*">
+      <mat-error
+        *ngIf="form.controls['email'].invalid &&
+                      (form.controls['email'].dirty ||
+                      form.controls['email'].touched)">{{ "Exemplo: nome@gmail.com" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-4">
-        <label for="email">
-          <h4 *ngIf="emailIsValid()">E-mail</h4>
-          <h4 *ngIf="!emailIsValid()" class="validationMessage">E-mail*</h4>
-        </label>
-        <input [(ngModel)]="user.email" type="email" class="form-control input100"
-               name="email" id="email" placeholder="usuario@email.com" >
-      </div>
-    </div>
+    <mat-form-field  style="width: 16.5%">
+      <input matInput formControlName="issuingBody" [(ngModel)]="personalInfo.issuingBody"
+             [formGroup]="form" type="text" class="form-control"
+             name="issuingBody" id="issuingBody" placeholder="Orgão Emissor*">
+      <mat-error
+        *ngIf="form.controls['issuingBody'].invalid &&
+                      (form.controls['issuingBody'].dirty ||
+                      form.controls['issuingBody'].touched)">{{ "Somente letras permitidas" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-2">
-        <label for="issuingBody">
-          <h4 *ngIf="textIsValid(personalInfo.issuingBody)">Orgão Emissor</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.issuingBody)" class="validationMessage">Orgão Emissor*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.issuingBody" type="text" class="form-control input100"
-               id="issuingBody" name="issuingBody" placeholder="Orgão Emissor*">
-      </div>
-    </div>
+    <mat-form-field style="width: 16.5%">
+      <input matInput formControlName="rg" [(ngModel)]="personalInfo.rg"
+             [formGroup]="form" type="number" class="form-control"
+             name="rg" id="rg" placeholder="RG*">
+      <mat-error
+        *ngIf="form.controls['rg'].invalid &&
+                      (form.controls['rg'].dirty ||
+                      form.controls['rg'].touched)">{{ "RG inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="rg">
-          <h4 *ngIf="numberIsValid(personalInfo.rg)">RG</h4>
-          <h4 *ngIf="!numberIsValid(personalInfo.rg)" class="validationMessage">RG*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.rg" type="number" class="form-control input100"
-               name="rg" id="rg" placeholder="RG*">
-      </div>
-    </div>
+    <mat-form-field style="width: 16.5%">
+      <input matInput formControlName="cpf" [(ngModel)]="personalInfo.cpf"
+             [formGroup]="form" type="number" class="form-control"
+             name="cpf" id="cpf" placeholder="CPF*">
+      <mat-error
+        *ngIf="form.controls['cpf'].invalid &&
+                      (form.controls['cpf'].dirty ||
+                      form.controls['cpf'].touched)">{{ "CPF inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="cpf">
-          <h4 *ngIf="cpfIsValid()">CPF</h4>
-          <h4 *ngIf="!cpfIsValid()" class="validationMessage">CPF*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.cpf" type="text" maxlength="14" class="form-control input100"
-               name="cpf" id="cpf" placeholder="xx.xxx.xxx-xx">
-      </div>
-    </div>
+    <mat-form-field style="width: 16.5%">
+      <input matInput formControlName="birthDay" [matDatepicker]="picker"
+             [formGroup]="form" class="form-control"
+             name="birthDay" id="birthDay" placeholder="Data de nascimento*">
 
-    <div class="form-group">
-      <div class="col-xs-2">
-        <label for="ddi">
-          <h4 *ngIf="numberIsValid(personalInfo.ddi)">DDI</h4>
-          <h4 *ngIf="!numberIsValid(personalInfo.ddi)" class="validationMessage">DDI*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.ddi" type="number" class="form-control input100"
-               name="ddi" id="ddi" placeholder="DDI*">
-      </div>
-    </div>
+      <mat-datepicker-toggle style="color: rgb(19, 143, 194); margin-left: -25px" matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="phone">
-          <h4 *ngIf="phoneIsValid()">Telefone</h4>
-          <h4 *ngIf="!phoneIsValid()" class="validationMessage">Telefone*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.phone" type="number" class="form-control input100"
-               name="phone" id="phone" placeholder="98789-2093">
-      </div>
-    </div>
+      <mat-error
+        *ngIf="form.controls['birthDay'].invalid &&
+                      (form.controls['birthDay'].dirty ||
+                      form.controls['birthDay'].touched)">{{ "Data inválida" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="birthDay">
-          <h4 *ngIf="birthDayIsValid()">Data de Nascimento</h4>
-          <h4 *ngIf="!birthDayIsValid()" class="validationMessage">Data de Nascimento*</h4>
-        </label>
-        <input (dateChange)="onDateChange($event.value)" [value]="selectedDate" [matDatepicker]="picker" id="birthDay"
-               class="form-control input100" name="birthDay" placeholder="Data de Nascimento*">
-        <div style="margin-left: 75%; margin-top: -65px; size: 10px">
-          <mat-datepicker-toggle style="size: 10px" matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker style="size: 10px;  " #picker></mat-datepicker>
-        </div>
-      </div>
-    </div>
+    <mat-form-field style="width: 9%">
+      <input matInput formControlName="ddi" [(ngModel)]="personalInfo.ddi"
+             [formGroup]="form" type="number" class="form-control"
+             name="ddi" id="ddi" placeholder="DDI*">
+      <mat-error
+        *ngIf="form.controls['ddi'].invalid &&
+                      (form.controls['ddi'].dirty ||
+                      form.controls['ddi'].touched)">{{ "DDI inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-4">
-        <label for="country">
-          <h4>País</h4>
-        </label>
-        <div class="form-group input100">
-          <mat-select id="country" [(ngModel)]="personalInfo.country"
-                      name="country" placeholder="Selecione">
-            <mat-option *ngFor="let country of countries" [value]="country.nome_pais">
-              {{ country.sigla + ' - ' + country.nome_pais }}
-            </mat-option>
-          </mat-select>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-2">
-        <label for="uf">
-          <h4 *ngIf="textIsValid(personalInfo.uf)">UF</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.uf)" class="validationMessage">UF*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.uf" type="text" class="form-control input100"
-               name="uf" id="uf" placeholder="UF*">
-      </div>
-    </div>
+    <mat-form-field style="width: 24%">
+      <input matInput formControlName="phone" [(ngModel)]="personalInfo.phone"
+             [formGroup]="form" type="number" class="form-control"
+             name="phone" id="phone" placeholder="Telefone*">
+      <mat-error
+        *ngIf="form.controls['phone'].invalid &&
+                      (form.controls['phone'].dirty ||
+                      form.controls['phone'].touched)">{{ "Telefone inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="cep">
-          <h4 *ngIf="numberIsValid(personalInfo.cep)">CEP</h4>
-          <h4 *ngIf="!numberIsValid(personalInfo.cep)" class="validationMessage">CEP*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.cep" type="number" class="form-control input100"
-               name="cep" id="cep" placeholder="xxxxx-xxx">
-      </div>
-    </div>
+    <mat-form-field>
+      <input matInput formControlName="profession" [(ngModel)]="personalInfo.profession"
+             [formGroup]="form" type="text" class="form-control"
+             name="profession" id="profession" placeholder="Profissão*">
+      <mat-error
+        *ngIf="form.controls['profession'].invalid &&
+                      (form.controls['profession'].dirty ||
+                      form.controls['profession'].touched)">{{ "Profissão inválida" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="city">
-          <h4 *ngIf="textIsValid(personalInfo.city)">Cidade</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.city)" class="validationMessage">Cidade*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.city" type="text" class="form-control input100"
-               name="city" id="city" placeholder="Cidade*">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-6">
-        <label for="address">
-          <h4 *ngIf="textIsValid(personalInfo.address)">Endereço</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.address)" class="validationMessage">Endereço*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.address" type="text" class="form-control input100"
-               name="address" id="address" placeholder="Endereço*">
-      </div>
-    </div>
+    <mat-form-field>
+      <mat-select id="civilStatus" [formGroup]="form" formControlName="civilStatus" [(ngModel)]="personalInfo.civilStatus"
+                  name="civilStatus" placeholder="Estado Civil*" style="margin-bottom: -2px" class="form-control">
+        <mat-option *ngFor="let status of civilStatus" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="form.controls['civilStatus'].invalid &&
+                    (form.controls['civilStatus'].dirty ||
+                    form.controls['civilStatus'].touched)">{{ "Estado civil inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-2">
-        <label for="number">
-          <h4 *ngIf="numberIsValid(personalInfo.number)">Número</h4>
-          <h4 *ngIf="!numberIsValid(personalInfo.number)" class="validationMessage">Número*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.number" type="number" class="form-control input100"
-               name="number" id="number" placeholder="Numero*">
-      </div>
-    </div>
+    <mat-form-field>
+      <mat-select id="country" [formGroup]="form" formControlName="country" [(ngModel)]="personalInfo.country"
+                  name="country" placeholder="País*" style="margin-bottom: -2px" class="form-control">
+        <mat-option *ngFor="let country of countries" [value]="country.nome_pais">
+          {{ country.sigla + ' - ' + country.nome_pais }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="form.controls['country'].invalid &&
+                    (form.controls['country'].dirty ||
+                    form.controls['country'].touched)">{{ "País inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-4">
-        <label for="complement">
-          <h4 *ngIf="textIsValid(personalInfo.addressComplement)">Complemento</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.addressComplement)" class="validationMessage">Complemento*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.addressComplement" class="form-control input100"
-               name="complement" id="complement" type="text" placeholder="Complemento*">
-      </div>
-    </div>
+    <mat-form-field style="width: 7%">
+      <input matInput formControlName="uf" [(ngModel)]="personalInfo.uf"
+             [formGroup]="form" type="text" class="form-control"
+             name="uf" id="uf" placeholder="UF*">
+      <mat-error
+        *ngIf="form.controls['uf'].invalid &&
+                      (form.controls['uf'].dirty ||
+                      form.controls['uf'].touched)">{{ "UF inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-6">
-        <label for="profession">
-          <h4 *ngIf="textIsValid(personalInfo.profession)">Profissão</h4>
-          <h4 *ngIf="!textIsValid(personalInfo.profession)" class="validationMessage">Profissão*</h4>
-        </label>
-        <input [(ngModel)]="personalInfo.profession" type="text" class="form-control input100"
-               name="profession" id="profession" placeholder="Profissão*">
-      </div>
-    </div>
+    <mat-form-field style="width: 17.2%">
+      <input matInput formControlName="cep" [(ngModel)]="personalInfo.cep"
+             [formGroup]="form" type="number" class="form-control"
+             name="cep" id="cep" placeholder="CEP*">
+      <mat-error
+        *ngIf="form.controls['cep'].invalid &&
+                      (form.controls['cep'].dirty ||
+                      form.controls['cep'].touched)">{{ "CEP inválido" }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <div class="col-xs-3">
-        <label for="civilStatus">
-          <h4>Estado Civil</h4>
-        </label>
-        <div class="form-group input100">
-          <mat-select id="civilStatus" [(ngModel)]="personalInfo.civilStatus" id="civilStatus"
-                      name="civilStatus" placeholder="Selecione">
-            <mat-option *ngFor="let status of civilStatus" [value]="status">
-              {{ status }}
-            </mat-option>
-          </mat-select>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="onUpdateSaveBtnStatus()"></div>
-    <div *ngIf="onUpdatePersonalInfo()"></div>
+    <mat-form-field style="width: 20%; margin-left: 8.3vh;">
+      <input matInput formControlName="city" [(ngModel)]="personalInfo.city"
+             [formGroup]="form" type="text" class="form-control"
+             name="city" id="city" placeholder="Cidade*">
+      <mat-error
+        *ngIf="form.controls['city'].invalid &&
+                      (form.controls['city'].dirty ||
+                      form.controls['city'].touched)">{{ "Cidade inválida" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="address" [(ngModel)]="personalInfo.address"
+             [formGroup]="form" type="text" class="form-control"
+             name="address" id="address" placeholder="Endereço*">
+      <mat-error
+        *ngIf="form.controls['address'].invalid &&
+                      (form.controls['address'].dirty ||
+                      form.controls['address'].touched)">{{ "Endereço inválido" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 10%">
+      <input matInput formControlName="number" [(ngModel)]="personalInfo.number"
+             [formGroup]="form" type="number" class="form-control"
+             name="number" id="number" placeholder="Número*">
+      <mat-error
+        *ngIf="form.controls['number'].invalid &&
+                      (form.controls['number'].dirty ||
+                      form.controls['number'].touched)">{{ "Endereço inválido" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 20.5%">
+      <input matInput formControlName="addressComplement" [(ngModel)]="personalInfo.addressComplement"
+             [formGroup]="form" type="text" class="form-control"
+             name="addressComplement" id="addressComplement" placeholder="Complemento*">
+      <mat-error
+        *ngIf="form.controls['addressComplement'].invalid &&
+                      (form.controls['addressComplement'].dirty ||
+                      form.controls['addressComplement'].touched)">{{ "Complemento inválido" }}
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+    <button mat-button class="navigationSaveButton pull-right"
+            *ngIf="showButtons" (click)="save()" [disabled]="form.invalid">
+      <mat-icon style="color: white">check</mat-icon>
+      SALVAR
+    </button>
+
     <div class="form-group">
       <div class="col-xs-12">
-        <br>
-        <button mat-button class="navigationSaveButton pull-right"
-                *ngIf="showButtons" (click)="save()" [disabled]="!infoIsValid()">
-          <mat-icon style="color: white">check</mat-icon>
-          SALVAR
-        </button>
+
       </div>
     </div>
   </form>
-
+  <div *ngIf="onUpdateSaveBtnStatus()"></div>
+  <div *ngIf="onUpdatePersonalInfo()"></div>
 </div>
