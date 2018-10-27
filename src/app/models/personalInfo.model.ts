@@ -2,7 +2,7 @@ export class PersonalInfo {
   public profilePicture: string;
   public ddi: number;
   public phone: number;
-  public birthDay: string;
+  public birthDay: any;
   public issuingBody: string;
   public rg: number;
   public cpf: string;

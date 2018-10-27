@@ -31,7 +31,6 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   createForm() {
-    this.setDate();
     this.form = this.formBuilder.group({
       name: [this.user.displayName, [Validators.required]],
       email: [this.user.email, [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -57,8 +56,9 @@ export class PersonalInfoComponent implements OnInit {
     this.userService.getPersonalInfo().on('value', (snapshot) => {
       if (snapshot.val() !== null) {
         this.personalInfo = snapshot.val();
-        this.createForm();
       }
+      this.setDate();
+      this.createForm();
       this.loading = false;
     });
   }
@@ -92,7 +92,10 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   setDate() {
-    const nums = this.personalInfo.birthDay.split('/');
-    this.personalInfo.birthDay = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10)-1, parseInt(nums[0], 10));
+    if (this.personalInfo.birthDay) {
+      const nums = this.personalInfo.birthDay.split('/');
+      this.personalInfo.birthDay = new Date(parseInt(nums[2], 10), parseInt(nums[1], 10)-1, parseInt(nums[0], 10));
+
+    }
   }
 }
