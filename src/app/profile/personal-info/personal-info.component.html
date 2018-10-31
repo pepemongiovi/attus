@@ -2,14 +2,14 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <mat-spinner style="margin-left: 47%; margin-top: 150px" *ngIf="loading"></mat-spinner>
 <div *ngIf="!loading" style="margin-left: 100px">
-  <div class="col-xs-4 logoutBtnContainer" [ngStyle]="{'margin-top': !showButtons ? '7%' : '4%' }">
+  <div class="col-xs-4 logoutBtnContainer" [ngStyle]="{'margin-top': !showButtons ? '5%' : '2%' }">
     <img [src]="personalInfo.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
          class="avatar img-circle img-thumbnail profilePicture" alt="avatar">
     <input (change)="onSelectFile($event)" type="file" id="profilePicture"
            class="text-center center-block file-upload">
     <button *ngIf="showButtons" mat-raised-button class="logoutBtn"
             color="warn" (click)="onLogout()">Sair</button>
-    <div style="height: 50px" *ngIf="!showButtons"></div>
+    <div style="height: 50px"></div>
   </div>
 
   <form class="form" [formGroup]="form" action="##" name="profileForm" id="profileForm">
