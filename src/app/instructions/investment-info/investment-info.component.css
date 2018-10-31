@@ -26,6 +26,15 @@
   transform: scale(0.8, 0.8);
 }
 
+mat-error {
+  font-size: 1.3em;
+}
+
+:host /deep/ .mat-input-placeholder {
+  font-size: 1.6em;
+  margin-top: -0.05em;
+}
+
 input, select, textarea{
   color: #000000;
 }

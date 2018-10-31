@@ -17,33 +17,26 @@ export class AuthService {
     this.API = '';
   }
 
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    const formatedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    return formatedDate;
-  }
-
   signUp(userInfo, personalInfo, bankInfo) {
-    personalInfo.birthDay = this.formatDate(personalInfo.birthDay);
     firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(userInfo.email, userInfo.password)
       .then( (user) => {
-        if(user) {
+        if (user) {
           firebase.auth().currentUser.updateProfile({
             displayName: userInfo.displayName,
             photoURL: ''
-          }).then(
-            ( s ) => {
-              this.setSession(user);
-              this.userService.savePersonalInfo(personalInfo);
-              this.userService.saveBankInfo(bankInfo);
+          }).then(() => {
+              this.userService.savePersonalInfo(personalInfo, false);
+              this.userService.saveBankInfo(bankInfo, false);
               this.messageService.showSuccess('Registrado com sucesso!!');
             }
           );
         }
       })
-      .catch(
-      error => console.log(error)
-    );
+      .catch(error => console.log(error));
+  }
+
+  emailIsValid(email) {
+    return firebase.auth().fetchProvidersForEmail(email);
   }
 
   login(user) {

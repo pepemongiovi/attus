@@ -13,7 +13,7 @@
 
   <div class="" style="margin-left: -10%">
     <div class="tab-content">
-      <div class="tab-pane active" id="personalInfo">
+      <div class="tab-pane active" *ngIf="pageTitle===PERSONAL_INFO_PAGE_TITLE">
         <div class="text-center col-xs-3 small" style="margin-left: 80px">
           <img [src]="personalInfo.profilePicture || 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'"
                class="avatar img-circle img-thumbnail profilePicture" alt="avatar">
@@ -34,11 +34,11 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput formControlName="email"
+            <input matInput formControlName="email" [(ngModel)]="user.email"
                    [formGroup]="form" type="text" class="form-control"
-                   name="email" id="email" placeholder="E-mail*">
-            <mat-error>
-              *ngIf="form.controls['email'].invalid && [(ngModel)]="user.email"
+                   name="email" id="email" placeholder="E-mail*" >
+            <mat-error
+              *ngIf="form.controls['email'].invalid &&
                       (form.controls['email'].dirty ||
                       form.controls['email'].touched)">{{ "Exemplo: nome@gmail.com" }}
             </mat-error>
@@ -187,7 +187,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 18.5%">
+          <mat-form-field style="width: 18.8%">
             <input matInput formControlName="cep" [(ngModel)]="personalInfo.cep"
                    [formGroup]="form" type="number" class="form-control"
                    name="cep" id="cep" placeholder="CEP*">
@@ -198,7 +198,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 20%; margin-left: 102px">
+          <mat-form-field style="width: 20.3%; margin-left: 102px">
             <input matInput formControlName="city" [(ngModel)]="personalInfo.city"
                    [formGroup]="form" type="text" class="form-control"
                    name="city" id="city" placeholder="Cidade*">
@@ -244,35 +244,37 @@
           <!---->
           <div class="form-group col-xs-12">
             <button type="submit" data-toggle="tab" [disabled]="form.invalid"
-                    href="#bankInfo" class="btn btn-lg btn-success pull-right small"
-                    (click)="next()" style="margin-right: 3%" >
-              <i class="glyphicon glyphicon-arrow-right"></i>
-              Pŕoximo
+                    mat-button class="navigationSaveButton pull-right"
+                    (click)="next()" >
+              <div style="height: 35px ">
+                <span *ngIf="!loading">Pŕoximo</span>
+                <mat-spinner *ngIf="loading" [diameter]="25"></mat-spinner>
+              </div>
             </button>
           </div>
         </form>
       </div><!--/tab-pane-->
 
-      <div class="tab-pane" id="bankInfo" style="margin-right: 50px">
+      <div *ngIf="pageTitle===BANK_INFO_PAGE_TITLE" style="margin-right: 50px">
         <div style="margin-left: -3%">
           <app-bank-info (updateBankInfo)="updateBankInfo($event)"
                          (submitBtnStatusUpdate)="submitBtnIsDisabled($event)">
           </app-bank-info>
         </div>
 
-        <button class="btn btn-lg btn-success pull-right small"
-                style="margin-left: 10px; margin-left: -10px"
+        <button mat-button class="navigationSaveButton pull-right"
+                [disabled]="submitBtnDisabled"
                 (click)="signUp()" type="submit">
-          <i class="glyphicon glyphicon-ok-sign"></i>
-          Finalizar
+          <div style="height: 35px ">
+            <span *ngIf="!loading">Finalizar</span>
+            <mat-spinner *ngIf="loading" [diameter]="25"></mat-spinner>
+          </div>
         </button>
-        <button data-toggle="tab" href="#personalInfo"
-                class="btn btn-lg btn-danger pull-right small" (click)="back()">
-          <i class="glyphicon glyphicon-arrow-left"></i>
+        <button data-toggle="tab" (click)="back()"
+                mat-button class="navigationBackButton pull-right" >
           Voltar
         </button>
       </div>
-
     </div><!--/tab-pane-->
   </div><!--/tab-content-->
 </div>

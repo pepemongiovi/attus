@@ -8,7 +8,7 @@
       <mat-icon style="color: white; font-weight: bolder">check</mat-icon>
     </ng-template>
     <mat-step>
-      <ng-template matStepLabel style="color: white">Dados cadastrais</ng-template>
+      <ng-template matStepLabel style="color: white"><span class="stepLabel">Dados cadastrais</span></ng-template>
       <div class="header-text instructionsText" style="margin-top: 20px; margin-bottom: 30px;">
         <h3>Confira atentamente seu dados pessoais, pois eles serão usados para confecção do contrato de investimento, garantindo sua segurança jurídica.</h3>
       </div>
@@ -26,7 +26,9 @@
       <div style="margin-bottom: 360px"></div>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel style="color: white">Dados bancários</ng-template>
+      <ng-template matStepLabel style="color: white">
+        <span class="stepLabel">Dados bancários</span>
+      </ng-template>
       <div class="header-text instructionsText">
         <h3>Confira também seus dados bancários, pois serão usados para que você receba os lucros e rendimentos sobre o investimento.</h3>
       </div>
@@ -44,7 +46,9 @@
       </div>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel style="color: white">Investimento</ng-template>
+      <ng-template matStepLabel style="color: white">
+        <span class="stepLabel">Investimento</span>
+      </ng-template>
       <div class="header-text instructionsText">
         <h3>Escolha o número de cotas a ser investido.</h3>
         <h4 style="color: white"><u><b>Limite de cotas:</b></u> {{getQuotasLimit()}} cotas</h4>
@@ -62,7 +66,9 @@
       </div>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel style="color: white">Considerações finais</ng-template>
+      <ng-template matStepLabel style="color: white">
+        <span class="stepLabel">Considerações finais</span>
+      </ng-template>
       <div class="header-text instructionsText">
         <h3>Após a escolha do projeto e dos valores, você receberá em seu email uma cópia do contrato (Termo de Adesão) para assinatura. Assine eletronicamente este contrato seguindo as instruções na tela. Esta assinatura é executada e garantida pela empresa de Certificação e Assinatura eletrônica <b>D4sign</b>.</h3>
         <h4><b>OBSERVAÇÂO: </b>Evite a abertura do email através de seu smartphone pois pode haver desconfiguração da tela.</h4>
@@ -74,7 +80,7 @@
         <br>
         <h3>Pronto, agora é só aguardar que os seus lucros serão depositados diretamente em sua conta corrente ao final da execução e venda/pagamento do projeto. Durante este período você poderá acompanhar o andamento através da aba “Meus projetos” aqui na área de assinante.</h3>
       </div>
-      <div class="instructionsBtns" style="margin-bottom: 350px">
+      <div class="instructionsBtns" style="margin-bottom: 450px">
         <button mat-button class="navigationBackButton" matStepperPrevious>VOLTAR</button>
         <button mat-button class="finishButton" (click)="invest()">FINALIZAR</button>
       </div>

@@ -9,6 +9,7 @@ import {MatDialogRef} from '@angular/material';
 import {PersonalInfo} from '../models/personalInfo.model';
 import {User} from '../models/user.model';
 import {BankInfo} from '../models/bankInfo.model';
+import {MessageService} from '../services/message.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,25 +20,37 @@ export class SignUpComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<SignUpComponent>,
               private authService: AuthService,
-              private formBuilder: FormBuilder) {
-    this.createForm();
-  }
+              private formBuilder: FormBuilder,
+              private messageService: MessageService) {}
 
-  pageTitle = 'Dados pessoais';
+  PERSONAL_INFO_PAGE_TITLE = 'Dados pessoais';
+  BANK_INFO_PAGE_TITLE = 'Dados bancários';
+  pageTitle = this.PERSONAL_INFO_PAGE_TITLE;
+  loading = false;
+
   civilStatus = ['Solteiro(a)', 'Casado(a)', 'Separdo(a)', 'Divorciado(a)', 'Viúvo(a)'];
   countries = require('../../jsons/countries.json');
+
   bankInfo: BankInfo = new BankInfo();
   personalInfo = new PersonalInfo();
   user = new User();
+
   submitBtnDisabled = true;
   form: FormGroup;
+
   passwordRegex = /^(?=.*\d).{8,}$/;
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  DEFAULT_COUNTRY = this.countries[29].nome_pais;
+  DEFAULT_DDI = 55;
+
   ngOnInit() {
+    this.createForm();
   }
 
   createForm() {
+    this.personalInfo.ddi = this.DEFAULT_DDI;
+    this.personalInfo.country = this.DEFAULT_COUNTRY;
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -47,11 +60,11 @@ export class SignUpComponent implements OnInit {
       rg: ['', Validators.required],
       cpf: ['', Validators.required],
       birthDay: ['', Validators.required],
-      ddi: ['55', Validators.required],
+      ddi: [this.DEFAULT_DDI, Validators.required],
       phone: ['', Validators.required],
       profession: ['', Validators.required],
       civilStatus: ['', Validators.required],
-      country: [this.countries[29].nome_pais, Validators.required],
+      country: [this.DEFAULT_COUNTRY, Validators.required],
       uf: ['', Validators.required],
       cep: ['', Validators.required],
       city: ['', Validators.required],
@@ -82,8 +95,16 @@ export class SignUpComponent implements OnInit {
   }
 
   next() {
-    this.pageTitle = 'Dados bancários (OPCIONAL)';
-    this.personalInfo.birthDay = this.form.value.birthDay;
+    this.loading = true;
+    this.authService.emailIsValid(this.user.email).then((data) => {
+      if (data.length !== 0) {
+        this.messageService.showError('E-mail em uso.');
+      } else {
+        this.pageTitle = this.BANK_INFO_PAGE_TITLE;
+        this.personalInfo.birthDay = this.form.value.birthDay;
+      }
+      this.loading = false;
+    });
   }
 
   back() {

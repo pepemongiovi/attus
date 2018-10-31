@@ -125,3 +125,6 @@ mat-horizontal-stepper {
   pointer-events: none !important;
 }
 
+.stepLabel {
+  font-size: 1.6em;
+}

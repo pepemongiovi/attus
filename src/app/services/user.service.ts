@@ -56,11 +56,15 @@ export class UserService {
     return formatedDate;
   }
 
-  savePersonalInfo(personalInfo: PersonalInfo) {
+  savePersonalInfo(personalInfo: PersonalInfo, showMessage = true) {
     personalInfo.birthDay = this.formatDate(personalInfo.birthDay);
     this.afAuth.authState.take(1).subscribe(auth => {
       this.afDababase.object(`personalInfo/${auth.uid}`).set(personalInfo)
-        .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
+        .then(() => {
+          if(showMessage) {
+            this.messageService.showSuccess('Salvo com sucesso!!')
+          }
+        });
     });
   }
 
@@ -81,10 +85,16 @@ export class UserService {
       .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
   }
 
-  saveBankInfo(bankInfo: BankInfo) {
+  saveBankInfo(bankInfo: BankInfo, showMessage = true) {
     this.afAuth.authState.take(1).subscribe(auth => {
+      console.log(auth);
       this.afDababase.object(`bankInfo/${auth.uid}`).set(bankInfo)
-        .then(() => this.messageService.showSuccess('Salvo com sucesso!!'));
+        .then(() => {
+          console.log(bankInfo);
+          if (showMessage) {
+            this.messageService.showSuccess('Salvo com sucesso!!');
+          }
+        }).catch((error) => console.log(error));
     });
   }
 

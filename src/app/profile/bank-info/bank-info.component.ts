@@ -55,6 +55,7 @@ export class BankInfoComponent implements OnInit {
   onUpdateBankInfo() {
     this.userService.bankInfo = this.bankInfo;
     this.submitBtnStatusUpdate.emit(this.form.invalid);
+    this.updateBankInfo.emit(this.bankInfo);
   }
 
   save() {

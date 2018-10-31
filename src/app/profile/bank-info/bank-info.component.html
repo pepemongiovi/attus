@@ -3,7 +3,7 @@
 
   <mat-form-field style="width: 30%; margin-left: 10%">
     <mat-select [formGroup]="form" formControlName="bankNumber"
-                class="form-control" style="margin-bottom: -2px"
+                class="form-control" style="margin-bottom: -2px" [(ngModel)]="bankInfo.bankNumber"
                 name="bankNumber" id="bankNumber" placeholder="Banco*">
       <mat-option *ngFor="let bank of banks" [value]="bank.value">
         {{ bank.value + ' - ' + bank.label }}
@@ -18,7 +18,7 @@
 
   <mat-form-field style="width: 15%">
     <input matInput [formGroup]="form" formControlName="agency" type="number"
-           class="form-control no-spin" name="agency"
+           class="form-control no-spin" name="agency" [(ngModel)]="bankInfo.agency"
            id="agency" placeholder="Agência*">
     <mat-error
       *ngIf="form.controls['agency'].invalid &&
@@ -29,8 +29,8 @@
 
   <mat-form-field style="width: 15%">
     <input matInput [formGroup]="form" formControlName="checkingAccount" type="number"
-           class="form-control no-spin" name="checkingAccount"
-           id="checkingAccount" placeholder="Conta corrente*">
+           class="form-control no-spin" name="checkingAccount" [(ngModel)]="bankInfo.checkingAccount"
+           id="checkingAccount" placeholder="Conta corrente com digito*">
     <mat-error
       *ngIf="form.controls['checkingAccount'].invalid &&
             (form.controls['checkingAccount'].dirty ||

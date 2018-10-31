@@ -1,5 +1,6 @@
 .limiter {
-  margin-left: 8%;
+  margin-left: 9%;
+  margin-top: 2%;
 }
 
 .closeIcon {
@@ -24,6 +25,10 @@
 
 .small {
   transform: scale(0.8, 0.8);
+}
+
+li {
+  font-size: 1.6em;
 }
 
 input, select, textarea{

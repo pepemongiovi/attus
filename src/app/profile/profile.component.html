@@ -3,34 +3,26 @@
   <span style="margin-right: 41px"></span>
 </div>
 <div class="limiter">
-  <div class="">
-    <div class="row small">
-      <div class="col-sm-5 header-text"><h1>Perfil</h1></div>
+  <div class="" style="margin-left: -10%">
+    <ul class="nav nav-tabs small">
+      <li class="active"><a data-toggle="tab" href="#personal-info">Dados Pessoais</a></li>
+      <li><a data-toggle="tab" href="#bank-info">Dados Bancários</a></li>
+      <li><a data-toggle="tab" href="#projects">Meus Investimentos</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" style="margin-top:15px" id="personal-info">
+        <app-personal-info (logout)="logout()" [showButtons]="true"></app-personal-info>
+      </div>
+
+      <div class="tab-pane" id="bank-info">
+        <app-bank-info [showSaveButton]="true"></app-bank-info>
+      </div>
+
+      <div class="tab-pane small" id="projects">
+        <app-investments-info></app-investments-info>
+      </div>
     </div>
-    <div class="row">
-
-      </div><!--/col-3-->
-      <div class="" style="margin-left: -10%">
-        <ul class="nav nav-tabs small">
-          <li class="active"><a data-toggle="tab" href="#personal-info">Dados Pessoais</a></li>
-          <li><a data-toggle="tab" href="#bank-info">Dados Bancários</a></li>
-          <li><a data-toggle="tab" href="#projects">Meus Investimentos</a></li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane active" style="margin-top:15px" id="personal-info">
-            <app-personal-info (logout)="logout()" [showButtons]="true"></app-personal-info>
-          </div>
-
-          <div class="tab-pane" id="bank-info">
-            <app-bank-info [showSaveButton]="true"></app-bank-info>
-          </div>
-
-          <div class="tab-pane small" id="projects">
-            <app-investments-info></app-investments-info>
-          </div>
-        </div><!--/tab-pane-->
-      </div><!--/tab-content-->
-  </div><!--/row-->
+  </div>
 </div>
 

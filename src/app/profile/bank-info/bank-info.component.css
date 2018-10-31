@@ -146,6 +146,15 @@ mat-form-field {
   margin-right: 1%;
 }
 
+mat-error {
+  font-size: 1.3em;
+}
+
+:host /deep/ .mat-input-placeholder {
+  font-size: 1.6em;
+  margin-top: -0.05em;
+}
+
 input {
   height: 40px;
 }
@@ -153,8 +162,4 @@ input {
 .form-control {
   margin-top: -5px !important;
   height: 35px;
-}
-
-:host /deep/ .mat-input-placeholder {
-  font-size: 0.9em;
 }
