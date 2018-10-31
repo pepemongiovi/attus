@@ -28,9 +28,11 @@
 
 mat-error {
   font-size: 1.3em;
+  font-weight: bold;
 }
 
 :host /deep/ .mat-input-placeholder {
+  font-weight: bold;
   font-size: 1.6em;
   margin-top: -0.05em;
 }

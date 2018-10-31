@@ -1,6 +1,6 @@
+
 <form class="form" [formGroup]="form" style="margin-top: 13px;"
       action="##" name="bankInfoForm" id="bankInfoForm">
-
   <mat-form-field style="width: 30%; margin-left: 10%">
     <mat-select [formGroup]="form" formControlName="bankNumber"
                 class="form-control" style="margin-bottom: -2px" [(ngModel)]="bankInfo.bankNumber"
@@ -30,7 +30,7 @@
   <mat-form-field style="width: 15%">
     <input matInput [formGroup]="form" formControlName="checkingAccount" type="number"
            class="form-control no-spin" name="checkingAccount" [(ngModel)]="bankInfo.checkingAccount"
-           id="checkingAccount" placeholder="Conta corrente com digito*">
+           id="checkingAccount" placeholder="Conta corrente*">
     <mat-error
       *ngIf="form.controls['checkingAccount'].invalid &&
             (form.controls['checkingAccount'].dirty ||
@@ -44,6 +44,10 @@
     <mat-icon style="color: white">check</mat-icon>
     SALVAR
   </button>
-
+  <br>
+  <span style="color: white; font-size: 1.6em; margin-left: 10%">
+    <b>Observação: </b>
+    A conta corrente deve conter os números juntamente com o dígito
+  </span>
   <div *ngIf="onUpdateBankInfo()"></div>
 </form>
