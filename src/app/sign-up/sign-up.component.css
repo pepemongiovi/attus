@@ -177,9 +177,9 @@ mat-error {
 }
 
 :host /deep/ .mat-input-placeholder {
+  font-size: 1.4em;
+  margin-top: -0.08em;
   font-weight: bold;
-  font-size: 1.6em;
-  margin-top: -0.05em;
 }
 
 .navigationSaveButton {
@@ -201,8 +201,4 @@ mat-error {
 .form-control {
   margin-top: -5px !important;
   height: 35px;
-}
-
-:host /deep/ .mat-input-placeholder {
-  font-size: 0.9em;
 }

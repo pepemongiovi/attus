@@ -31,7 +31,7 @@
                   </div>
                   <div>
                     <mat-icon>access_time</mat-icon>
-                    <span><b>Tempo de retorno ao investimento: </b> {{project.tempoDeRetorno}} dias</span>
+                    <span><b>Prazo de retorno do investimento: </b> {{project.tempoDeRetorno}} dias</span>
                   </div>
                   <div>
                     <mat-icon>monetization_on</mat-icon>
@@ -67,7 +67,7 @@
                     </div>
                     <div *ngIf="project.captacaoAtual<project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE" class="caption-button" style="margin-top: -20px" data-animation="animated fadeInUp">
                       <a class="button" (click)="onInvest(project)" style="width: 75%; text-align: center; border-radius: 4px; height: 35px; margin-bottom: 30px">
-                        <div style="margin-top: -5px">Investir</div>
+                        <div style="margin-top: -5px; cursor: pointer ">Investir</div>
                       </a>
                     </div>
                     <h3 style="color: white" *ngIf="project.captacaoAtual>=project.captacaoNecessaria*MAX_INVESTMENT_PERCENTAGE" class="ended-projects">

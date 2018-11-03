@@ -30,16 +30,16 @@ section h3.section-subheading {
   list-style: none;
 }
 
-/*.timeline:before {*/
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*bottom: 0;*/
-  /*left: 40px;*/
-  /*width: 2px;*/
-  /*margin-left: -1.5px;*/
-  /*content: '';*/
-  /*background-color: #45b9e0;*/
-/*}*/
+.timeline:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 2px;
+  margin-left: -1.5px;
+  content: '';
+  background-color: #45b9e0;
+}
 
 .timeline > li {
   position: relative;
@@ -57,8 +57,6 @@ section h3.section-subheading {
 }
 
 .timeline > li .timeline-panel {
-  margin-left: 3%;
-  margin-right: 3%;
   position: relative;
   float: right;
   width: 100%;
@@ -213,10 +211,3 @@ section h3.section-subheading {
   }
 }
 
-.leftBall {
-  margin-left: -30%;
-}
-
-.rightBall {
-  margin-right: -30%;
-}
