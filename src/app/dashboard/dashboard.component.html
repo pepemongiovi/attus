@@ -40,11 +40,19 @@
         <td>R$ {{investment.value}}</td>
         <td>
           <div class="col-xs-4">
-            <input type="number" matInput style="width: 150px; height: 25px; margin-left: -33px" class="input100" [value]="investment.income" [(ngModel)]="investments[i].income">
+            <input style="width: 150px; height: 25px; margin-left: -33px"
+                   class="input100" [value]="investment.income"
+                   [(ngModel)]="investments[i].income" type="number"
+                   *ngIf="investments[i].status===STATUS_FINISHED" matInput>
           </div>
         </td>
         <td>
           <mat-select style="width: 170px; margin-top: -13px" [(ngModel)]="investments[i].status" [value]="investments[i].status" placeholder="Selecione">
+            <mat-option [value]="STATUS_PENDING">
+            <span>
+              {{STATUS_PENDING}}
+            </span>
+            </mat-option>
             <mat-option [value]="STATUS_IN_PROGRESS">
             <span>
               {{STATUS_IN_PROGRESS}}

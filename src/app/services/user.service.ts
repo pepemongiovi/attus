@@ -87,10 +87,8 @@ export class UserService {
 
   saveBankInfo(bankInfo: BankInfo, showMessage = true) {
     this.afAuth.authState.take(1).subscribe(auth => {
-      console.log(auth);
       this.afDababase.object(`bankInfo/${auth.uid}`).set(bankInfo)
         .then(() => {
-          console.log(bankInfo);
           if (showMessage) {
             this.messageService.showSuccess('Salvo com sucesso!!');
           }
@@ -127,7 +125,6 @@ export class UserService {
 
   getUserByEmail(emailAddress) {
     const url = 'https://us-central1-attus-4fdcb.cloudfunctions.net/getUserByEmail';
-    console.log(emailAddress);
     return this.http.post(url, {email: emailAddress});
   }
 }

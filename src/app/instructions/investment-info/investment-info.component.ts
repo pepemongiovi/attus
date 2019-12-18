@@ -18,12 +18,13 @@ export class InvestmentInfoComponent implements OnInit {
   @Output() updateInvestmentInfo = new EventEmitter();
   user = JSON.parse(localStorage.getItem('user')).user;
   investmentForm: FormGroup;
-  STATUS_IN_PROGRESS = 'EM ANDAMENTO';
+  STATUS_PENDING = 'PENDENTE';
   selectedProject: Project;
   MAX_INVESTMENT_PERCENTAGE = 1.2;
 
   ngOnInit() {
     this.createForm();
+    this.disableSubmit();
     this.fetchSelectedProject();
   }
 
@@ -46,12 +47,12 @@ export class InvestmentInfoComponent implements OnInit {
     return '--';
   }
 
-  investmentInfoUpdate() {
+  investmentInfoUpdate(value) {
     const info = new InvestmentInfo(
       this.selectedProject.name,
-      this.investmentForm.value.quotas * this.selectedProject.valorDeCota,
+      value * this.selectedProject.valorDeCota,
       0,
-      this.STATUS_IN_PROGRESS,
+      this.STATUS_PENDING,
       this.investmentForm.value.quotas,
       this.selectedProject.valorDeCota);
     this.updateInvestmentInfo.emit(info);
@@ -73,7 +74,8 @@ export class InvestmentInfoComponent implements OnInit {
   }
 
   disableSubmit() {
-    const quotasEmpty = this.investmentForm.value.quotas === '';
+    const value = this.investmentForm.value.quotas;
+    const quotasEmpty = (value === null || value === '');
     this.submitBtnStatusUpdate.emit(!this.quotasIsValid() || quotasEmpty);
   }
 }

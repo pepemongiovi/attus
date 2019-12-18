@@ -67,7 +67,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field  style="width: 14.4%">
+          <mat-form-field>
             <input matInput formControlName="issuingBody" [(ngModel)]="personalInfo.issuingBody"
                    [formGroup]="form" type="text" class="form-control"
                    name="issuingBody" id="issuingBody" placeholder="Orgão Emissor*">
@@ -100,7 +100,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 14.4%">
+          <mat-form-field>
             <input matInput formControlName="birthDay" [matDatepicker]="picker"
                    [formGroup]="form" class="form-control"
                    name="birthDay" id="birthDay" placeholder="Data de nascimento*">
@@ -137,7 +137,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field style="margin-left: 102px">
             <input matInput formControlName="profession" [(ngModel)]="personalInfo.profession"
                    [formGroup]="form" type="text" class="form-control"
                    name="profession" id="profession" placeholder="Profissão*">
@@ -148,7 +148,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 18%; margin-left: 102px">
+          <mat-form-field style="width: 26.9%">
             <mat-select id="civilStatus" [formGroup]="form" formControlName="civilStatus" [(ngModel)]="personalInfo.civilStatus"
                         name="civilStatus" placeholder="Estado Civil*" style="margin-bottom: -2px" class="form-control">
               <mat-option *ngFor="let status of civilStatus" [value]="status">
@@ -176,7 +176,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 19%">
+          <mat-form-field style="width: 13%; margin-left: 102px">
             <input matInput formControlName="uf" [(ngModel)]="personalInfo.uf"
                    [formGroup]="form" type="text" class="form-control"
                    name="uf" id="uf" placeholder="UF*">
@@ -187,7 +187,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 18.8%">
+          <mat-form-field style="width: 15.5%">
             <input matInput formControlName="cep" [(ngModel)]="personalInfo.cep"
                    [formGroup]="form" type="number" class="form-control"
                    name="cep" id="cep" placeholder="CEP*">
@@ -198,7 +198,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 20.3%; margin-left: 102px">
+          <mat-form-field style="width: 21%">
             <input matInput formControlName="city" [(ngModel)]="personalInfo.city"
                    [formGroup]="form" type="text" class="form-control"
                    name="city" id="city" placeholder="Cidade*">
@@ -209,7 +209,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field style="width: 31%">
             <input matInput formControlName="address" [(ngModel)]="personalInfo.address"
                    [formGroup]="form" type="text" class="form-control"
                    name="address" id="address" placeholder="Endereço*">
@@ -220,7 +220,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="width: 10%">
+          <mat-form-field style="width: 10%; margin-left: 102px">
             <input matInput formControlName="number" [(ngModel)]="personalInfo.number"
                    [formGroup]="form" type="number" class="form-control"
                    name="number" id="number" placeholder="Número*">

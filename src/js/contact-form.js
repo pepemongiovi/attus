@@ -64,7 +64,7 @@ Ajax Contact Form
             }
         }).fail(function (data) {
             // for debug
-            console.log(data)
+
         });
 
         e.preventDefault();

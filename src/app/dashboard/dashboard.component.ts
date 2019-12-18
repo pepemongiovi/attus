@@ -11,12 +11,14 @@ import {User} from '../models/user.model';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DashboardComponent>,
               private userService: UserService,
               private projectService: ProjectService) { }
 
+  STATUS_PENDING = 'PENDENTE';
   STATUS_IN_PROGRESS = 'EM ANDAMENTO';
   STATUS_FINISHED = 'FINALIZADO';
 
@@ -40,14 +42,14 @@ export class DashboardComponent implements OnInit {
 
   updateProjects() {
     this.investments.filter((inv, j) => {
-      if(inv.status === this.STATUS_FINISHED && this.investmentsOldVersion[j].status === this.STATUS_IN_PROGRESS) {
+      if(inv.status !== this.STATUS_PENDING && this.investmentsOldVersion[j].status === this.STATUS_PENDING) {
         this.projects.filter((p,i) => {
           if(p.name === inv.project) {
             this.projects[i].captacaoAtual += inv.value;
           }
         })
       }
-      else if(inv.status === this.STATUS_IN_PROGRESS && this.investmentsOldVersion[j].status === this.STATUS_FINISHED){
+      else if(inv.status === this.STATUS_PENDING && this.investmentsOldVersion[j].status !== this.STATUS_PENDING){
         this.projects.filter((p,i) => {
           if(p.name === inv.project) {
             this.projects[i].captacaoAtual -= inv.value;

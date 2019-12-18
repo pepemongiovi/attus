@@ -17,6 +17,7 @@
         </label>
         <input formControlName="quotas" type="number" min="1" step="1"
                class="form-control input100" name="quotas"
+               (ngModelChange)="investmentInfoUpdate($event)"
                id="quotas" placeholder="Nº de Cotas*" required>
         <div *ngIf="!quotasIsValid()"
              class="validationMessage">
@@ -33,6 +34,6 @@
       </div>
     </div>
   </div>
-  <div *ngIf="investmentInfoUpdate()"></div>
+
   <div *ngIf="disableSubmit()"></div>
 </form>

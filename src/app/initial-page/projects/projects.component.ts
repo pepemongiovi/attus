@@ -46,7 +46,6 @@ export class ProjectsComponent implements OnInit {
 
   getProjects() {
     if(this.projects !== undefined) {
-      console.log(this.projects);
       return this.projects.filter((proj, index) => index > 0);
     }
   }
